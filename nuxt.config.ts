@@ -44,6 +44,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
+      // @nuxt/image on Vercel emits /_vercel/image URLs; they are not pages and 404 at build time
+      ignore: ['/_vercel/**'],
       routes: [
         '/',
         '/products',
