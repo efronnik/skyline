@@ -44,8 +44,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      // @nuxt/image on Vercel emits /_vercel/image URLs; they are not pages and 404 at build time
-      ignore: ['/_vercel/**'],
+      // Nitro ignore is startsWith (not glob). Vercel Image URLs are runtime-only.
+      ignore: ['/_vercel/image'],
       routes: [
         '/',
         '/products',
@@ -82,6 +82,7 @@ export default defineNuxtConfig({
     '/about': { prerender: true },
     '/contact': { prerender: true },
     '/privacy': { prerender: true },
-    '/cookies': { prerender: true }
+    '/cookies': { prerender: true },
+    '/_vercel/image/**': { prerender: false }
   }
 })
