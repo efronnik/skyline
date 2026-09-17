@@ -5,31 +5,29 @@ interface Props {
   priority?: boolean
   sizes?: string
   ratio?: string
-  width?: number
-  height?: number
+  position?: string
+  fit?: 'cover' | 'contain'
 }
 
 withDefaults(defineProps<Props>(), {
-  sizes: 'sm:100vw md:100vw lg:100vw',
-  ratio: '16 / 9',
-  width: 1600,
-  height: 900
+  sizes: '100vw',
+  ratio: '3 / 4',
+  position: 'center',
+  fit: 'cover'
 })
 </script>
 
 <template>
   <figure class="media" :style="{ aspectRatio: ratio }">
-    <NuxtImg
+    <img
       :src="src"
       :alt="alt"
-      :sizes="sizes"
-      :width="width"
-      :height="height"
-      :preload="priority"
       :loading="priority ? 'eager' : 'lazy'"
-      format="webp"
+      :fetchpriority="priority ? 'high' : 'low'"
+      decoding="async"
       class="media__img"
-    />
+      :style="{ objectPosition: position, objectFit: fit }"
+    >
   </figure>
 </template>
 
@@ -39,11 +37,14 @@ withDefaults(defineProps<Props>(), {
   position: relative;
   overflow: hidden;
   background: var(--stone);
+  width: 100%;
 }
 
 .media__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  max-width: none;
 }
 </style>

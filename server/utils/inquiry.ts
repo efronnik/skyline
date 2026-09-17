@@ -1,7 +1,7 @@
 import type { InquiryPayload, InquiryResult } from '#shared/types/content'
 
 interface InquiryAdapter {
-  submit(payload: InquiryPayload, files: { name: string }[]): Promise<InquiryResult>
+  submit(payload: InquiryPayload): Promise<InquiryResult>
 }
 
 function validate(payload: InquiryPayload) {
@@ -18,7 +18,7 @@ function validate(payload: InquiryPayload) {
 
 export function createInquiryAdapter(mode: 'mock' | 'live'): InquiryAdapter {
   return {
-    async submit(payload, files) {
+    async submit(payload) {
       const errors = validate(payload)
       if (errors.length) {
         return {
@@ -32,7 +32,7 @@ export function createInquiryAdapter(mode: 'mock' | 'live'): InquiryAdapter {
         return {
           ok: true,
           mode: 'mock',
-          message: `Форма принята в тестовом режиме. CRM ещё не подключена. Файлов: ${files.length}.`
+          message: 'Форма принята в тестовом режиме. CRM ещё не подключена.'
         }
       }
 

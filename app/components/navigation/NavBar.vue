@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { primaryNav } from '~/data/site'
 
+const { t } = useLocale()
 const route = useRoute()
 const menuOpen = ref(false)
-const inverted = computed(() => Boolean(route.meta.darkHeader))
+const inverted = computed(() => Boolean(route.meta.darkHeader) && route.path === '/')
 const scrolled = ref(false)
 
 function onScroll() {
-  scrolled.value = window.scrollY > 24
+  scrolled.value = window.scrollY > 16
 }
 
 onMounted(() => {
@@ -18,32 +19,33 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="bar" :class="{ 'is-invert': inverted && !scrolled && !menuOpen, 'is-solid': scrolled || menuOpen }">
-    <NuxtLink to="/" class="bar__brand" aria-label="LIMEN — на главную">
+  <header class="bar" :class="{ 'is-invert': inverted && !scrolled && !menuOpen, 'is-solid': scrolled || menuOpen || route.path !== '/' }">
+    <NuxtLink to="/" class="bar__brand" :aria-label="t('brandAria')">
       <span class="bar__mark" aria-hidden="true" />
       <span>LIMEN</span>
     </NuxtLink>
-    <nav class="bar__nav" aria-label="Основная навигация">
-      <NuxtLink
+    <nav class="bar__nav" :aria-label="t('navAria')">
+      <HashLink
         v-for="item in primaryNav"
         :key="item.to"
         :to="item.to"
         class="bar__link"
       >
-        {{ item.label }}
-      </NuxtLink>
+        {{ t(`nav.${item.label}`) }}
+      </HashLink>
     </nav>
     <div class="bar__actions">
-      <NuxtLink to="/contact" class="bar__link bar__cta-link">Заявка</NuxtLink>
+      <LangSwitch class="bar__lang" />
+      <HashLink to="#contact" class="bar__link bar__cta-link">{{ t('nav.contact') }}</HashLink>
       <button
         class="bar__burger"
         type="button"
         :aria-expanded="menuOpen"
         aria-controls="mobile-menu"
+        :aria-label="menuOpen ? t('menuClose') : t('menuOpen')"
         @click="menuOpen = !menuOpen"
       >
-        <span class="visually-hidden">{{ menuOpen ? 'Закрыть меню' : 'Открыть меню' }}</span>
-        <span aria-hidden="true">{{ menuOpen ? 'Close' : 'Menu' }}</span>
+        {{ t('menuAria') }}
       </button>
     </div>
     <MobileMenu v-model="menuOpen" />
@@ -60,7 +62,7 @@ onMounted(() => {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   min-height: var(--header);
   padding: 0 var(--pad);
   border-bottom: var(--hair) solid var(--line);
@@ -75,7 +77,9 @@ onMounted(() => {
 }
 
 .bar.is-solid {
-  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  background-color: var(--paper);
+  background-image: var(--grain);
+  background-size: 180px 180px;
   color: var(--ink);
   border-bottom-color: var(--line);
 }
@@ -100,30 +104,30 @@ onMounted(() => {
 .bar__nav {
   display: none;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.15rem 0.85rem;
   min-width: 0;
 }
 
 .bar__link {
   font-family: var(--font-spec);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   min-height: 48px;
   display: inline-flex;
   align-items: center;
   opacity: 0.72;
+  white-space: nowrap;
 }
 
-.bar__link:hover,
-.bar__link.router-link-active {
+.bar__link:hover {
   opacity: 1;
 }
 
 .bar__actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   justify-self: end;
 }
 
@@ -132,9 +136,14 @@ onMounted(() => {
   opacity: 1;
 }
 
+.bar__lang {
+  display: none;
+  margin-right: 0.2rem;
+}
+
 .bar__burger {
-  min-width: 48px;
   min-height: 48px;
+  min-width: 48px;
   border: 0;
   background: none;
   color: inherit;
@@ -145,17 +154,10 @@ onMounted(() => {
   text-transform: uppercase;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-}
-
-@media (min-width: 1080px) {
+@media (min-width: 1180px) {
   .bar__nav,
-  .bar__cta-link {
+  .bar__cta-link,
+  .bar__lang {
     display: flex;
   }
 

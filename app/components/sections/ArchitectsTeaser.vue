@@ -1,41 +1,40 @@
+<script setup lang="ts">
+const { t, ta } = useLocale()
+</script>
+
 <template>
-  <section class="arch" aria-labelledby="arch-title">
+  <section id="architects" class="arch" aria-labelledby="arch-title">
     <div>
-      <SectionLabel kicker="Для бюро" spec="07 — Practice" />
-      <h2 id="arch-title">Для архитекторов и дизайнеров.</h2>
-      <p>
-        Узлы, размеры, BIM и образцы подключаются в этот раздел.
-        Пока файлы не загружены, можно запросить комплект напрямую.
-      </p>
+      <SectionLabel :kicker="t('architects.kicker')" :spec="t('architects.spec')" />
+      <h2 id="arch-title">{{ t('architects.title') }}</h2>
+      <p>{{ t('architects.text') }}</p>
     </div>
     <ul>
-      <li>DWG / CAD — структура готова</li>
-      <li>BIM-семейства — по запросу проекта</li>
-      <li>Образцы отделки</li>
-      <li>Консультация по узлу примыкания</li>
+      <li v-for="item in ta('architects.points')" :key="item">{{ item }}</li>
     </ul>
     <div class="arch__cta">
-      <AppButton to="/architects">Скачать технические материалы</AppButton>
-      <AppButton to="/contact" variant="ghost">Запросить консультацию</AppButton>
+      <AppButton to="#contact">{{ t('architects.cta') }}</AppButton>
     </div>
   </section>
 </template>
 
 <style scoped>
 .arch {
-  margin: 0 var(--pad) var(--space-8);
-  padding: var(--space-7) var(--pad);
+  width: calc(100% - 2 * var(--pad));
+  max-width: var(--max);
+  margin: 0 auto var(--section);
+  padding: 1.6rem var(--pad);
   border: var(--hair) solid var(--line);
   display: grid;
-  gap: var(--space-5);
+  gap: 1.1rem;
 }
 
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  max-width: 14ch;
-  margin: 1rem 0;
+  max-width: 16ch;
+  margin: 0.7rem 0;
 }
 
 p,
@@ -48,9 +47,9 @@ ul {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.4rem;
   font-family: var(--font-spec);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

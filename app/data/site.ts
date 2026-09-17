@@ -3,9 +3,8 @@ import type { NavItem, SiteContact } from '~/types/content'
 export const site = {
   name: 'LIMEN',
   legalName: 'LIMEN',
-  tagline: 'Порог, которого нет',
-  description:
-    'Архитектурные двери скрытого монтажа: полотно в плоскости стены, скрытая коробка, минимальный зазор.',
+  taglineKey: 'hero.title',
+  descriptionKey: 'seo.homeDesc',
   url: 'https://limen.example',
   locale: 'ru_RU'
 } as const
@@ -34,19 +33,22 @@ export const contact: SiteContact = {
     value: 'Выезд на объект — по проекту',
     placeholder: true
   },
-  mapUrl: ''
+  mapUrl: '',
+  instagram: {
+    handle: '@idoors.es',
+    href: 'https://www.instagram.com/idoors.es/'
+  }
 }
 
 export const primaryNav: NavItem[] = [
-  { label: 'Коллекция', to: '/products' },
-  { label: 'Проекты', to: '/projects' },
-  { label: 'Материалы', to: '/materials' },
-  { label: 'Узлы', to: '/technology' },
-  { label: 'Бюро', to: '/architects' }
+  { label: 'collection', to: '#collection' },
+  { label: 'configurator', to: '#configurator' },
+  { label: 'materials', to: '#materials' },
+  { label: 'projects', to: '#projects' }
 ]
 
 export const footerNav: NavItem[] = [
-  { label: 'Контакт', to: '/contact' },
-  { label: 'Конфиденциальность', to: '/privacy' },
+  { label: 'contact', to: '#contact' },
+  { label: 'privacyNav', to: '/privacy' },
   { label: 'Cookies', to: '/cookies' }
 ]

@@ -1,76 +1,66 @@
 <script setup lang="ts">
 import { contact } from '~/data/site'
 
-usePageSeo({
-  title: 'Консультация и расчёт',
-  description: 'Заявка на двери скрытого монтажа LIMEN: консультация, расчёт проекта, обсуждение узла.',
+const { t } = useLocale()
+const { open } = useInquiryModal()
+
+usePageSeo(() => ({
+  title: t('contact.kicker'),
+  description: t('contact.lead'),
   path: '/contact',
-  image: '/images/interior-flush.png'
+  image: '/images/interior-flush.jpg',
+  noindex: true
+}))
+
+onMounted(() => {
+  open()
 })
 </script>
 
 <template>
   <div class="page">
-    <header>
-      <SectionLabel kicker="Контакт" spec="Request" />
-      <h1>Получить консультацию.</h1>
-      <p>Форма уходит в service layer. Пока CRM не подключена, отправка работает в тестовом режиме — без имитации «письма менеджеру».</p>
-    </header>
-    <div class="grid">
-      <ConsultationForm />
-      <aside>
-        <p v-if="contact.phone.href"><a :href="contact.phone.href">{{ contact.phone.value }}</a></p>
-        <p v-else>Телефон появится в app/data/site.ts</p>
-        <p v-if="contact.email.href"><a :href="contact.email.href">{{ contact.email.value }}</a></p>
-        <p>{{ contact.city.value }}</p>
-        <p v-if="contact.mapUrl">
-          <a :href="contact.mapUrl" rel="noreferrer" target="_blank">Как добраться</a>
-        </p>
-        <p v-else>Карта подключается вместе с адресом.</p>
-      </aside>
-    </div>
+    <SectionLabel :kicker="t('contact.kicker')" :spec="t('contact.spec')" />
+    <h1>{{ t('contact.title') }}</h1>
+    <p>{{ t('contact.lead') }}</p>
+    <AppButton @click="open">{{ t('contact.open') }}</AppButton>
+    <aside>
+      <a v-if="contact.email.href" :href="contact.email.href">{{ contact.email.value }}</a>
+      <a
+        v-if="contact.instagram.href"
+        :href="contact.instagram.href"
+          rel="noopener noreferrer"
+          target="_blank"
+      >{{ contact.instagram.handle }}</a>
+    </aside>
   </div>
 </template>
 
 <style scoped>
 .page {
-  padding: calc(var(--header) + 2rem) var(--pad) var(--space-8);
-  max-width: var(--max);
-  margin: 0 auto;
-}
-
-header {
+  padding: calc(var(--header) + 1.6rem) var(--pad) var(--section);
   max-width: 36rem;
-  margin-bottom: var(--space-7);
 }
 
 h1 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  margin: 1rem 0;
+  margin: 0.7rem 0 0.5rem;
 }
 
-.grid {
-  display: grid;
-  gap: var(--space-7);
+p {
+  color: var(--muted);
+  margin-bottom: 1.2rem;
 }
 
 aside {
-  border-top: var(--hair) solid var(--line);
-  padding-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
   font-family: var(--font-spec);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  display: grid;
-  gap: 0.7rem;
-  align-content: start;
-}
-
-@media (min-width: 980px) {
-  .grid {
-    grid-template-columns: 1.4fr 0.6fr;
-  }
+  color: var(--muted);
 }
 </style>

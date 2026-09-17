@@ -1,55 +1,57 @@
 <script setup lang="ts">
 import { products } from '~/data/products'
 
-usePageSeo({
-  title: 'Коллекция скрытых дверей',
-  description: 'Системы скрытого монтажа LIMEN: под покраску, до потолка, двустворчатые, раздвижные, стекло и шпон.',
+const { t } = useLocale()
+const { openProduct } = useConfigurator()
+
+usePageSeo(() => ({
+  title: t('collection.kicker'),
+  description: t('collection.hint'),
   path: '/products',
-  image: '/images/interior-flush.png'
-})
+  image: '/images/interior-flush.jpg',
+  noindex: true
+}))
 </script>
 
 <template>
   <div class="page">
     <header>
-      <SectionLabel kicker="Коллекция" spec="Systems" />
-      <h1>Шесть способов исчезнуть в стене.</h1>
-      <p>Не витрина из карточек. Системы, которые принимают геометрию помещения.</p>
+      <SectionLabel :kicker="t('collection.kicker')" :spec="t('collection.spec')" />
+      <h1>{{ t('collection.title') }}</h1>
+      <p>{{ t('collection.hint') }}</p>
     </header>
-    <article v-for="(item, index) in products" :key="item.slug" :class="{ reverse: index % 2 }">
-      <NuxtLink :to="`/products/${item.slug}`">
+    <div class="list">
+      <button
+        v-for="item in products"
+        :key="item.slug"
+        type="button"
+        @click="openProduct(item.slug)"
+      >
         <MediaFrame
           :src="item.image"
-          :alt="`${item.name}. ${item.summary}`"
-          :ratio="index === 0 ? '16 / 9' : '4 / 5'"
-          sizes="(min-width: 900px) 55vw, 100vw"
+          :alt="t(`products.${item.slug}.summary`)"
+          :ratio="item.ratio"
+          fit="contain"
+          sizes="(min-width: 900px) 22vw, 50vw"
         />
-        <div>
-          <p>{{ item.latin }}</p>
-          <h2>{{ item.name }}</h2>
-          <p>{{ item.summary }}</p>
-          <ul>
-            <li v-for="feature in item.features" :key="feature">{{ feature }}</li>
-          </ul>
-          <span>Открыть систему</span>
-        </div>
-      </NuxtLink>
-    </article>
-    <DoorConfigurator />
-    <CtaBand title="Подобрать систему" />
+        <p>{{ t(`products.${item.slug}.latin`) }}</p>
+        <h2>{{ t(`products.${item.slug}.name`) }}</h2>
+        <p>{{ t(`products.${item.slug}.summary`) }}</p>
+      </button>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .page {
-  padding: calc(var(--header) + 2rem) var(--pad) var(--space-8);
+  padding: calc(var(--header) + 1.6rem) var(--pad) var(--section);
   max-width: var(--max);
   margin: 0 auto;
 }
 
 header {
   max-width: 36rem;
-  margin-bottom: var(--space-8);
+  margin-bottom: 1.8rem;
 }
 
 h1,
@@ -61,47 +63,41 @@ h2 {
 h1 {
   font-size: var(--fs-xl);
   line-height: 0.95;
-  margin: 1rem 0;
+  margin: 0.8rem 0 0.5rem;
 }
 
-article {
-  margin-bottom: var(--space-8);
-}
-
-article a {
+.list {
   display: grid;
-  gap: 1.2rem;
+  gap: 1.3rem;
 }
 
-article p:first-child,
-span,
-li {
+button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button p:first-of-type {
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--joint);
+  margin-top: 0.6rem;
 }
 
-ul {
-  margin: 1rem 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.4rem;
+@media (min-width: 720px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-@media (min-width: 900px) {
-  article a {
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: end;
-  }
-
-  article.reverse a {
-    grid-template-columns: 0.85fr 1.15fr;
-  }
-
-  article.reverse a > :first-child {
-    order: 2;
+@media (min-width: 1100px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 </style>

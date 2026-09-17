@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import type { Project } from '~/types/content'
 
-defineProps<{
+const props = defineProps<{
   project: Project
 }>()
+
+const { t } = useLocale()
+const key = computed(() => `projects.items.${props.project.slug}`)
 </script>
 
 <template>
   <dl>
-    <div><dt>Тип</dt><dd>{{ project.typology }}</dd></div>
-    <div><dt>Контекст</dt><dd>{{ project.setting }}</dd></div>
-    <div><dt>Система</dt><dd>{{ project.product }}</dd></div>
-    <div><dt>Отделка</dt><dd>{{ project.finish }}</dd></div>
-    <div><dt>Размеры</dt><dd>{{ project.dimensions }}</dd></div>
-    <div><dt>Статус</dt><dd>{{ project.yearLabel }}</dd></div>
+    <div><dt>{{ t('projects.meta.type') }}</dt><dd>{{ t(`${key}.typology`) }}</dd></div>
+    <div><dt>{{ t('projects.meta.setting') }}</dt><dd>{{ t(`${key}.setting`) }}</dd></div>
+    <div><dt>{{ t('projects.meta.system') }}</dt><dd>{{ t(`${key}.product`) }}</dd></div>
+    <div><dt>{{ t('projects.meta.finish') }}</dt><dd>{{ t(`${key}.finish`) }}</dd></div>
+    <div><dt>{{ t('projects.meta.size') }}</dt><dd>{{ t(`${key}.dimensions`) }}</dd></div>
+    <div><dt>{{ t('projects.meta.status') }}</dt><dd>{{ t(`${key}.yearLabel`) }}</dd></div>
   </dl>
 </template>
 

@@ -12,8 +12,7 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Syne', provider: 'google', weights: [500, 600, 700, 800] },
-      { name: 'Newsreader', provider: 'google', weights: [300, 400, 500, 600], styles: ['normal', 'italic'] },
-      { name: 'IBM Plex Mono', provider: 'google', weights: [400, 500] }
+      { name: 'Newsreader', provider: 'google', weights: [300, 400, 500, 600], styles: ['normal', 'italic'] }
     ]
   },
   image: {
@@ -25,6 +24,9 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'ru' },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      meta: [
+        { name: 'theme-color', content: '#e4e0d7' }
+      ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
       ]
@@ -49,12 +51,10 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/products',
-        '/products/plane',
-        '/products/ceiling',
-        '/products/pair',
-        '/products/pocket',
-        '/products/lumen',
-        '/products/timber',
+        '/products/prime-al-c',
+        '/products/prime-al-c-inside',
+        '/products/prime-al-ch',
+        '/products/prime-al-ch-inside',
         '/projects',
         '/projects/anfilade',
         '/projects/gallery',
@@ -74,6 +74,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
+    '/products/prime-al': { redirect: { to: '/products/prime-al-c', statusCode: 301 } },
     '/products/**': { prerender: true },
     '/projects/**': { prerender: true },
     '/materials': { prerender: true },

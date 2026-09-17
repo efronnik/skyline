@@ -1,154 +1,106 @@
 <script setup lang="ts">
-import { products } from '~/data/products'
-import { materials } from '~/data/materials'
 import { submitInquiry } from '~/utils/inquiryClient'
 import type { InquiryPayload } from '~/types/content'
 
-const route = useRoute()
+const { t } = useLocale()
+
 const form = reactive<InquiryPayload>({
   name: '',
   phone: '',
   email: '',
-  city: '',
-  objectType: '',
-  doorCount: '',
-  dimensions: '',
-  product: String(route.query.product || ''),
-  finish: String(route.query.finish || ''),
-  timeline: '',
-  comment: String(route.query.comment || ''),
-  fileNames: []
+  message: ''
 })
 
-const files = ref<File[]>([])
 const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const message = ref('')
 const fieldError = reactive<Record<string, string>>({})
 
-function validateField(key: keyof InquiryPayload) {
-  if (key === 'name' && !form.name.trim()) fieldError.name = 'Укажите имя'
+function validateField(key: 'name' | 'email') {
+  if (key === 'name' && !form.name.trim()) fieldError.name = t('form.nameErr')
   else if (key === 'name') fieldError.name = ''
 
   if (key === 'email' && form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    fieldError.email = 'Проверьте почту'
+    fieldError.email = t('form.emailErr')
   } else if (key === 'email') fieldError.email = ''
 }
 
-function onFiles(event: Event) {
-  const input = event.target as HTMLInputElement
-  files.value = Array.from(input.files || []).slice(0, 6)
-  form.fileNames = files.value.map(file => file.name)
-}
-
 async function onSubmit() {
-  fieldError.name = form.name.trim() ? '' : 'Укажите имя'
+  fieldError.name = form.name.trim() ? '' : t('form.nameErr')
   if (!form.phone.trim() && !form.email.trim()) {
-    fieldError.phone = 'Телефон или почта'
-    fieldError.email = 'Телефон или почта'
+    fieldError.phone = t('form.contactErr')
+    fieldError.email = t('form.contactErr')
   } else {
     fieldError.phone = ''
     validateField('email')
   }
   if (fieldError.name || fieldError.phone || fieldError.email) {
     status.value = 'error'
-    message.value = 'Проверьте обязательные поля.'
+    message.value = t('form.fieldsErr')
     return
   }
 
   status.value = 'loading'
   message.value = ''
   try {
-    const result = await submitInquiry({ ...form }, files.value)
+    const result = await submitInquiry({ ...form })
     status.value = result.ok ? 'success' : 'error'
-    message.value = result.message
+    message.value = result.ok ? t('form.success') : t('form.error')
   } catch {
     status.value = 'error'
-    message.value = 'Сервер не ответил. Повторите отправку.'
+    message.value = t('form.error')
   }
 }
 </script>
 
 <template>
   <form class="form" novalidate @submit.prevent="onSubmit">
-    <fieldset>
-      <legend>Контакт</legend>
-      <label>
-        Имя
-        <input v-model="form.name" name="name" autocomplete="name" required :aria-invalid="!!fieldError.name" @blur="validateField('name')">
-        <small v-if="fieldError.name">{{ fieldError.name }}</small>
+    <div class="form__fields">
+      <div class="form__col">
+        <label>
+          {{ t('form.name') }}
+          <input
+            v-model="form.name"
+            name="name"
+            autocomplete="name"
+            required
+            :aria-invalid="!!fieldError.name"
+            @blur="validateField('name')"
+          >
+          <small v-if="fieldError.name">{{ fieldError.name }}</small>
+        </label>
+        <label>
+          {{ t('form.phone') }}
+          <input
+            v-model="form.phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            :aria-invalid="!!fieldError.phone"
+          >
+          <small v-if="fieldError.phone">{{ fieldError.phone }}</small>
+        </label>
+        <label>
+          {{ t('form.email') }}
+          <input
+            v-model="form.email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            :aria-invalid="!!fieldError.email"
+            @blur="validateField('email')"
+          >
+          <small v-if="fieldError.email">{{ fieldError.email }}</small>
+        </label>
+      </div>
+      <label class="form__message">
+        {{ t('form.message') }}
+        <textarea v-model="form.message" name="message" rows="6" />
       </label>
-      <label>
-        Телефон
-        <input v-model="form.phone" name="phone" type="tel" autocomplete="tel" :aria-invalid="!!fieldError.phone">
-        <small v-if="fieldError.phone">{{ fieldError.phone }}</small>
-      </label>
-      <label>
-        Почта
-        <input v-model="form.email" name="email" type="email" autocomplete="email" :aria-invalid="!!fieldError.email" @blur="validateField('email')">
-        <small v-if="fieldError.email">{{ fieldError.email }}</small>
-      </label>
-      <label>
-        Город
-        <input v-model="form.city" name="city" autocomplete="address-level2">
-      </label>
-    </fieldset>
-
-    <fieldset>
-      <legend>Объект</legend>
-      <label>
-        Тип объекта
-        <select v-model="form.objectType">
-          <option value="">Не указан</option>
-          <option>Квартира</option>
-          <option>Дом</option>
-          <option>Офис</option>
-          <option>Общественное пространство</option>
-        </select>
-      </label>
-      <label>
-        Количество дверей
-        <input v-model="form.doorCount" inputmode="numeric">
-      </label>
-      <label>
-        Размеры проёмов
-        <input v-model="form.dimensions" placeholder="Например: 900 × высота потолка">
-      </label>
-      <label>
-        Сроки
-        <input v-model="form.timeline">
-      </label>
-    </fieldset>
-
-    <fieldset>
-      <legend>Решение</legend>
-      <label>
-        Система
-        <select v-model="form.product">
-          <option value="">Не выбрана</option>
-          <option v-for="item in products" :key="item.slug" :value="item.name">{{ item.name }}</option>
-        </select>
-      </label>
-      <label>
-        Отделка
-        <select v-model="form.finish">
-          <option value="">Не выбрана</option>
-          <option v-for="item in materials" :key="item.id" :value="item.name">{{ item.name }}</option>
-        </select>
-      </label>
-      <label class="full">
-        Комментарий
-        <textarea v-model="form.comment" rows="5" />
-      </label>
-      <label class="full">
-        План, фото, чертеж
-        <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.dwg" @change="onFiles">
-        <small v-if="form.fileNames.length">{{ form.fileNames.join(', ') }}</small>
-      </label>
-    </fieldset>
+    </div>
 
     <div class="form__actions">
       <AppButton type="submit" :disabled="status === 'loading'">
-        {{ status === 'loading' ? 'Отправка…' : 'Отправить заявку' }}
+        {{ status === 'loading' ? t('form.sending') : t('form.submit') }}
       </AppButton>
       <p v-if="message" :class="status" role="status">{{ message }}</p>
     </div>
@@ -158,37 +110,29 @@ async function onSubmit() {
 <style scoped>
 .form {
   display: grid;
-  gap: var(--space-6);
+  gap: 1.2rem;
 }
 
-fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
+.form__fields {
   display: grid;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
-legend {
-  font-family: var(--font-spec);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--joint);
-  margin-bottom: 0.4rem;
+.form__col {
+  display: grid;
+  gap: 0.85rem;
 }
 
 label {
   display: grid;
-  gap: 0.35rem;
-  font-size: 0.92rem;
+  gap: 0.3rem;
+  font-size: 0.9rem;
 }
 
 input,
-select,
 textarea {
-  min-height: 48px;
-  padding: 0.7rem 0.8rem;
+  min-height: 44px;
+  padding: 0.55rem 0.1rem;
   border: 0;
   border-bottom: var(--hair) solid var(--line-strong);
   background: transparent;
@@ -196,14 +140,13 @@ textarea {
 }
 
 input:focus,
-select:focus,
 textarea:focus {
   outline: none;
   border-bottom-color: var(--ink);
 }
 
 textarea {
-  min-height: 8rem;
+  min-height: 8.5rem;
   resize: vertical;
 }
 
@@ -216,7 +159,7 @@ small {
 
 .form__actions {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.7rem;
 }
 
 .success {
@@ -227,13 +170,15 @@ small {
   color: var(--danger);
 }
 
-@media (min-width: 800px) {
-  fieldset {
+@media (min-width: 720px) {
+  .form__fields {
     grid-template-columns: 1fr 1fr;
+    gap: 1.2rem 1.6rem;
+    align-items: stretch;
   }
 
-  .full {
-    grid-column: 1 / -1;
+  .form__message textarea {
+    min-height: 100%;
   }
 }
 </style>

@@ -4,43 +4,62 @@ interface SeoInput {
   path: string
   image?: string
   type?: 'website' | 'article'
+  noindex?: boolean
 }
 
-export function usePageSeo(input: SeoInput) {
+const ogLocales = {
+  ru: 'ru_RU',
+  uk: 'uk_UA',
+  es: 'es_ES',
+  en: 'en_US'
+} as const
+
+export function usePageSeo(input: SeoInput | (() => SeoInput)) {
   const config = useRuntimeConfig()
-  const url = `${config.public.siteUrl}${input.path}`
-  const image = input.image
-    ? `${config.public.siteUrl}${input.image}`
-    : `${config.public.siteUrl}/images/hero-wall.png`
-  const fullTitle = `${input.title} — LIMEN`
+  const { locale } = useLocale()
+  const resolved = computed(() => typeof input === 'function' ? input() : input)
+
+  function absolute(path: string) {
+    if (path.startsWith('http')) return path
+    return `${config.public.siteUrl}${path}`
+  }
+
+  function imageUrl() {
+    return absolute(resolved.value.image || '/images/hero-poster.jpg')
+  }
 
   useSeoMeta({
-    title: fullTitle,
-    description: input.description,
-    ogTitle: fullTitle,
-    ogDescription: input.description,
-    ogType: input.type ?? 'website',
-    ogUrl: url,
-    ogImage: image,
-    ogLocale: 'ru_RU',
+    title: () => `${resolved.value.title} — LIMEN`,
+    description: () => resolved.value.description,
+    robots: () => resolved.value.noindex ? 'noindex, follow' : 'index, follow',
+    ogTitle: () => `${resolved.value.title} — LIMEN`,
+    ogDescription: () => resolved.value.description,
+    ogType: () => resolved.value.type ?? 'website',
+    ogUrl: () => absolute(resolved.value.path),
+    ogImage: () => imageUrl(),
+    ogImageAlt: () => resolved.value.title,
+    ogSiteName: () => String(config.public.siteName),
+    ogLocale: () => ogLocales[locale.value],
+    ogLocaleAlternate: () => Object.values(ogLocales).filter(item => item !== ogLocales[locale.value]),
     twitterCard: 'summary_large_image',
-    twitterTitle: fullTitle,
-    twitterDescription: input.description,
-    twitterImage: image
+    twitterTitle: () => `${resolved.value.title} — LIMEN`,
+    twitterDescription: () => resolved.value.description,
+    twitterImage: () => imageUrl(),
+    twitterImageAlt: () => resolved.value.title
   })
 
   useHead({
-    link: [{ rel: 'canonical', href: url }]
+    link: computed(() => [{ rel: 'canonical', href: absolute(resolved.value.path) }])
   })
 }
 
-export function useJsonLd(schema: Record<string, unknown>) {
+export function useJsonLd(schema: Record<string, unknown> | (() => Record<string, unknown>)) {
   useHead({
-    script: [
+    script: computed(() => [
       {
         type: 'application/ld+json',
-        textContent: JSON.stringify(schema)
+        innerHTML: JSON.stringify(typeof schema === 'function' ? schema() : schema)
       }
-    ]
+    ])
   })
 }

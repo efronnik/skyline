@@ -12,7 +12,9 @@
   "dependencies": {
     "@nuxt/fonts": "^0.14.0",
     "@nuxt/image": "^2.1.0",
+    "animejs": "^4.5.0",
     "nuxt": "^4.5.2",
+    "three": "^0.186.0",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
   },

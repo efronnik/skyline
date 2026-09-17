@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { primaryNav } from '~/data/site'
 
+const { t } = useLocale()
 const open = defineModel<boolean>({ default: false })
 const panel = ref<HTMLElement | null>(null)
 const route = useRoute()
@@ -16,6 +17,10 @@ function onKey(event: KeyboardEvent) {
   if (event.key === 'Escape') open.value = false
 }
 
+function close() {
+  open.value = false
+}
+
 onMounted(() => {
   window.addEventListener('keydown', onKey)
   onUnmounted(() => window.removeEventListener('keydown', onKey))
@@ -23,34 +28,37 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    v-if="open"
-    id="mobile-menu"
-    ref="panel"
-    class="menu"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Меню"
-  >
+  <div id="mobile-menu">
+    <div
+      v-if="open"
+      ref="panel"
+      class="menu"
+      role="dialog"
+      aria-modal="true"
+      :aria-label="t('menuAria')"
+    >
     <div class="menu__top">
       <p class="menu__mark">LIMEN</p>
-      <button class="menu__close" type="button" @click="open = false">
-        Закрыть
+      <button class="menu__close" type="button" @click="close">
+        {{ t('menuClose') }}
       </button>
     </div>
-    <nav class="menu__nav" aria-label="Мобильная навигация">
-      <NuxtLink
+    <nav class="menu__nav" :aria-label="t('navAria')">
+      <HashLink
         v-for="item in primaryNav"
         :key="item.to"
         :to="item.to"
         class="menu__link"
+        @click="close"
       >
-        {{ item.label }}
-      </NuxtLink>
-      <NuxtLink to="/about" class="menu__link">О студии</NuxtLink>
+        {{ t(`nav.${item.label}`) }}
+      </HashLink>
+      <HashLink to="#contact" class="menu__link" @click="close">{{ t('nav.contact') }}</HashLink>
     </nav>
     <div class="menu__cta">
-      <AppButton to="/contact" invert>Получить консультацию</AppButton>
+      <LangSwitch />
+      <HashLink to="#contact" class="menu__request" @click="close">{{ t('cta.consult') }}</HashLink>
+    </div>
     </div>
   </div>
 </template>
@@ -72,6 +80,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .menu__mark,
@@ -93,19 +102,28 @@ onMounted(() => {
 .menu__nav {
   display: grid;
   align-content: center;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .menu__link {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 8vw, 3.4rem);
+  font-size: clamp(2rem, 8vw, 3.2rem);
   line-height: 1.05;
   font-weight: 600;
 }
 
-.menu__link:hover,
-.menu__link.router-link-active {
+.menu__link:hover {
   color: var(--joint-bright);
+}
+
+.menu__request {
+  font-family: var(--font-spec);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .menu__cta {

@@ -1,6 +1,11 @@
 <script setup lang="ts">
+const { t } = useLocale()
 const error = useError()
 const is404 = computed(() => error.value?.statusCode === 404)
+
+useSeoMeta({
+  robots: 'noindex, nofollow'
+})
 
 function clear() {
   clearError({ redirect: '/' })
@@ -9,12 +14,11 @@ function clear() {
 
 <template>
   <div class="err">
-    <p>{{ is404 ? '404' : 'Ошибка' }}</p>
-    <h1>{{ is404 ? 'Такой плоскости нет.' : 'Страница не собралась.' }}</h1>
-    <p>{{ is404 ? 'Проверьте адрес или вернитесь в коллекцию.' : 'Попробуйте обновить страницу.' }}</p>
+    <p>{{ is404 ? '404' : t('error.code') }}</p>
+    <h1>{{ is404 ? t('error.notFound') : t('error.fail') }}</h1>
+    <p>{{ is404 ? t('error.notFoundLead') : t('error.failLead') }}</p>
     <div>
-      <AppButton to="/products">Коллекция</AppButton>
-      <button type="button" class="back" @click="clear">На главную</button>
+      <AppButton @click="clear">{{ t('error.home') }}</AppButton>
     </div>
   </div>
 </template>
@@ -35,19 +39,5 @@ h1 {
   line-height: 0.95;
   max-width: 12ch;
   margin: 0.6rem 0 1rem;
-}
-
-.back {
-  min-height: 48px;
-  margin-left: 0.6rem;
-  border: var(--hair) solid var(--line-on-night);
-  background: none;
-  color: inherit;
-  cursor: pointer;
-  font-family: var(--font-spec);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 0.68rem;
-  padding: 0 1rem;
 }
 </style>

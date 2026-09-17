@@ -1,32 +1,85 @@
 <script setup lang="ts">
+import { animate } from 'animejs'
 import { technicalSteps } from '~/data/technical'
 
+const { t } = useLocale()
+const { swing } = useConfigurator()
+const reduced = useReducedMotion()
+const { play } = useAnimeJob()
 const active = ref(0)
+const framesRoot = ref<HTMLElement | null>(null)
+
+const frames = [
+  { id: 'out' as const, src: '/images/idoors-install-standard.jpg' },
+  { id: 'in' as const, src: '/images/idoors-install-inside.jpg' }
+]
+
+watch(swing, async () => {
+  await nextTick()
+  if (reduced.value || !framesRoot.value) return
+  const on = framesRoot.value.querySelector('.tech__frame.is-on .media')
+  if (!on) return
+  play(
+    'tech-frame',
+    animate(on, {
+      opacity: [0.55, 1],
+      scale: [0.97, 1],
+      duration: 560,
+      ease: 'outCubic'
+    })
+  )
+})
 </script>
 
 <template>
-  <section class="tech" aria-labelledby="tech-title">
-    <SectionLabel kicker="Технология" spec="04 — How it works" />
-    <h2 id="tech-title">Как собирается невидимость.</h2>
+  <section id="technology" class="tech" aria-labelledby="tech-title">
+    <SectionLabel :kicker="t('technology.kicker')" :spec="t('technology.spec')" />
+    <h2 id="tech-title">{{ t('technology.title') }}</h2>
+    <p class="tech__lead">{{ t('technology.lead') }}</p>
+
+    <div ref="framesRoot" class="tech__frames">
+      <button
+        v-for="frame in frames"
+        :key="frame.id"
+        type="button"
+        class="tech__frame"
+        :class="{ 'is-on': swing === frame.id }"
+        :aria-pressed="swing === frame.id"
+        @click="swing = frame.id"
+      >
+        <MediaFrame
+          :src="frame.src"
+          :alt="t(`technology.frames.${frame.id}.alt`)"
+          ratio="3 / 4"
+          fit="contain"
+          sizes="(min-width: 900px) 46vw, 100vw"
+        />
+        <span>
+          <strong>{{ t(`technology.frames.${frame.id}.title`) }}</strong>
+          <em>{{ t('technology.wall') }}</em>
+        </span>
+      </button>
+    </div>
+
+    <p class="tech__note">{{ t('technology.hProfile') }}</p>
+
     <div class="tech__layout">
       <TechnicalDiagram :active="active" />
       <ol>
         <li v-for="(step, index) in technicalSteps" :key="step.id">
           <button type="button" :class="{ 'is-on': active === index }" @click="active = index">
             <span>{{ step.index }}</span>
-            <strong>{{ step.title }}</strong>
-            <em>{{ step.text }}</em>
+            <strong>{{ t(`technology.steps.${step.id}.title`) }}</strong>
           </button>
         </li>
       </ol>
     </div>
-    <AppButton to="/technology" variant="line">Разбор конструкции</AppButton>
   </section>
 </template>
 
 <style scoped>
 .tech {
-  padding: var(--space-8) var(--pad);
+  padding: var(--section) var(--pad);
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -35,39 +88,64 @@ h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  max-width: 12ch;
-  margin: 1rem 0 var(--space-6);
+  max-width: 16ch;
+  margin: 0.8rem 0 0.7rem;
 }
 
-.tech__layout {
+.tech__lead,
+.tech__note {
+  max-width: 40rem;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+
+.tech__note {
+  font-family: var(--font-spec);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0.9rem 0 1.6rem;
+}
+
+.tech__frames {
   display: grid;
-  gap: var(--space-6);
-  margin-bottom: var(--space-6);
+  gap: 0.8rem;
 }
 
-ol {
-  list-style: none;
-  margin: 0;
+.tech__frame {
+  display: grid;
+  gap: 0.7rem;
   padding: 0;
-  display: grid;
-  gap: 0.35rem;
-}
-
-button {
-  width: 100%;
-  display: grid;
-  gap: 0.25rem;
-  padding: 0.9rem 0;
   border: 0;
-  border-top: var(--hair) solid var(--line);
   background: none;
   text-align: left;
   cursor: pointer;
   color: inherit;
 }
 
-button span,
-button em {
+.tech__frame :deep(.media) {
+  background: #fff;
+  border: var(--hair) solid var(--line);
+  transition: border-color var(--duration-fast) var(--ease);
+}
+
+.tech__frame:hover :deep(.media),
+.tech__frame.is-on :deep(.media) {
+  border-color: var(--ink);
+}
+
+.tech__frame span {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.tech__frame strong {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.tech__frame em {
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;
@@ -76,20 +154,72 @@ button em {
   color: var(--muted);
 }
 
-button strong {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-button.is-on strong {
+.tech__frame.is-on strong {
   color: var(--joint);
 }
 
-@media (min-width: 980px) {
+.tech__layout {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.tech__layout ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.tech__layout button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.85rem 0;
+  border: 0;
+  border-top: var(--hair) solid var(--line);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.tech__layout button span {
+  font-family: var(--font-spec);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tech__layout button strong {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.tech__layout button.is-on strong {
+  color: var(--joint);
+}
+
+@media (min-width: 900px) {
+  .tech__frames {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .tech__layout {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: 1.6rem;
+    align-items: start;
+  }
+
+  .tech__layout ol {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.6rem;
   }
 }
 </style>

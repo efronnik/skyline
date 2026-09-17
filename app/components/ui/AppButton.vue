@@ -23,7 +23,10 @@ const classes = computed(() => [
 </script>
 
 <template>
-  <NuxtLink v-if="to" :to="to" :class="classes">
+  <HashLink v-if="typeof to === 'string' && to.startsWith('#')" :to="to" :class="classes">
+    <span><slot /></span>
+  </HashLink>
+  <NuxtLink v-else-if="to" :to="to" :class="classes">
     <span><slot /></span>
   </NuxtLink>
   <a v-else-if="href" :href="href" :class="classes">
@@ -65,6 +68,10 @@ const classes = computed(() => [
 .btn--solid:hover {
   background: var(--joint);
   border-color: var(--joint);
+}
+
+.btn--invert.btn--solid:hover {
+  background: color-mix(in srgb, var(--paper) 86%, var(--ink));
 }
 
 .btn--ghost {

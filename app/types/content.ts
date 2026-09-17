@@ -7,7 +7,6 @@ export type {
   Project,
   Material,
   TechnicalStep,
-  ProcessStep,
   InquiryPayload,
   InquiryResult
 } from '#shared/types/content'

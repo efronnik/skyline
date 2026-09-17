@@ -1,22 +1,24 @@
 <script setup lang="ts">
-usePageSeo({
-  title: 'Cookies',
-  description: 'Политика cookies LIMEN — шаблон под юридическую редакцию.',
+const { t } = useLocale()
+
+usePageSeo(() => ({
+  title: t('legal.cookiesTitle'),
+  description: t('legal.cookies1'),
   path: '/cookies'
-})
+}))
 </script>
 
 <template>
   <article class="page">
-    <h1>Cookies</h1>
-    <p>Сайт не подключает рекламные трекеры. Технические cookies появятся здесь после выбора аналитики.</p>
-    <p>Пока сторонние счётчики не установлены, отдельное согласие не запрашивается.</p>
+    <h1>{{ t('legal.cookiesTitle') }}</h1>
+    <p>{{ t('legal.cookies1') }}</p>
+    <p>{{ t('legal.cookies2') }}</p>
   </article>
 </template>
 
 <style scoped>
 .page {
-  padding: calc(var(--header) + 2rem) var(--pad) var(--space-8);
+  padding: calc(var(--header) + 1.6rem) var(--pad) var(--section);
   max-width: 40rem;
   margin: 0 auto;
 }

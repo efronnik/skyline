@@ -1,51 +1,46 @@
 <script setup lang="ts">
-const { el, visible } = useReveal()
+const { t } = useLocale()
+const { el, style } = useParallax(56)
 </script>
 
 <template>
-  <section ref="el" class="phi" :class="{ 'is-in': visible }" aria-labelledby="phi-title">
-    <SectionLabel kicker="Философия" spec="01 — Plane" />
+  <section id="philosophy" class="phi" aria-labelledby="phi-title">
+    <SectionLabel :kicker="t('philosophy.kicker')" :spec="t('philosophy.spec')" />
     <div class="phi__grid">
       <div>
-        <p class="phi__not">Не дверь.</p>
-        <h2 id="phi-title">Продолжение архитектуры.</h2>
+        <p class="phi__not">{{ t('philosophy.not') }}</p>
+        <h2 id="phi-title">{{ t('philosophy.title') }}</h2>
       </div>
       <div class="phi__text">
-        <p>
-          Скрытый монтаж убирает коробку, наличник и видимые петли.
-          Полотно стоит заподлицо со стеной и может быть окрашено в тот же цвет.
-        </p>
-        <ul>
-          <li>Плоскость стены и полотна совпадают</li>
-          <li>Коробка спрятана в конструкции</li>
-          <li>Петли не видны с фасада</li>
-          <li>Зазор читается как шов, а не как рама</li>
-        </ul>
+        <p>{{ t('philosophy.text') }}</p>
       </div>
     </div>
-    <div class="phi__visual">
-      <MediaFrame
-        src="/images/after-flush.png"
-        alt="Стена с интегрированной скрытой дверью после отделки"
-        ratio="16 / 8"
-        sizes="100vw"
-      />
-      <p class="phi__cap">Стена → дверь → одна поверхность</p>
+    <div ref="el" class="phi__visual">
+      <div class="phi__plane" :style="style">
+        <MediaFrame
+          src="/images/work-pair.jpg"
+          :alt="t('philosophy.alt')"
+          ratio="16 / 9"
+          sizes="100vw"
+          position="50% 58%"
+        />
+      </div>
     </div>
+    <p class="phi__cap">{{ t('philosophy.cap') }}</p>
   </section>
 </template>
 
 <style scoped>
 .phi {
-  padding: var(--space-8) var(--pad);
+  padding: var(--section) var(--pad);
   max-width: var(--max);
   margin: 0 auto;
 }
 
 .phi__grid {
   display: grid;
-  gap: var(--space-6);
-  margin: var(--space-6) 0 var(--space-7);
+  gap: 1.4rem;
+  margin: 1.4rem 0 1.6rem;
 }
 
 .phi__not {
@@ -54,7 +49,7 @@ const { el, visible } = useReveal()
   text-transform: uppercase;
   font-size: var(--fs-xs);
   color: var(--joint);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 h2 {
@@ -65,39 +60,38 @@ h2 {
 }
 
 .phi__text p {
-  font-size: 1.25rem;
+  font-size: 1.12rem;
   max-width: var(--measure);
 }
 
-ul {
-  margin: 1.4rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.55rem;
+.phi__visual {
+  overflow: hidden;
 }
 
-li {
-  font-family: var(--font-spec);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding-left: 1.1rem;
-  position: relative;
+.phi__plane {
+  will-change: transform;
 }
 
-li::before {
-  content: '';
-  width: 8px;
-  height: 1px;
-  background: var(--joint);
-  position: absolute;
-  left: 0;
-  top: 0.55em;
+.phi__plane :deep(.media) {
+  overflow: hidden;
+}
+
+.phi__plane :deep(.media__img) {
+  transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phi__plane {
+    will-change: auto;
+  }
+
+  .phi__plane :deep(.media__img) {
+    transform: none;
+  }
 }
 
 .phi__cap {
-  margin-top: 0.8rem;
+  margin-top: 0.7rem;
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.16em;
@@ -107,7 +101,7 @@ li::before {
 
 @media (min-width: 980px) {
   .phi__grid {
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.05fr 0.95fr;
     align-items: end;
   }
 }

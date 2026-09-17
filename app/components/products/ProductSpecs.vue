@@ -4,25 +4,35 @@ import type { Product } from '~/types/content'
 defineProps<{
   product: Product
 }>()
+
+const { t } = useLocale()
 </script>
 
 <template>
   <dl class="specs">
     <div>
-      <dt>Отделка</dt>
-      <dd>{{ product.finishes.join(' · ') }}</dd>
+      <dt>{{ t('specs.finish') }}</dt>
+      <dd>{{ t('materials.items.paint.name') }}</dd>
     </div>
     <div>
-      <dt>Открывание</dt>
-      <dd>{{ product.openings.join(' · ') }}</dd>
+      <dt>{{ t('specs.edge') }}</dt>
+      <dd>{{ t(`config.edges.${product.edge}`) }}</dd>
     </div>
     <div>
-      <dt>Высота</dt>
-      <dd>{{ product.heights.join(' · ') }}</dd>
+      <dt>{{ t('specs.opening') }}</dt>
+      <dd>{{ t(`config.openings.${product.swing}`) }} · {{ t('config.openings.left') }} · {{ t('config.openings.right') }}</dd>
     </div>
     <div>
-      <dt>Цвет</dt>
-      <dd>{{ product.colors.map(item => item.name).join(' · ') }}</dd>
+      <dt>{{ t('specs.threshold') }}</dt>
+      <dd>{{ t('config.thresholds.yes') }} · {{ t('config.thresholds.no') }}</dd>
+    </div>
+    <div>
+      <dt>{{ t('specs.height') }}</dt>
+      <dd>{{ t('config.heights.standard') }} · {{ t('config.heights.ceiling') }}</dd>
+    </div>
+    <div>
+      <dt>{{ t('specs.color') }}</dt>
+      <dd>{{ t('config.colors.white') }} · {{ t('config.leafFinish') }}</dd>
     </div>
   </dl>
 </template>

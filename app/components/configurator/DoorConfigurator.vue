@@ -1,225 +1,400 @@
 <script setup lang="ts">
-import { materials } from '~/data/materials'
-import { products } from '~/data/products'
+const { t } = useLocale()
+const { edge, swing, selectedSlug } = useConfigurator()
 
-const types = [
-  { id: 'single', label: 'Одностворчатая' },
-  { id: 'double', label: 'Двустворчатая' },
-  { id: 'sliding', label: 'Раздвижная' }
-] as const
+const sides = ['left', 'right'] as const
+const swings = ['in', 'out'] as const
+const heights = ['standard', 'ceiling', 'custom'] as const
+const edges = ['silver', 'black'] as const
+const handlePositions = ['standard', 'high', 'custom'] as const
+const thresholds = ['no', 'yes'] as const
 
-const openings = [
-  { id: 'left', label: 'Левое' },
-  { id: 'right', label: 'Правое' },
-  { id: 'in', label: 'Внутрь' },
-  { id: 'out', label: 'Наружу' }
-] as const
-
-const heights = [
-  { id: 'standard', label: 'Стандарт' },
-  { id: 'ceiling', label: 'До потолка' },
-  { id: 'custom', label: 'По проекту' }
-] as const
-
-const handles = [
-  { id: 'linear', label: 'Линейная' },
-  { id: 'hidden', label: 'Скрытая' },
-  { id: 'none', label: 'Без ручки' }
-] as const
-
-const colors = [
-  { id: 'chalk', label: 'Мел', value: '#E8E4DC' },
-  { id: 'mineral', label: 'Минерал', value: '#C9C4BB' },
-  { id: 'ink', label: 'Чернила', value: '#1C1916' },
-  { id: 'custom', label: 'По образцу', value: '#55605A' }
-] as const
+const edgeTones = {
+  silver: '#C5C2BA',
+  black: '#1C1916'
+} as const
 
 const spec = reactive({
-  type: 'single',
-  opening: 'left',
-  height: 'ceiling',
-  finish: materials[0]?.id ?? 'paint',
-  color: 'mineral',
-  handle: 'linear'
+  side: 'left' as (typeof sides)[number],
+  height: 'ceiling' as (typeof heights)[number],
+  handlePos: 'standard' as (typeof handlePositions)[number],
+  threshold: 'yes' as (typeof thresholds)[number]
 })
 
-const finish = computed(() => materials.find(item => item.id === spec.finish) ?? materials[0])
-const color = computed(() => colors.find(item => item.id === spec.color) ?? colors[1])
-const matchedProduct = computed(() => {
-  if (spec.type === 'sliding') return products.find(item => item.slug === 'pocket')
-  if (spec.type === 'double') return products.find(item => item.slug === 'pair')
-  if (spec.finish === 'glass') return products.find(item => item.slug === 'lumen')
-  if (spec.finish === 'oak' || spec.finish === 'walnut') return products.find(item => item.slug === 'timber')
-  return products.find(item => item.slug === 'plane')
-})
+const opened = ref(true)
 
-const query = computed(() => ({
-  product: matchedProduct.value?.name ?? 'Plane',
-  finish: finish.value?.name ?? '',
-  comment: `Тип: ${spec.type}; открывание: ${spec.opening}; высота: ${spec.height}; цвет: ${spec.color}; ручка: ${spec.handle}`
-}))
+function cycleHandle() {
+  const index = handlePositions.indexOf(spec.handlePos)
+  spec.handlePos = handlePositions[(index + 1) % handlePositions.length]
+}
+
+function toggleThreshold() {
+  spec.threshold = spec.threshold === 'yes' ? 'no' : 'yes'
+}
 </script>
 
 <template>
-  <section class="cfg" aria-labelledby="cfg-title">
-    <div>
-      <SectionLabel kicker="Конфигуратор" spec="Spec" />
-      <h2 id="cfg-title">Собрать систему.</h2>
-      <p>Цены не симулируются. Спецификация уходит в заявку как постановка задачи.</p>
+  <section id="configurator" class="cfg" aria-labelledby="cfg-title">
+    <div class="cfg__head">
+      <SectionLabel :kicker="t('config.kicker')" :spec="t('config.spec')" />
+      <h2 id="cfg-title">{{ t('config.title') }}</h2>
+      <p>{{ t('config.lead') }}</p>
     </div>
 
-    <div class="cfg__preview" :style="{ '--leaf': color.value }">
-      <div class="wall">
-        <div class="leaf" :class="[`is-${spec.type}`, `is-${spec.height}`]">
-          <img v-if="finish" :src="finish.image" alt="">
-          <span v-if="spec.handle === 'linear'" class="handle" />
-        </div>
+    <div class="room">
+      <ClientOnly>
+        <DoorStage
+          :edge="edge"
+          leaf="paint"
+          :side="spec.side"
+          :swing="swing"
+          :handle-pos="spec.handlePos"
+          :threshold="spec.threshold"
+          :height="spec.height"
+          :opened="opened"
+          @leaf-click="opened = !opened"
+          @handle-click="cycleHandle"
+          @sill-click="toggleThreshold"
+        />
+        <template #fallback>
+          <p class="room__hint">{{ t('config.loading') }}</p>
+        </template>
+      </ClientOnly>
+      <div class="room__bar">
+        <button type="button" class="open-btn" :aria-pressed="opened" @click="opened = !opened">
+          {{ opened ? t('config.closeDoor') : t('config.openDoor') }}
+        </button>
+        <span class="room__hint">{{ t('config.clickDoor') }}</span>
       </div>
-      <p>{{ finish?.name }} · {{ color.label }} · {{ spec.height }}</p>
     </div>
 
     <form class="cfg__form" @submit.prevent>
-      <fieldset v-for="group in [
-        { legend: 'Тип', key: 'type', items: types },
-        { legend: 'Открывание', key: 'opening', items: openings },
-        { legend: 'Высота', key: 'height', items: heights },
-        { legend: 'Ручка', key: 'handle', items: handles }
-      ]" :key="group.key">
-        <legend>{{ group.legend }}</legend>
-        <label v-for="item in group.items" :key="item.id">
-          <input v-model="(spec as Record<string, string>)[group.key]" type="radio" :value="item.id">
-          {{ item.label }}
-        </label>
+      <p class="cfg__sum">
+        {{ t(`products.${selectedSlug}.name`) }}
+        · {{ t(`config.edges.${edge}`) }}
+        · {{ t(`config.openings.${spec.side}`) }}
+        · {{ t(`config.openings.${swing}`) }}
+      </p>
+
+      <fieldset class="seg">
+        <legend>{{ t('config.edge') }}</legend>
+        <div class="chips">
+          <label
+            v-for="item in edges"
+            :key="item"
+            class="chip"
+            :class="{ 'is-on': edge === item }"
+          >
+            <input v-model="edge" class="sr" type="radio" name="cfg-edge" :value="item">
+            <span class="chip__sw" :style="{ background: edgeTones[item] }" />
+            <em>{{ t(`config.edges.${item}`) }}</em>
+          </label>
+        </div>
       </fieldset>
 
-      <fieldset>
-        <legend>Отделка</legend>
-        <label v-for="item in materials" :key="item.id">
-          <input v-model="spec.finish" type="radio" :value="item.id">
-          {{ item.name }}
-        </label>
+      <fieldset class="seg">
+        <legend>{{ t('config.side') }}</legend>
+        <div class="seg__row" :style="{ '--n': sides.length }">
+          <label v-for="item in sides" :key="item" class="pill" :class="{ 'is-on': spec.side === item }">
+            <input v-model="spec.side" class="sr" type="radio" name="cfg-side" :value="item">
+            <span>{{ t(`config.openings.${item}`) }}</span>
+          </label>
+        </div>
       </fieldset>
 
-      <fieldset>
-        <legend>Цвет</legend>
-        <label v-for="item in colors" :key="item.id">
-          <input v-model="spec.color" type="radio" :value="item.id">
-          {{ item.label }}
-        </label>
+      <fieldset class="seg">
+        <legend>{{ t('config.swing') }}</legend>
+        <div class="seg__row" :style="{ '--n': swings.length }">
+          <label v-for="item in swings" :key="item" class="pill" :class="{ 'is-on': swing === item }">
+            <input v-model="swing" class="sr" type="radio" name="cfg-swing" :value="item">
+            <span>{{ t(`config.openings.${item}`) }}</span>
+          </label>
+        </div>
       </fieldset>
+
+      <div class="cfg__pair">
+        <fieldset class="seg">
+          <legend>{{ t('config.handlePos') }}</legend>
+          <div class="seg__row" :style="{ '--n': handlePositions.length }">
+            <label v-for="item in handlePositions" :key="item" class="pill" :class="{ 'is-on': spec.handlePos === item }">
+              <input v-model="spec.handlePos" class="sr" type="radio" name="cfg-handle" :value="item">
+              <span>{{ t(`config.handlePositions.${item}`) }}</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend>{{ t('config.threshold') }}</legend>
+          <div class="seg__row" :style="{ '--n': thresholds.length }">
+            <label v-for="item in thresholds" :key="String(item)" class="pill" :class="{ 'is-on': spec.threshold === item }">
+              <input v-model="spec.threshold" class="sr" type="radio" name="cfg-sill" :value="item">
+              <span>{{ t(`config.thresholds.${item}`) }}</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <fieldset class="seg">
+        <legend>{{ t('config.height') }}</legend>
+        <div class="seg__row" :style="{ '--n': heights.length }">
+          <label v-for="item in heights" :key="item" class="pill" :class="{ 'is-on': spec.height === item }">
+            <input v-model="spec.height" class="sr" type="radio" name="cfg-height" :value="item">
+            <span>{{ t(`config.heights.${item}`) }}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <AppButton to="#contact">{{ t('config.discuss') }}</AppButton>
     </form>
-
-    <AppButton :to="{ path: '/contact', query }">Обсудить это решение</AppButton>
   </section>
 </template>
 
 <style scoped>
 .cfg {
   display: grid;
-  gap: var(--space-6);
-  padding: var(--space-7) 0;
+  gap: 1.4rem;
+  padding: var(--section) var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.cfg__head p {
+  max-width: 38rem;
+  margin-top: 0.7rem;
+  color: var(--muted);
 }
 
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  margin: 0.8rem 0;
+  margin: 0.7rem 0 0;
 }
 
-.cfg__preview {
-  border: var(--hair) solid var(--line);
-  padding: 1rem;
-}
-
-.wall {
-  height: min(52vw, 380px);
-  background: var(--stone);
+.room {
   position: relative;
-  overflow: hidden;
-}
-
-.leaf {
-  position: absolute;
-  top: 8%;
-  bottom: 8%;
-  left: 58%;
-  width: 22%;
-  background: var(--leaf);
-  box-shadow: inset 1px 0 0 rgba(20, 18, 16, 0.35);
-}
-
-.leaf img {
+  min-height: min(68vw, 520px);
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.78;
+  overflow: hidden;
+  border: var(--hair) solid var(--line);
+  background: #cfcabe;
 }
 
-.leaf.is-double {
-  width: 34%;
-  box-shadow: inset 1px 0 0 rgba(20,18,16,.35), inset -1px 0 0 rgba(20,18,16,.2);
-}
-
-.leaf.is-sliding {
-  left: 48%;
-  width: 18%;
-}
-
-.leaf.is-ceiling {
-  top: 0;
-}
-
-.handle {
+.room__bar {
   position: absolute;
-  right: 12%;
-  top: 46%;
-  width: 2px;
-  height: 18%;
+  z-index: 2;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1rem;
+  pointer-events: none;
+}
+
+.open-btn {
+  pointer-events: auto;
+  min-height: 40px;
+  padding: 0.45rem 0.95rem;
+  border: var(--hair) solid var(--ink);
   background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-spec);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.open-btn[aria-pressed='false'] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.room__hint {
+  font-family: var(--font-spec);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 68%, transparent);
+}
+
+.cfg__sum {
+  font-family: var(--font-spec);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--joint);
 }
 
 .cfg__form {
   display: grid;
-  gap: 1rem;
+  gap: 1.05rem;
 }
 
-fieldset {
+.cfg__pair {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.seg {
   border: 0;
-  border-top: var(--hair) solid var(--line);
-  padding: 0.8rem 0 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
 }
 
-legend {
+.seg legend {
   font-family: var(--font-spec);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.16em;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--joint);
-  padding: 0 0.6rem 0 0;
+  padding: 0;
 }
 
-label {
+.chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--hair);
+  background: var(--line);
+  border: var(--hair) solid var(--line);
+}
+
+.chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 52px;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.chip__sw {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(20,18,16,0.22);
+}
+
+.chip em {
+  font-family: var(--font-spec);
+  font-size: 0.6rem;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  color: var(--ink-soft);
+}
+
+.chip.is-on {
+  background: var(--ink);
+}
+
+.chip.is-on em {
+  color: var(--paper);
+}
+
+.seg__row {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  gap: var(--hair);
+  background: var(--line);
+  border: var(--hair) solid var(--line);
+}
+
+.sr {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
   min-height: 44px;
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  background: var(--paper);
   cursor: pointer;
-  font-size: 0.95rem;
+  color: var(--ink-soft);
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+
+.pill span {
+  position: relative;
+  z-index: 0;
+  font-family: var(--font-spec);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.pill.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.pill:hover:not(.is-on),
+.chip:hover:not(.is-on) {
+  background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+}
+
+.pill:focus-within,
+.chip:focus-within,
+.open-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.cfg__form :deep(.btn) {
+  width: 100%;
+  margin-top: 0.2rem;
 }
 
 @media (min-width: 980px) {
   .cfg {
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+    column-gap: 2rem;
   }
 
-  .cfg__form,
-  a.btn {
+  .cfg__head {
     grid-column: 1 / -1;
+  }
+
+  .room {
+    min-height: 560px;
+    height: calc(100svh - var(--header) - 1.6rem);
+    max-height: 720px;
+    position: sticky;
+    top: calc(var(--header) + 0.6rem);
+  }
+
+  .cfg__form {
+    position: sticky;
+    top: calc(var(--header) + 0.6rem);
+  }
+
+  .cfg__pair {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
   }
 }
 </style>

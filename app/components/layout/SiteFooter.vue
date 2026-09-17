@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { contact, footerNav, primaryNav, site } from '~/data/site'
 import { products } from '~/data/products'
+
+const { t } = useLocale()
+const year = new Date().getFullYear()
+
+function footerLabel(item: { label: string, to: string }) {
+  if (item.label === 'privacyNav') return t('legal.privacyNav')
+  if (item.label === 'Cookies') return 'Cookies'
+  if (item.label === 'contact') return t('nav.contact')
+  return item.label
+}
 </script>
 
 <template>
@@ -8,33 +18,45 @@ import { products } from '~/data/products'
     <div class="foot__grid">
       <div>
         <p class="foot__brand">{{ site.name }}</p>
-        <p class="foot__tag">{{ site.tagline }}</p>
-        <AppButton to="/contact">Рассчитать проект</AppButton>
+        <p class="foot__tag">{{ t('hero.title') }}</p>
+        <AppButton to="#contact">{{ t('hero.cta2') }}</AppButton>
       </div>
-      <nav aria-label="Разделы">
-        <p class="foot__h">Студия</p>
-        <NuxtLink v-for="item in primaryNav" :key="item.to" :to="item.to">{{ item.label }}</NuxtLink>
-        <NuxtLink to="/about">О студии</NuxtLink>
+      <nav :aria-label="t('footer.studio')">
+        <p class="foot__h">{{ t('footer.studio') }}</p>
+        <HashLink v-for="item in primaryNav" :key="item.to" :to="item.to">{{ t(`nav.${item.label}`) }}</HashLink>
+        <HashLink to="#contact">{{ t('nav.contact') }}</HashLink>
       </nav>
-      <nav aria-label="Коллекция">
-        <p class="foot__h">Коллекция</p>
-        <NuxtLink v-for="item in products" :key="item.slug" :to="`/products/${item.slug}`">
-          {{ item.name }}
+      <nav :aria-label="t('footer.collection')">
+        <p class="foot__h">{{ t('footer.collection') }}</p>
+        <NuxtLink
+          v-for="item in products"
+          :key="item.slug"
+          :to="`/products/${item.slug}`"
+          class="foot__prod"
+        >
+          {{ t(`products.${item.slug}.name`) }}
         </NuxtLink>
       </nav>
       <div>
-        <p class="foot__h">Контакт</p>
+        <p class="foot__h">{{ t('footer.contact') }}</p>
         <a v-if="contact.phone.href" :href="contact.phone.href">{{ contact.phone.value }}</a>
-        <p v-else>{{ contact.city.value }}</p>
         <a v-if="contact.email.href" :href="contact.email.href">{{ contact.email.value }}</a>
-        <a v-if="contact.mapUrl" :href="contact.mapUrl" rel="noreferrer" target="_blank">Как добраться</a>
-        <p v-else class="foot__note">Адрес появится после заполнения карточки студии.</p>
+        <a
+          v-if="contact.instagram.href"
+          :href="contact.instagram.href"
+          rel="noopener noreferrer"
+          target="_blank"
+        >{{ contact.instagram.handle }}</a>
+        <a v-if="contact.mapUrl" :href="contact.mapUrl" rel="noreferrer" target="_blank">{{ t('footer.directions') }}</a>
       </div>
     </div>
     <div class="foot__base">
-      <p>© {{ new Date().getFullYear() }} {{ site.legalName }}</p>
+      <p>© {{ year }} {{ site.legalName }}</p>
       <nav>
-        <NuxtLink v-for="item in footerNav" :key="item.to" :to="item.to">{{ item.label }}</NuxtLink>
+        <template v-for="item in footerNav" :key="item.to">
+          <HashLink v-if="item.to.startsWith('#')" :to="item.to">{{ footerLabel(item) }}</HashLink>
+          <NuxtLink v-else :to="item.to">{{ footerLabel(item) }}</NuxtLink>
+        </template>
       </nav>
     </div>
   </footer>
@@ -64,8 +86,8 @@ import { products } from '~/data/products'
 .foot__tag {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 1.2rem;
-  margin-bottom: 1.4rem;
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
   max-width: 16rem;
 }
 
@@ -81,22 +103,28 @@ import { products } from '~/data/products'
 nav,
 .foot__grid > div {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.4rem;
   align-content: start;
 }
 
 .foot a,
-.foot p {
+.foot p,
+.foot__prod {
   font-size: 0.95rem;
 }
 
-.foot a:hover {
+.foot a:hover,
+.foot__prod:hover {
   color: var(--joint-bright);
 }
 
-.foot__note {
-  color: color-mix(in srgb, var(--paper) 55%, transparent);
-  max-width: 16rem;
+.foot__prod {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .foot__base {
@@ -105,8 +133,8 @@ nav,
   justify-content: space-between;
   gap: 1rem;
   max-width: var(--max);
-  margin: var(--space-8) auto 0;
-  padding-top: 1.2rem;
+  margin: var(--space-7) auto 0;
+  padding-top: 1.1rem;
   border-top: var(--hair) solid var(--line-on-night);
   font-family: var(--font-spec);
   font-size: var(--fs-xs);

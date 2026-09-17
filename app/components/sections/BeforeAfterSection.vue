@@ -1,7 +1,35 @@
 <script setup lang="ts">
-const pos = ref(54)
+import { animate } from 'animejs'
+
+const { t } = useLocale()
+const reduced = useReducedMotion()
+const { play } = useAnimeJob()
+const { el, visible } = useReveal()
+const pos = ref(86)
 const dragging = ref(false)
 const frame = ref<HTMLElement | null>(null)
+const played = ref(false)
+
+onMounted(() => {
+  if (reduced.value) pos.value = 54
+})
+
+watch(visible, (on) => {
+  if (!on || played.value || reduced.value) return
+  played.value = true
+  const proxy = { x: 86 }
+  play(
+    'ba',
+    animate(proxy, {
+      x: 54,
+      duration: 1600,
+      ease: 'inOutCubic',
+      onUpdate: () => {
+        if (!dragging.value) pos.value = proxy.x
+      }
+    })
+  )
+})
 
 function setFromEvent(event: PointerEvent) {
   if (!frame.value) return
@@ -31,9 +59,9 @@ function onKey(event: KeyboardEvent) {
 </script>
 
 <template>
-  <section class="ba" aria-labelledby="ba-title">
-    <SectionLabel kicker="Сравнение" spec="05 — Before / After" />
-    <h2 id="ba-title">Обычная дверь. Затем — стена.</h2>
+  <section ref="el" id="compare" class="ba" aria-labelledby="ba-title">
+    <SectionLabel :kicker="t('beforeAfter.kicker')" :spec="t('beforeAfter.spec')" />
+    <h2 id="ba-title">{{ t('beforeAfter.title') }}</h2>
     <div
       ref="frame"
       class="ba__frame"
@@ -42,14 +70,14 @@ function onKey(event: KeyboardEvent) {
       @pointerup="end"
       @pointercancel="end"
     >
-      <img src="/images/after-flush.png" alt="Стена со скрытой дверью после интеграции">
+      <img src="/images/after-flush.jpg" :alt="t('beforeAfter.altAfter')">
       <div class="ba__before" :style="{ clipPath: `inset(0 ${100 - pos}% 0 0)` }">
-        <img src="/images/before-classic.png" alt="Обычная дверь с наличником до интеграции">
+        <img src="/images/idoors-install.jpg" :alt="t('beforeAfter.altBefore')">
       </div>
       <div class="ba__handle" :style="{ left: pos + '%' }">
         <button
           type="button"
-          aria-label="Сравнить до и после"
+          :aria-label="t('beforeAfter.aria')"
           :aria-valuemin="8"
           :aria-valuemax="92"
           :aria-valuenow="Math.round(pos)"
@@ -59,15 +87,15 @@ function onKey(event: KeyboardEvent) {
       </div>
     </div>
     <div class="ba__labels">
-      <span>Наличник</span>
-      <span>Плоскость</span>
+      <span>{{ t('beforeAfter.before') }}</span>
+      <span>{{ t('beforeAfter.after') }}</span>
     </div>
   </section>
 </template>
 
 <style scoped>
 .ba {
-  padding: var(--space-8) var(--pad);
+  padding: var(--section) var(--pad);
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -76,8 +104,8 @@ h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  max-width: 14ch;
-  margin: 1rem 0 var(--space-6);
+  max-width: 16ch;
+  margin: 0.8rem 0 1.4rem;
 }
 
 .ba__frame {
@@ -90,21 +118,19 @@ h2 {
   user-select: none;
 }
 
-.ba__frame img {
+.ba__frame img,
+.ba__before img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
 }
 
 .ba__before {
   position: absolute;
   inset: 0;
-}
-
-.ba__before img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .ba__handle {
@@ -120,8 +146,8 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: var(--hair) solid var(--paper);
   background: var(--ink);
@@ -132,7 +158,7 @@ h2 {
 .ba__labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.8rem;
+  margin-top: 0.7rem;
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.16em;
