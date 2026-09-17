@@ -772,7 +772,9 @@ export const messages = {
     fill: L('Заполнение', 'Заповнення', 'Relleno', 'Core'),
     fillValue: L('Соты или вспененный полиэтилен', 'Соти або спінений поліетилен', 'Nido de abeja o polietileno expandido', 'Honeycomb or expanded polyethylene'),
     sound: L('Звук / ресурс', 'Звук / ресурс', 'Sonido / ciclos', 'Sound / cycles'),
-    cycles: L('циклов', 'циклів', 'ciclos', 'cycles')
+    cycles: L('циклов', 'циклів', 'ciclos', 'cycles'),
+    mm: L('мм', 'мм', 'mm', 'mm'),
+    dba: L('дБА', 'дБА', 'dBA', 'dBA')
   },
 
   legal: {

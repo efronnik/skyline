@@ -27,7 +27,7 @@
   --fs-sm: 0.9375rem;
   --fs-xs: 0.72rem;
 
-  --lh-display: 0.92;
+  --lh-display: 1.06;
   --lh-body: 1.55;
 
   --space-1: 0.25rem;
@@ -115,6 +115,11 @@ h3,
 h4,
 p {
   margin: 0;
+}
+
+h1,
+h2 {
+  line-height: var(--lh-display);
 }
 
 :focus-visible {

@@ -29,7 +29,7 @@ const { t } = useLocale()
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   max-width: 12ch;
 }
 

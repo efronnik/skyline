@@ -45,7 +45,7 @@ usePageSeo(() => ({
 h1 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   letter-spacing: -0.03em;
   margin: 0 0 1rem;
 }

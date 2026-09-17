@@ -62,7 +62,7 @@ h2 {
 
 h1 {
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   margin: 0.8rem 0 0.5rem;
 }
 

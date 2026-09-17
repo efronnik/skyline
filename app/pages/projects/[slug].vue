@@ -6,9 +6,8 @@ definePageMeta({ darkHeader: true })
 const { t } = useLocale()
 const project = getProject(String(useRoute().params.slug))
 
-if (!project) {
-  throw createError({ statusCode: 404, message: 'Сценарий не найден' })
-}
+if (!project)
+  throw createError({ statusCode: 404, message: t('pages.notFoundProject') })
 
 usePageSeo(() => ({
   title: t(`projects.items.${project.slug}.title`),
@@ -106,7 +105,7 @@ h2 {
 
 h1 {
   font-size: var(--fs-display);
-  line-height: 0.92;
+  line-height: var(--lh-display);
 }
 
 .body {

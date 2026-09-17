@@ -132,7 +132,7 @@ h3 {
 
 h2 {
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   margin: 0;
 }
 

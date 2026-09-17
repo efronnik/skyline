@@ -13,9 +13,8 @@ if (slug === 'prime-al') {
 
 const product = getProduct(slug)
 
-if (!product) {
-  throw createError({ statusCode: 404, message: 'Система не найдена' })
-}
+if (!product)
+  throw createError({ statusCode: 404, message: t('pages.notFoundProduct') })
 
 usePageSeo(() => ({
   title: t(`products.${product.slug}.name`),
@@ -116,7 +115,7 @@ useJsonLd(() => ({
 h1 {
   font-family: var(--font-display);
   font-size: var(--fs-display);
-  line-height: 0.92;
+  line-height: var(--lh-display);
   margin: 0.5rem 0 0.8rem;
 }
 

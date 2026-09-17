@@ -58,7 +58,7 @@ function lift(event: PointerEvent, on: boolean, id: string) {
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   margin: 0.8rem 0 0.55rem;
 }
 

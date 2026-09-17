@@ -101,7 +101,7 @@ function onBackdrop(event: MouseEvent) {
 h2 {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 0.95;
+  line-height: var(--lh-display);
 }
 
 .modal__head p {

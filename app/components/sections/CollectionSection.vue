@@ -112,7 +112,7 @@ function liftShot(event: PointerEvent, on: boolean) {
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.92;
+  line-height: var(--lh-display);
   letter-spacing: -0.04em;
   margin-top: 0.7rem;
 }

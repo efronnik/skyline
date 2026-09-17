@@ -49,7 +49,7 @@ watch(swing, async () => {
       </div>
       <div>
         <dt>{{ t('technology.facts.mdf') }}</dt>
-        <dd>{{ swing === 'in' ? idoorsBuild.mdfIn : idoorsBuild.mdfOut }} мм</dd>
+        <dd>{{ swing === 'in' ? idoorsBuild.mdfIn : idoorsBuild.mdfOut }} {{ t('specs.mm') }}</dd>
       </div>
       <div>
         <dt>{{ t('technology.facts.fill') }}</dt>
@@ -57,7 +57,7 @@ watch(swing, async () => {
       </div>
       <div>
         <dt>{{ t('technology.facts.sound') }}</dt>
-        <dd>{{ idoorsBuild.soundDb }} дБА</dd>
+        <dd>{{ idoorsBuild.soundDb }} {{ t('specs.dba') }}</dd>
       </div>
       <div>
         <dt>{{ t('technology.facts.cycles') }}</dt>
@@ -118,7 +118,7 @@ watch(swing, async () => {
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   max-width: 16ch;
   margin: 0.8rem 0 0.7rem;
 }

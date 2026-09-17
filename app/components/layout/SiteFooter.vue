@@ -7,7 +7,7 @@ const year = new Date().getFullYear()
 
 function footerLabel(item: { label: string, to: string }) {
   if (item.label === 'privacyNav') return t('legal.privacyNav')
-  if (item.label === 'Cookies') return 'Cookies'
+  if (item.label === 'Cookies') return t('legal.cookiesTitle')
   if (item.label === 'contact') return t('nav.contact')
   return item.label
 }

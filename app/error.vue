@@ -36,7 +36,7 @@ function clear() {
 h1 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   max-width: 12ch;
   margin: 0.6rem 0 1rem;
 }

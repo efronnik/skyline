@@ -94,7 +94,7 @@ watch(active, async () => {
 h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  line-height: 0.95;
+  line-height: var(--lh-display);
   max-width: 16ch;
   margin-top: 0.8rem;
 }

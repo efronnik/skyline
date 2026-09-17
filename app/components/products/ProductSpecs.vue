@@ -35,7 +35,7 @@ const mdf = computed(() => (props.product.swing === 'in' ? idoorsBuild.mdfIn : i
     </div>
     <div>
       <dt>{{ t('specs.mdf') }}</dt>
-      <dd>{{ mdf }} мм</dd>
+      <dd>{{ mdf }} {{ t('specs.mm') }}</dd>
     </div>
     <div>
       <dt>{{ t('specs.fill') }}</dt>
@@ -43,7 +43,7 @@ const mdf = computed(() => (props.product.swing === 'in' ? idoorsBuild.mdfIn : i
     </div>
     <div>
       <dt>{{ t('specs.sound') }}</dt>
-      <dd>{{ idoorsBuild.soundDb }} дБА · {{ idoorsBuild.cycles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') }} {{ t('specs.cycles') }}</dd>
+      <dd>{{ idoorsBuild.soundDb }} {{ t('specs.dba') }} · {{ idoorsBuild.cycles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') }} {{ t('specs.cycles') }}</dd>
     </div>
   </dl>
 </template>
