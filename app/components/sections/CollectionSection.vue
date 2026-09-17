@@ -8,7 +8,7 @@ const reduced = useReducedMotion()
 const { play } = useAnimeJob()
 
 const edgeTones = {
-  silver: '#C5C2BA',
+  silver: '#E8E6E1',
   black: '#1C1916'
 } as const
 

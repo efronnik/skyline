@@ -4,13 +4,13 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { getLeafFinish, type LeafFinish } from '~/data/doorFinishes'
-import { floorFinishByHex, wallFinishByHex } from '~/data/roomFinishes'
+import { getFloorFinish, getWallFinish, HERRINGBONE_MAP, WALL_MAP, type FloorFinish, type WallFinish } from '~/data/roomFinishes'
 
 const props = defineProps<{
   edge: 'silver' | 'black'
   leaf: LeafFinish
-  wall: string
-  floor: string
+  wall: WallFinish
+  floor: FloorFinish
   side: 'left' | 'right'
   swing: 'in' | 'out'
   handlePos: 'standard' | 'high' | 'custom'
@@ -30,9 +30,17 @@ const reduced = useReducedMotion()
 const { play, stop } = useAnimeJob()
 
 const edgeTones = {
-  silver: 0xc5c2ba,
+  silver: 0xe8e6e1,
   black: 0x1c1916
 }
+
+const edgeSurface = {
+  silver: { metalness: 0.78, roughness: 0.22 },
+  black: { metalness: 0.85, roughness: 0.3 }
+} as const
+
+const HANDLE_TONE = 0x1a1816
+const HANDLE_SURFACE = { metalness: 0.86, roughness: 0.28 } as const
 
 const handleHeight = {
   standard: 1050,
@@ -67,39 +75,13 @@ let sillDroppedY = 0
 let sillRetractedY = 0
 let primed = false
 const textures = new Map<string, THREE.Texture>()
-let roomNoise: THREE.CanvasTexture | null = null
 const pointer = new THREE.Vector2()
 const raycaster = new THREE.Raycaster()
 const clickable: THREE.Object3D[] = []
 let pointerDown = new THREE.Vector2()
 let resizeObs: ResizeObserver | null = null
 
-function noiseTexture() {
-  if (roomNoise) return roomNoise
-  const size = 256
-  const canvas = document.createElement('canvas')
-  canvas.width = size
-  canvas.height = size
-  const ctx = canvas.getContext('2d')
-  if (!ctx) return null
-  const image = ctx.createImageData(size, size)
-  for (let i = 0; i < image.data.length; i += 4) {
-    const n = 160 + Math.floor(Math.random() * 70)
-    image.data[i] = n
-    image.data[i + 1] = n
-    image.data[i + 2] = n
-    image.data[i + 3] = 255
-  }
-  ctx.putImageData(image, 0, 0)
-  roomNoise = new THREE.CanvasTexture(canvas)
-  roomNoise.wrapS = THREE.RepeatWrapping
-  roomNoise.wrapT = THREE.RepeatWrapping
-  roomNoise.colorSpace = THREE.NoColorSpace
-  return roomNoise
-}
-
-async function roomMap(path: string | null, repeat = 4) {
-  if (!path) return null
+async function roomMap(path: string, repeat = 4) {
   const key = `${path}:${repeat}`
   const cached = textures.get(key)
   if (cached) return cached
@@ -131,15 +113,35 @@ function paintMaterial() {
   })
 }
 
-function metal(color: number) {
+function edgeMaterial(tone: keyof typeof edgeTones = props.edge) {
+  const surface = edgeSurface[tone]
   return new THREE.MeshStandardMaterial({
-    color,
-    metalness: 0.78,
-    roughness: 0.28,
+    color: edgeTones[tone],
+    metalness: surface.metalness,
+    roughness: surface.roughness,
     polygonOffset: true,
     polygonOffsetFactor: -2,
     polygonOffsetUnits: -2
   })
+}
+
+function handleMaterial() {
+  return new THREE.MeshStandardMaterial({
+    color: HANDLE_TONE,
+    metalness: HANDLE_SURFACE.metalness,
+    roughness: HANDLE_SURFACE.roughness,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2
+  })
+}
+
+function tintEdgeMaterial(material: THREE.MeshStandardMaterial, tone: keyof typeof edgeTones = props.edge) {
+  const surface = edgeSurface[tone]
+  material.color.set(edgeTones[tone])
+  material.metalness = surface.metalness
+  material.roughness = surface.roughness
+  material.needsUpdate = true
 }
 
 function bake(mesh: THREE.Mesh) {
@@ -314,74 +316,59 @@ function playSill() {
 
 function playEdge() {
   if (!edgeMeshes.length) return
-  const target = new THREE.Color(edgeTones[props.edge])
-  const colors = edgeMeshes
+  const tone = props.edge
+  const target = new THREE.Color(edgeTones[tone])
+  const surface = edgeSurface[tone]
+  const materials = edgeMeshes
     .map(mesh => mesh.material)
     .filter((material): material is THREE.MeshStandardMaterial => material instanceof THREE.MeshStandardMaterial)
-    .map(material => material.color)
   if (reduced.value) {
-    for (const color of colors) color.copy(target)
+    for (const material of materials) tintEdgeMaterial(material, tone)
     return
+  }
+  for (const material of materials) {
+    material.metalness = surface.metalness
+    material.roughness = surface.roughness
   }
   play(
     'edge',
-    animate(colors, {
-      r: target.r,
-      g: target.g,
-      b: target.b,
-      duration: 480,
-      ease: 'outQuad',
-      composition: 'replace'
-    })
+    animate(
+      materials.map(material => material.color),
+      {
+        r: target.r,
+        g: target.g,
+        b: target.b,
+        duration: 480,
+        ease: 'outQuad',
+        composition: 'replace'
+      }
+    )
   )
 }
 
-function playRoomColor(slot: 'wall' | 'floor', mesh: THREE.Mesh | null, hex: string) {
+function playRoomColor(slot: 'wall' | 'floor', mesh: THREE.Mesh | null, id: string) {
   if (!mesh) return
-  void applyRoomSurface(slot, mesh, hex)
+  void applyRoomSurface(slot, mesh, id)
 }
 
-async function applyRoomSurface(slot: 'wall' | 'floor', mesh: THREE.Mesh, hex: string) {
-  const finish = slot === 'wall' ? wallFinishByHex(hex) : floorFinishByHex(hex)
+async function applyRoomSurface(slot: 'wall' | 'floor', mesh: THREE.Mesh, id: string) {
+  const finish = slot === 'wall' ? getWallFinish(id) : getFloorFinish(id)
   let material = mesh.material
   if (!(material instanceof THREE.MeshStandardMaterial)) {
     material = new THREE.MeshStandardMaterial({ side: THREE.DoubleSide })
     mesh.material = material
   }
 
-  const target = new THREE.Color(hex)
-  const mapPath = 'map' in finish ? finish.map : null
-  const map = await roomMap(mapPath, slot === 'floor' ? 3 : 2)
-  const bump = finish.bumpScale > 0 ? noiseTexture() : null
-
+  const mapPath = slot === 'floor' ? HERRINGBONE_MAP : WALL_MAP
+  const map = await roomMap(mapPath, slot === 'floor' ? 3 : 2.4)
   material.map = map
-  material.bumpMap = bump
-  material.bumpScale = finish.bumpScale
+  material.bumpMap = map
+  material.bumpScale = slot === 'floor' ? 0.028 : 0.016
+  material.color.set(finish.hex)
   material.roughness = finish.roughness
   material.metalness = finish.metalness
   material.side = THREE.DoubleSide
-  if (bump) {
-    bump.repeat.set(slot === 'floor' ? 10 : 6, slot === 'floor' ? 6 : 8)
-  }
   material.needsUpdate = true
-
-  if (reduced.value) {
-    material.color.copy(map ? new THREE.Color(0xffffff) : target)
-    return
-  }
-
-  const colorTarget = map ? new THREE.Color(0xffffff) : target
-  play(
-    slot,
-    animate(material.color, {
-      r: colorTarget.r,
-      g: colorTarget.g,
-      b: colorTarget.b,
-      duration: 420,
-      ease: 'outQuad',
-      composition: 'replace'
-    })
-  )
 }
 
 function playHeight() {
@@ -421,6 +408,7 @@ function rebuildWall() {
   }
   wallMesh = makeWall(opening)
   scene.add(wallMesh)
+  void applyRoomSurface('wall', wallMesh, props.wall)
   if (leafPivot) leafPivot.rotation.y = closed
 }
 
@@ -455,8 +443,9 @@ function frameCamera() {
   camera.near = Math.max(1, dist / 50)
   camera.far = dist * 24
   camera.updateProjectionMatrix()
-  controls.minDistance = dist * 0.55
-  controls.maxDistance = dist * 2.2
+  const startDist = camera.position.distanceTo(controls.target)
+  controls.minDistance = startDist * 0.55
+  controls.maxDistance = startDist * 1.18
   controls.update()
 }
 
@@ -487,17 +476,21 @@ function makeWall(opening: THREE.Box3) {
     curveSegments: 1
   })
   geometry.translate(0, 0, wallFront(opening) - 96)
-  const finish = wallFinishByHex(props.wall)
-  const bump = finish.bumpScale > 0 ? noiseTexture() : null
-  if (bump) bump.repeat.set(6, 8)
+  const pos = geometry.attributes.position
+  const uv = geometry.attributes.uv
+  if (uv) {
+    for (let i = 0; i < pos.count; i++) {
+      uv.setXY(i, pos.getX(i) * 0.00045, pos.getY(i) * 0.00045)
+    }
+    uv.needsUpdate = true
+  }
+  const finish = getWallFinish(props.wall)
   const mesh = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
-      color: props.wall,
+      color: 0xffffff,
       roughness: finish.roughness,
       metalness: finish.metalness,
-      bumpMap: bump,
-      bumpScale: finish.bumpScale,
       side: THREE.DoubleSide
     })
   )
@@ -516,10 +509,10 @@ function addEdgeBand(box: THREE.Box3, parent: THREE.Object3D) {
   const band = 3.2
   const wrap = 2
   const parts: THREE.Mesh[] = [
-    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), metal(edgeTones[props.edge]))
+    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), edgeMaterial()),
+    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), edgeMaterial()),
+    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), edgeMaterial()),
+    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), edgeMaterial())
   ]
   parts[0].position.set(box.min.x - band / 2, cy, cz)
   parts[1].position.set(box.max.x + band / 2, cy, cz)
@@ -537,7 +530,7 @@ function addEdgeBand(box: THREE.Box3, parent: THREE.Object3D) {
 function makeHandle(box: THREE.Box3) {
   const group = new THREE.Group()
   group.name = 'handle'
-  const finish = metal(edgeTones[props.edge])
+  const finish = handleMaterial()
 
   if (handleTemplate) {
     const model = handleTemplate.clone(true)
@@ -573,7 +566,7 @@ function makeHandle(box: THREE.Box3) {
 
 function makeSill(box: THREE.Box3) {
   const width = box.max.x - box.min.x - 16
-  const material = metal(edgeTones[props.edge])
+  const material = edgeMaterial()
   material.transparent = true
   const sill = new THREE.Mesh(new THREE.BoxGeometry(width, 18, 36), material)
   sill.name = 'sill'
@@ -588,7 +581,7 @@ function makeProceduralLeaf() {
   const leaf = new THREE.Mesh(new THREE.BoxGeometry(800, 1996, 40), paintMaterial())
   leaf.position.set(400, 1000, 20)
   leaf.name = 'leaf'
-  const frame = new THREE.Mesh(new THREE.BoxGeometry(804, 2000, 42), metal(edgeTones[props.edge]))
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(804, 2000, 42), edgeMaterial())
   frame.position.set(400, 1002, 20)
   frame.name = 'Alu'
   return { leaf, frame }
@@ -618,7 +611,7 @@ function setupDoor(root: THREE.Object3D | null) {
 
   if (!scene) return
 
-  frame.material = metal(edgeTones[props.edge])
+  frame.material = edgeMaterial()
   scene.add(leaf)
   scene.add(frame)
   const leafBox = new THREE.Box3().setFromObject(leaf)
@@ -648,9 +641,6 @@ function setupDoor(root: THREE.Object3D | null) {
   leaf.userData.part = 'leaf'
   leafMeshes = [leaf]
   edgeMeshes.push(frame, sill)
-  handle.traverse((child) => {
-    if (child instanceof THREE.Mesh) edgeMeshes.push(child)
-  })
 
   doorRoot.updateWorldMatrix(true, true)
   const assembled = new THREE.Box3().setFromObject(doorRoot)
@@ -718,10 +708,9 @@ onMounted(async () => {
 
   controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
-  controls.maxPolarAngle = Math.PI / 1.85
-  controls.minPolarAngle = Math.PI / 5
+  controls.enableRotate = false
   controls.enablePan = false
-  if (reduced.value) controls.enableRotate = false
+  controls.enableZoom = true
 
   scene.add(new THREE.HemisphereLight(0xf4f2ee, 0x8a8680, 1.05))
   const key = new THREE.DirectionalLight(0xffffff, 1.55)
@@ -736,7 +725,7 @@ onMounted(async () => {
 
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(3600, 1600),
-    new THREE.MeshStandardMaterial({ color: props.floor, roughness: 0.9, metalness: 0 })
+    new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9, metalness: 0 })
   )
   floor.rotation.x = -Math.PI / 2
   floor.position.set(0, 0, 800)
@@ -781,8 +770,8 @@ onMounted(async () => {
 
 watch(() => props.leaf, applyLeaf)
 watch(() => props.edge, playEdge)
-watch(() => props.wall, hex => playRoomColor('wall', wallMesh, hex))
-watch(() => props.floor, hex => playRoomColor('floor', floorMesh, hex))
+watch(() => props.wall, id => playRoomColor('wall', wallMesh, id))
+watch(() => props.floor, id => playRoomColor('floor', floorMesh, id))
 watch(() => props.handlePos, playHandle)
 watch(() => props.threshold, playSill)
 watch(() => props.opened, playDoor)
@@ -803,7 +792,6 @@ onUnmounted(() => {
   controls?.dispose()
   if (scene) disposeObject(scene)
   for (const map of textures.values()) map.dispose()
-  roomNoise?.dispose()
   renderer?.dispose()
   renderer?.domElement.remove()
 })

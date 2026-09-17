@@ -197,7 +197,7 @@ export const messages = {
       custom: L('По проекту', 'За проєктом', 'A medida', 'Bespoke')
     },
     edges: {
-      silver: L('Анодированный серый', 'Анодований сірий', 'Anodizado gris', 'Anodized grey'),
+      silver: L('Анодированный алюминий', 'Анодований алюміній', 'Aluminio anodizado', 'Anodized aluminum'),
       black: L('Анодированный чёрный', 'Анодований чорний', 'Anodizado negro', 'Anodized black')
     },
     thresholds: {
@@ -216,6 +216,9 @@ export const messages = {
       graphite: L('Графит', 'Графіт', 'Grafito', 'Graphite'),
       ink: L('Чернила', 'Чорнило', 'Tinta', 'Ink'),
       oak: L('Дуб', 'Дуб', 'Roble', 'Oak'),
+      honey: L('Медовый', 'Медовий', 'Miel', 'Honey'),
+      smoke: L('Дымчатый', 'Димчастий', 'Ahumado', 'Smoke'),
+      herringbone: L('Паркет ёлочкой', 'Паркет ялинкою', 'Parquet en espiga', 'Herringbone parquet'),
       oakLight: L('Дуб светлый', 'Дуб світлий', 'Roble claro', 'Light oak'),
       oakWarm: L('Дуб тёплый', 'Дуб теплий', 'Roble cálido', 'Warm oak'),
       oakGrey: L('Дуб серый', 'Дуб сірий', 'Roble gris', 'Grey oak'),

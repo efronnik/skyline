@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { floorFinishes, sameHex, wallFinishes } from '~/data/roomFinishes'
-import { leafFinishes } from '~/data/doorFinishes'
+import { floorFinishes, wallFinishes, type FloorFinish, type WallFinish } from '~/data/roomFinishes'
 
 const { t } = useLocale()
 const { edge, swing, selectedSlug } = useConfigurator()
@@ -13,7 +12,7 @@ const handlePositions = ['standard', 'high', 'custom'] as const
 const thresholds = ['no', 'yes'] as const
 
 const edgeTones = {
-  silver: '#C5C2BA',
+  silver: '#E8E6E1',
   black: '#1C1916'
 } as const
 
@@ -22,9 +21,8 @@ const spec = reactive({
   height: 'ceiling' as (typeof heights)[number],
   handlePos: 'standard' as (typeof handlePositions)[number],
   threshold: 'yes' as (typeof thresholds)[number],
-  leaf: 'oakLight' as (typeof leafFinishes)[number]['id'],
-  wall: wallFinishes.find(item => item.id === 'chalk')!.hex,
-  floor: floorFinishes.find(item => item.id === 'stone')!.hex
+  wall: 'chalk' as WallFinish,
+  floor: 'oak' as FloorFinish
 })
 
 const opened = ref(true)
@@ -51,7 +49,7 @@ function toggleThreshold() {
       <ClientOnly>
         <DoorStage
           :edge="edge"
-          :leaf="spec.leaf"
+          leaf="paint"
           :wall="spec.wall"
           :floor="spec.floor"
           :side="spec.side"
@@ -100,27 +98,6 @@ function toggleThreshold() {
         </div>
       </fieldset>
 
-      <fieldset class="seg">
-        <legend>{{ t('config.leaf') }}</legend>
-        <div class="swatches">
-          <label
-            v-for="item in leafFinishes"
-            :key="item.id"
-            class="swatch"
-            :class="{ 'is-on': spec.leaf === item.id }"
-            :title="t(`config.colors.${item.id}`)"
-          >
-            <input v-model="spec.leaf" class="sr" type="radio" name="cfg-leaf" :value="item.id">
-            <span
-              :style="item.map
-                ? { backgroundImage: `url(${item.map})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-                : { background: item.preview }"
-              :aria-label="t(`config.colors.${item.id}`)"
-            />
-          </label>
-        </div>
-      </fieldset>
-
       <div class="cfg__pair">
         <fieldset class="seg">
           <legend>{{ t('config.wall') }}</legend>
@@ -129,19 +106,14 @@ function toggleThreshold() {
               v-for="item in wallFinishes"
               :key="item.id"
               class="swatch"
-              :class="{ 'is-on': sameHex(spec.wall, item.hex) }"
+              :class="{ 'is-on': spec.wall === item.id }"
               :title="t(`config.colors.${item.id}`)"
             >
-              <input v-model="spec.wall" class="sr" type="radio" name="cfg-wall" :value="item.hex">
-              <span :style="{ background: item.hex }" :aria-label="t(`config.colors.${item.id}`)" />
-            </label>
-            <label
-              class="swatch"
-              :class="{ 'is-on': !wallFinishes.some(item => sameHex(spec.wall, item.hex)) }"
-              :title="t('config.wallPick')"
-            >
-              <input v-model="spec.wall" class="sr" type="color" :aria-label="t('config.wallPick')">
-              <span :style="{ background: spec.wall }" />
+              <input v-model="spec.wall" class="sr" type="radio" name="cfg-wall" :value="item.id">
+              <span
+                :style="{ background: item.hex }"
+                :aria-label="t(`config.colors.${item.id}`)"
+              />
             </label>
           </div>
         </fieldset>
@@ -153,19 +125,14 @@ function toggleThreshold() {
               v-for="item in floorFinishes"
               :key="item.id"
               class="swatch"
-              :class="{ 'is-on': sameHex(spec.floor, item.hex) }"
+              :class="{ 'is-on': spec.floor === item.id }"
               :title="t(`config.colors.${item.id}`)"
             >
-              <input v-model="spec.floor" class="sr" type="radio" name="cfg-floor" :value="item.hex">
-              <span :style="{ background: item.hex }" :aria-label="t(`config.colors.${item.id}`)" />
-            </label>
-            <label
-              class="swatch"
-              :class="{ 'is-on': !floorFinishes.some(item => sameHex(spec.floor, item.hex)) }"
-              :title="t('config.floorPick')"
-            >
-              <input v-model="spec.floor" class="sr" type="color" :aria-label="t('config.floorPick')">
-              <span :style="{ background: spec.floor }" />
+              <input v-model="spec.floor" class="sr" type="radio" name="cfg-floor" :value="item.id">
+              <span
+                :style="{ background: item.hex }"
+                :aria-label="t(`config.colors.${item.id}`)"
+              />
             </label>
           </div>
         </fieldset>
