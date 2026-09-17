@@ -90,7 +90,10 @@ function metal(color: number) {
   return new THREE.MeshStandardMaterial({
     color,
     metalness: 0.78,
-    roughness: 0.28
+    roughness: 0.28,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2
   })
 }
 
@@ -101,6 +104,20 @@ function bake(mesh: THREE.Mesh) {
   const baked = new THREE.Mesh(geometry, paintMaterial())
   baked.name = mesh.name
   return baked
+}
+
+function shrinkLeaf(mesh: THREE.Mesh, inset: number) {
+  const geometry = mesh.geometry
+  geometry.computeBoundingBox()
+  const box = geometry.boundingBox
+  if (!box) return
+  const center = box.getCenter(new THREE.Vector3())
+  const size = box.getSize(new THREE.Vector3())
+  const sx = Math.max(0.2, (size.x - inset * 2) / size.x)
+  const sy = Math.max(0.2, (size.y - inset * 2) / size.y)
+  geometry.translate(-center.x, -center.y, -center.z)
+  geometry.scale(sx, sy, 1)
+  geometry.translate(center.x, center.y, center.z)
 }
 
 async function textureFor(id: LeafFinish) {
@@ -301,7 +318,6 @@ function rebuildWall() {
   if (leafPivot) leafPivot.rotation.y = 0
   doorRoot.updateWorldMatrix(true, true)
   const opening = new THREE.Box3().setFromObject(frameMesh)
-  if (leafPivot) leafPivot.rotation.y = closed
   if (wallMesh) {
     scene.remove(wallMesh)
     wallMesh.geometry.dispose()
@@ -310,6 +326,16 @@ function rebuildWall() {
   }
   wallMesh = makeWall(opening)
   scene.add(wallMesh)
+  if (leafPivot) leafPivot.rotation.y = closed
+}
+
+function wallFront(opening: THREE.Box3) {
+  let front = opening.max.z
+  for (const mesh of leafMeshes) {
+    const box = new THREE.Box3().setFromObject(mesh)
+    if (box.max.z > front) front = box.max.z
+  }
+  return front
 }
 
 function applySide() {
@@ -361,14 +387,19 @@ function makeWall(opening: THREE.Box3) {
   hole.closePath()
   shape.holes.push(hole)
   const geometry = new THREE.ExtrudeGeometry(shape, {
-    depth: 44,
+    depth: 96,
     bevelEnabled: false,
     curveSegments: 1
   })
-  geometry.translate(0, 0, opening.min.z - 40)
+  geometry.translate(0, 0, wallFront(opening) - 96)
   const mesh = new THREE.Mesh(
     geometry,
-    new THREE.MeshStandardMaterial({ color: 0xb7b1a6, roughness: 0.94, metalness: 0 })
+    new THREE.MeshStandardMaterial({
+      color: 0xb7b1a6,
+      roughness: 0.94,
+      metalness: 0,
+      side: THREE.DoubleSide
+    })
   )
   mesh.name = 'wall'
   return mesh
@@ -382,19 +413,21 @@ function addEdgeBand(box: THREE.Box3, parent: THREE.Object3D) {
   const cx = (box.min.x + box.max.x) / 2
   const cy = (box.min.y + box.max.y) / 2
   const cz = (box.min.z + box.max.z) / 2
-  const band = 3
+  const band = 3.2
+  const wrap = 2
   const parts: THREE.Mesh[] = [
-    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + 1), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + 1), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(w, band, d + 1), metal(edgeTones[props.edge])),
-    new THREE.Mesh(new THREE.BoxGeometry(w, band, d + 1), metal(edgeTones[props.edge]))
+    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), metal(edgeTones[props.edge])),
+    new THREE.Mesh(new THREE.BoxGeometry(band, h, d + wrap), metal(edgeTones[props.edge])),
+    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), metal(edgeTones[props.edge])),
+    new THREE.Mesh(new THREE.BoxGeometry(w + band * 2, band, d + wrap), metal(edgeTones[props.edge]))
   ]
-  parts[0].position.set(box.min.x + band / 2, cy, cz)
-  parts[1].position.set(box.max.x - band / 2, cy, cz)
-  parts[2].position.set(cx, box.max.y - band / 2, cz)
-  parts[3].position.set(cx, box.min.y + band / 2, cz)
+  parts[0].position.set(box.min.x - band / 2, cy, cz)
+  parts[1].position.set(box.max.x + band / 2, cy, cz)
+  parts[2].position.set(cx, box.max.y + band / 2, cz)
+  parts[3].position.set(cx, box.min.y - band / 2, cz)
   for (const part of parts) {
     part.name = 'edge-band'
+    part.renderOrder = 1
     scene.add(part)
     parent.attach(part)
     edgeMeshes.push(part)
@@ -494,6 +527,7 @@ function setupDoor(root: THREE.Object3D | null) {
   scene.add(leaf)
   scene.add(frame)
   const leafBox = new THREE.Box3().setFromObject(leaf)
+  shrinkLeaf(leaf, 1.8)
 
   doorRoot = new THREE.Group()
   leafPivot = new THREE.Group()

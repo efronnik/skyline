@@ -7,24 +7,14 @@ export const materials: Material[] = [
     preview: '/images/work-pair.jpg'
   },
   {
+    id: 'wallpaper',
+    image: '/images/interior-flush.jpg',
+    preview: '/images/interior-flush.jpg'
+  },
+  {
     id: 'plaster',
     image: '/images/material-plaster.jpg',
     preview: '/images/after-flush.jpg'
-  },
-  {
-    id: 'oak',
-    image: '/images/project-living-oak.jpg',
-    preview: '/images/project-living-oak.jpg'
-  },
-  {
-    id: 'walnut',
-    image: '/images/idoors-interior-dark.jpg',
-    preview: '/images/project-living-oak.jpg'
-  },
-  {
-    id: 'glass',
-    image: '/images/material-glass.jpg',
-    preview: '/images/product-glass.jpg'
   }
 ]
 

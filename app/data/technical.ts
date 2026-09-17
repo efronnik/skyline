@@ -11,7 +11,7 @@ export const technicalSteps: TechnicalStep[] = [
 export const processIndexes = ['01', '02', '03', '04', '05', '06'] as const
 
 export const qualityDetails = [
-  { id: 'gap', image: '/images/detail-gap.jpg', ratio: '3 / 4' },
-  { id: 'hinge', image: '/images/detail-hinge.jpg', ratio: '3 / 4' },
-  { id: 'handle', image: '/images/detail-handle.jpg', ratio: '3 / 4' }
+  { id: 'gap', image: '/images/quality-gap.jpg', ratio: '3 / 4', position: 'center' },
+  { id: 'hinge', image: '/images/quality-hinge.jpg', ratio: '3 / 4', position: 'center' },
+  { id: 'handle', image: '/images/quality-handle.jpg', ratio: '3 / 4', position: 'center' }
 ]

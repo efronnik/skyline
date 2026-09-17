@@ -26,6 +26,7 @@ function lift(event: PointerEvent, on: boolean, id: string) {
   <section id="quality" class="qual" aria-labelledby="qual-title">
     <SectionLabel :kicker="t('quality.kicker')" :spec="t('quality.spec')" />
     <h2 id="qual-title">{{ t('quality.title') }}</h2>
+    <p class="qual__metrics">{{ t('quality.metrics') }}</p>
     <div class="qual__grid">
       <article
         v-for="item in qualityDetails"
@@ -37,6 +38,7 @@ function lift(event: PointerEvent, on: boolean, id: string) {
           :src="item.image"
           :alt="t(`quality.items.${item.id}.title`)"
           :ratio="item.ratio"
+          :position="item.position"
           sizes="(min-width: 800px) 30vw, 100vw"
         />
         <h3>{{ t(`quality.items.${item.id}.title`) }}</h3>
@@ -57,7 +59,16 @@ h2 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: 0.95;
-  margin: 0.8rem 0 1.4rem;
+  margin: 0.8rem 0 0.55rem;
+}
+
+.qual__metrics {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-spec);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .qual__grid {

@@ -64,6 +64,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+#mobile-menu {
+  display: contents;
+}
+
 .menu {
   position: fixed;
   inset: 0;

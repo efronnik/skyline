@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import type { Product } from '~/types/content'
+import { idoorsBuild, idoorsSizes, sizeLine } from '~/data/idoorsSpec'
 
-defineProps<{
+const props = defineProps<{
   product: Product
 }>()
 
 const { t } = useLocale()
+const size = computed(() => idoorsSizes[props.product.swing])
+const mdf = computed(() => (props.product.swing === 'in' ? idoorsBuild.mdfIn : idoorsBuild.mdfOut))
 </script>
 
 <template>
   <dl class="specs">
     <div>
       <dt>{{ t('specs.finish') }}</dt>
-      <dd>{{ t('materials.items.paint.name') }}</dd>
+      <dd>{{ t('config.leafFinish') }}</dd>
     </div>
     <div>
       <dt>{{ t('specs.edge') }}</dt>
@@ -23,16 +26,24 @@ const { t } = useLocale()
       <dd>{{ t(`config.openings.${product.swing}`) }} · {{ t('config.openings.left') }} · {{ t('config.openings.right') }}</dd>
     </div>
     <div>
-      <dt>{{ t('specs.threshold') }}</dt>
-      <dd>{{ t('config.thresholds.yes') }} · {{ t('config.thresholds.no') }}</dd>
+      <dt>{{ t('specs.leafSize') }}</dt>
+      <dd>{{ sizeLine(size.leafH, size.leafW) }}</dd>
     </div>
     <div>
-      <dt>{{ t('specs.height') }}</dt>
-      <dd>{{ t('config.heights.standard') }} · {{ t('config.heights.ceiling') }}</dd>
+      <dt>{{ t('specs.openingSize') }}</dt>
+      <dd>{{ sizeLine(size.openingH, size.openingW) }}</dd>
     </div>
     <div>
-      <dt>{{ t('specs.color') }}</dt>
-      <dd>{{ t('config.colors.white') }} · {{ t('config.leafFinish') }}</dd>
+      <dt>{{ t('specs.mdf') }}</dt>
+      <dd>{{ mdf }} мм</dd>
+    </div>
+    <div>
+      <dt>{{ t('specs.fill') }}</dt>
+      <dd>{{ t('specs.fillValue') }}</dd>
+    </div>
+    <div>
+      <dt>{{ t('specs.sound') }}</dt>
+      <dd>{{ idoorsBuild.soundDb }} дБА · {{ idoorsBuild.cycles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') }} {{ t('specs.cycles') }}</dd>
     </div>
   </dl>
 </template>

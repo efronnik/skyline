@@ -93,10 +93,10 @@ export const messages = {
     title: L('Prime-AL.', 'Prime-AL.', 'Prime-AL.', 'Prime-AL.'),
     configure: L('Настроить', 'Налаштувати', 'Configurar', 'Configure'),
     hint: L(
-      'Плёнка под покраску. Кромка серая или чёрная. Standard или INSIDE.',
-      'Плівка під фарбування. Кромка сіра або чорна. Standard або INSIDE.',
-      'Lámina para pintar. Canto gris o negro. Standard o INSIDE.',
-      'Film for painting. Grey or black edge. Standard or INSIDE.'
+      'Праймированная плёнка (Германия) под краску, обои и штукатурку. Кромка серая или чёрная. Standard или INSIDE.',
+      'Праймована плівка (Німеччина) під фарбу, шпалери й штукатурку. Кромка сіра або чорна. Standard або INSIDE.',
+      'Lámina imprimada (Alemania) para pintura, papel y enlucido. Canto gris o negro. Standard o INSIDE.',
+      'Primed film (Germany) for paint, wallpaper and plaster. Grey or black edge. Standard or INSIDE.'
     ),
     shelfAria: L('Четыре модели Prime-AL, листайте в сторону', 'Чотири моделі Prime-AL, гортайте вбік', 'Cuatro modelos Prime-AL, deslice hacia el lado', 'Four Prime-AL models, swipe sideways'),
     doorColor: L('Цвет двери', 'Колір дверей', 'Color de la puerta', 'Door colour'),
@@ -120,7 +120,7 @@ export const messages = {
       room: L('Белая скрытая дверь в жилом холле', 'Білі приховані двері в житловому холі', 'Puerta oculta blanca en un hall residencial', 'White flush door in a residential hall')
     },
     facts: {
-      leaf: L('Полотно под покраску', 'Полотно під фарбування', 'Hoja para pintar', 'Leaf for painting'),
+      leaf: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       frame: L('Анодированный короб и торец', 'Анодований короб і торець', 'Marco y canto anodizados', 'Anodized frame and edge'),
       swing: L('Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE'),
       wall: L('Гипсокартон или кирпич', 'Гіпсокартон або цегла', 'Pladur o ladrillo', 'Drywall or brick')
@@ -132,10 +132,10 @@ export const messages = {
     spec: L('03 — Spec', '03 — Spec', '03 — Spec', '03 — Spec'),
     title: L('Собрать систему.', 'Зібрати систему.', 'Configurar el sistema.', 'Specify the system.'),
     lead: L(
-      'Полотно белое. Кромка анодированная. Нажмите на дверь, чтобы открыть.',
-      'Полотно біле. Кромка анодована. Натисніть на двері, щоб відкрити.',
-      'Hoja blanca. Canto anodizado. Pulse la puerta para abrir.',
-      'White leaf. Anodized edge. Click the door to open.'
+      'Праймированная плёнка. Кромка анодированная. Нажмите на дверь, чтобы открыть.',
+      'Праймована плівка. Кромка анодована. Натисніть на двері, щоб відкрити.',
+      'Lámina imprimada. Canto anodizado. Pulse la puerta para abrir.',
+      'Primed film. Anodized edge. Click the door to open.'
     ),
     liveAria: L('Кромка, сторона и направление', 'Кромка, сторона і напрямок', 'Canto, lado y sentido', 'Edge, side and swing'),
     clickDoor: L('Нажмите на полотно, чтобы открыть или закрыть', 'Натисніть на полотно, щоб відкрити або закрити', 'Pulse la hoja para abrir o cerrar', 'Click the leaf to open or close'),
@@ -154,9 +154,9 @@ export const messages = {
     handlePos: L('Положение ручки', 'Положення ручки', 'Posición de la manilla', 'Handle position'),
     edge: L('Окантовка', 'Окантовка', 'Canto', 'Edging'),
     leaf: L('Цвет двери', 'Колір дверей', 'Color de la puerta', 'Door colour'),
-    leafFinish: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting'),
+    leafFinish: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)'),
     finishes: {
-      paint: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting')
+      paint: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)')
     },
     threshold: L('Выпадающий порог', 'Випадний поріг', 'Umbral automático', 'Drop seal'),
     finish: L('Отделка', 'Оздоблення', 'Acabado', 'Finish'),
@@ -226,56 +226,34 @@ export const messages = {
         name: L('Грунт / окраска', 'Ґрунт / фарбування', 'Imprimación / pintura', 'Primer / paint'),
         category: L('Paint', 'Paint', 'Paint', 'Paint'),
         summary: L(
-          'Полотно готовится под финиш помещения: та же краска, та же степень матовости, что и стена.',
-          'Полотно готується під фініш приміщення: та сама фарба, той самий ступінь матовості, що й стіна.',
-          'La hoja se prepara para el acabado del espacio: la misma pintura y el mismo mate que el muro.',
-          'The leaf is prepared for the room finish: the same paint and the same sheen as the wall.'
+          'Базовый финиш: та же краска, что и стена. Предпочтительны водные акриловые и акрил-силиконовые эмульсии.',
+          'Базовий фініш: та сама фарба, що й стіна. Краще водні акрилові та акрил-силіконові емульсії.',
+          'Acabado base: la misma pintura que el muro. Preferibles emulsiones acrílicas o acrílico-siliconadas al agua.',
+          'The base finish: the same paint as the wall. Water-based acrylic and acrylic-silicone emulsions are preferred.'
         ),
         notes: L('Финиш выполняется вместе с отделкой стен. Цвет задаёт проект, не каталог.', 'Фініш виконується разом з оздобленням стін. Колір задає проєкт, не каталог.', 'El acabado se ejecuta con los muros. El color lo define el proyecto, no el catálogo.', 'The finish is done with the walls. Colour comes from the project, not a catalogue.')
       },
+      wallpaper: {
+        name: L('Обои', 'Шпалери', 'Papel', 'Wallpaper'),
+        category: L('Wallpaper', 'Wallpaper', 'Wallpaper', 'Wallpaper'),
+        summary: L(
+          'Тяжелее краски: сначала алкидный грунт, затем обычная поклейка. Если обои только с одной стороны — два выпрямителя в полотне.',
+          'Важчі за фарбу: спочатку алкідний ґрунт, далі звичайне наклеювання. Якщо шпалери лише з одного боку — два випрямлячі в полотні.',
+          'Más peso que la pintura: imprimación alquídica y luego el papel. Si es solo por una cara, dos tensores en la hoja.',
+          'Heavier than paint: alkyd primer first, then a normal hang. Wallpaper on one face only needs two leaf straighteners.'
+        ),
+        notes: L('Односторонняя поклейка без второго выпрямителя снимает гарантию на прогиб.', 'Однобічне наклеювання без другого випрямляча знімає гарантію на прогин.', 'El empapelado a una cara sin el segundo tensor anula la garantía de alabeo.', 'One-sided hanging without the second straightener voids the warp warranty.')
+      },
       plaster: {
-        name: L('Минеральная плоскость', 'Мінеральна площина', 'Plano mineral', 'Mineral plane'),
+        name: L('Декоративная штукатурка', 'Декоративна штукатурка', 'Enlucido decorativo', 'Decorative plaster'),
         category: L('Plaster', 'Plaster', 'Plaster', 'Plaster'),
         summary: L(
-          'Известковая и минеральная штукатурка. Дверь исчезает в зерне поверхности.',
-          'Вапняна і мінеральна штукатурка. Двері зникають у зерні поверхні.',
-          'Enlucido de cal y mineral. La puerta desaparece en el grano de la superficie.',
-          'Lime and mineral plaster. The door disappears into the grain of the surface.'
+          'Слой до 1,5 мм — не выше алюминиевой кромки. Толще — без гарантии на прогиб. Жидкие обои считаются штукатуркой.',
+          'Шар до 1,5 мм — не вище алюмінієвої кромки. Товстіший — без гарантії на прогин. Рідкі шпалери рахуються як штукатурка.',
+          'Capa de hasta 1,5 mm, sin rebasar el canto de aluminio. Más espesor anula la garantía de alabeo. El papel líquido cuenta como enlucido.',
+          'Coat up to 1.5 mm — not proud of the aluminium edge. Thicker voids the warp warranty. Liquid wallpaper counts as plaster.'
         ),
-        notes: L('Работает только при точном монтаже и общем финишном слое.', 'Працює лише за точного монтажу і спільного фінішного шару.', 'Solo funciona con una instalación precisa y una capa de acabado común.', 'Works only with precise installation and a shared finishing coat.')
-      },
-      oak: {
-        name: L('Дуб', 'Дуб', 'Roble', 'Oak'),
-        category: L('Veneer', 'Veneer', 'Veneer', 'Veneer'),
-        summary: L(
-          'Прямой шпон европейского дуба. Масло, без глянца, без мебельного блеска.',
-          'Прямий шпон європейського дуба. Олія, без глянцю, без меблевого блиску.',
-          'Chapa de roble europeo. Aceite, sin brillo de mobiliario.',
-          'Straight European oak veneer. Oil, no furniture gloss.'
-        ),
-        notes: L('Подбор по образцу. Рисунок и тон согласовываются до производства.', 'Підбір за зразком. Рисунок і тон узгоджуються до виробництва.', 'Selección según muestra. Dibujo y tono se acuerdan antes de fabricar.', 'Matched to sample. Figure and tone are agreed before production.')
-      },
-      walnut: {
-        name: L('Орех', 'Горіх', 'Nogal', 'Walnut'),
-        category: L('Veneer', 'Veneer', 'Veneer', 'Veneer'),
-        summary: L(
-          'Тёмный шпон для интерьеров, где стена сама является деревом.',
-          'Темний шпон для інтер’єрів, де стіна сама є деревом.',
-          'Chapa oscura para interiores donde el muro es la madera.',
-          'Dark veneer for interiors where the wall itself is wood.'
-        ),
-        notes: L('Возможны другие породы по запросу проекта.', 'Можливі інші породи на запит проєкту.', 'Otras especies posibles según el proyecto.', 'Other species available on project request.')
-      },
-      glass: {
-        name: L('Стекло', 'Скло', 'Vidrio', 'Glass'),
-        category: L('Glass', 'Glass', 'Glass', 'Glass'),
-        summary: L(
-          'Матовое или прозрачное полотно в скрытой системе. Свет без дверной рамы.',
-          'Матове або прозоре полотно в прихованій системі. Світло без дверної рами.',
-          'Hoja mate o transparente en sistema oculto. Luz sin marco de puerta.',
-          'Frosted or clear leaf in a concealed system. Light without a door frame.'
-        ),
-        notes: L('Тип стекла и фурнитура согласовываются отдельно.', 'Тип скла і фурнітура узгоджуються окремо.', 'El tipo de vidrio y la herrajería se acuerdan aparte.', 'Glass type and hardware are agreed separately.')
+        notes: L('Односторонняя штукатурка — два выпрямителя, независимо от высоты полотна.', 'Однобічна штукатурка — два випрямлячі, незалежно від висоти полотна.', 'Enlucido a una cara: dos tensores, da igual la altura de la hoja.', 'One-sided plaster needs two straighteners, whatever the leaf height.')
       }
     }
   },
@@ -285,13 +263,22 @@ export const messages = {
     spec: L('05 — Construction', '05 — Construction', '05 — Construction', '05 — Construction'),
     title: L('Алюминиевый короб iDoors.', 'Алюмінієвий короб iDoors.', 'Marco de aluminio iDoors.', 'iDoors aluminium frame.'),
     lead: L(
-      'Standard — наружу. INSIDE — внутрь.',
-      'Standard — назовні. INSIDE — всередину.',
-      'Standard hacia fuera. INSIDE hacia dentro.',
-      'Standard outward. INSIDE inward.'
+      'Standard открывается в сторону плоскости. INSIDE — заподлицо с одной стороны, открывается в другую. Рядом, закрытые, выглядят одинаково.',
+      'Standard відчиняється в бік площини. INSIDE — запідлицо з одного боку, відчиняється в інший. Поруч, зачинені, виглядають однаково.',
+      'Standard abre hacia el plano. INSIDE queda al ras por un lado y abre al contrario. Cerradas, juntas, se ven iguales.',
+      'Standard opens toward the flush face. INSIDE is flush on one side and opens the other way. Closed, side by side, they look the same.'
     ),
     wall: L('Гипсокартон · кирпич / штукатурка', 'Гіпсокартон · цегла / штукатурка', 'Pladur · ladrillo / yeso', 'Drywall · brick / plaster'),
     hProfile: L('Соединительный H-профиль для расширителей', 'З’єднувальний H-профіль для розширювачів', 'Perfil H de unión para ensanches', 'Connecting H-profile for extensions'),
+    facts: {
+      leaf: L('Полотно', 'Полотно', 'Hoja', 'Leaf'),
+      opening: L('Проём', 'Проріз', 'Hueco', 'Opening'),
+      mdf: L('МДФ', 'МДФ', 'MDF', 'MDF'),
+      fill: L('Заполнение', 'Заповнення', 'Relleno', 'Core'),
+      fillValue: L('Соты или вспененный полиэтилен', 'Соти або спінений поліетилен', 'Nido de abeja o polietileno expandido', 'Honeycomb or expanded polyethylene'),
+      sound: L('Звук', 'Звук', 'Sonido', 'Sound'),
+      cycles: L('Циклы', 'Цикли', 'Ciclos', 'Cycles')
+    },
     frames: {
       out: {
         title: L('Standard · наружу', 'Standard · назовні', 'Standard · fuera', 'Standard · outward'),
@@ -317,23 +304,48 @@ export const messages = {
     steps: {
       frame: {
         title: L('Hidden Frame', 'Hidden Frame', 'Hidden Frame', 'Hidden Frame'),
-        text: L('Коробка уходит в стену. Снаружи остаётся плоскость, а не портал.', 'Коробка йде в стіну. Ззовні лишається площина, а не портал.', 'El marco entra en el muro. Fuera queda un plano, no un portal.', 'The frame goes into the wall. Outside, a plane remains — not a portal.')
+        text: L(
+          'Анодированный алюминиевый короб. Штукатурная сетка на стыке со стеной. Пластиковые заглушки в местах петель.',
+          'Анодований алюмінієвий короб. Штукатурна сітка на стику зі стіною. Пластикові заглушки в місцях петель.',
+          'Marco de aluminio anodizado. Malla de yeso en el encuentro con el muro. Tapones de plástico en las bisagras.',
+          'Anodized aluminium frame. Plaster mesh at the wall joint. Plastic plugs at the hinge seats.'
+        )
       },
       hinges: {
         title: L('Invisible Hinges', 'Invisible Hinges', 'Invisible Hinges', 'Invisible Hinges'),
-        text: L('Петли скрыты в толщине полотна и коробки. С фасада их нет.', 'Петлі сховані в товщині полотна і коробки. З фасаду їх немає.', 'Las bisagras quedan en el canto. De frente no existen.', 'Hinges sit in the thickness of leaf and frame. From the front they are gone.')
+        text: L(
+          'Скрытые петли ANSELMI. Хром, чёрный, белый, матовое золото.',
+          'Приховані петлі ANSELMI. Хром, чорний, білий, матове золото.',
+          'Bisagras ocultas ANSELMI. Cromo, negro, blanco, oro mate.',
+          'ANSELMI concealed hinges. Chrome, black, white, matt gold.'
+        )
       },
       leaf: {
         title: L('Flush Leaf', 'Flush Leaf', 'Flush Leaf', 'Flush Leaf'),
-        text: L('Полотно стоит в одной плоскости со стеной. Наличник не используется.', 'Полотно стоїть в одній площині зі стіною. Лиштва не використовується.', 'La hoja queda al ras del muro. No hay tapajuntas.', 'The leaf sits in the wall plane. No architrave is used.')
+        text: L(
+          'Каркас из переклеенного массива, соты, МДФ 6 мм (Standard) или 8 мм (INSIDE). Торец — анод серебро или чёрный. Выпрямители в стойках.',
+          'Каркас із переклеєного масиву, соти, МДФ 6 мм (Standard) або 8 мм (INSIDE). Торець — анод срібло або чорний. Випрямлячі в стояках.',
+          'Bastidor de madera laminada, nido de abeja, MDF de 6 mm (Standard) u 8 mm (INSIDE). Canto anodizado plata o negro. Tensores en los montantes.',
+          'Laminated timber core, honeycomb, 6 mm MDF (Standard) or 8 mm (INSIDE). Anodized silver or black edge. Straighteners in the stiles.'
+        )
       },
       install: {
         title: L('Precise Install', 'Precise Install', 'Precise Install', 'Precise Install'),
-        text: L('Геометрия проёма, регулировка петель и зазор задают качество всей стены.', 'Геометрія прорізу, регулювання петель і зазор задають якість усієї стіни.', 'La geometría del hueco, el ajuste y la junta definen la calidad del muro.', 'Opening geometry, hinge adjustment and the gap set the quality of the whole wall.')
+        text: L(
+          'Зазор 30 мм по высоте, 30–40 мм по ширине. Наличника нет — проём должен быть ровным. Край короба работает как маяк.',
+          'Зазор 30 мм по висоті, 30–40 мм по ширині. Лиштви немає — проріз має бути рівним. Край короба працює як маяк.',
+          'Junta de 30 mm en altura y 30–40 mm en ancho. Sin tapajuntas: el hueco tiene que estar a plomo. El canto del marco hace de maestra.',
+          '30 mm height clearance, 30–40 mm on width. No architrave — the opening must be true. The frame edge acts as a screed bead.'
+        )
       },
       finish: {
         title: L('Final Finish', 'Final Finish', 'Final Finish', 'Final Finish'),
-        text: L('Финиш выполняется вместе со стеной: окраска, штукатурка или шпон.', 'Фініш виконується разом зі стіною: фарбування, штукатурка або шпон.', 'El acabado se hace con el muro: pintura, enlucido o chapa.', 'The finish is done with the wall: paint, plaster or veneer.')
+        text: L(
+          'Покраска, обои или штукатурка по праймированной плёнке. Штукатурка до 1,5 мм. Односторонний финиш — два выпрямителя.',
+          'Фарбування, шпалери або штукатурка по праймованій плівці. Штукатурка до 1,5 мм. Однобічний фініш — два випрямлячі.',
+          'Pintura, papel o enlucido sobre la lámina imprimada. Enlucido hasta 1,5 mm. Acabado a una cara: dos tensores.',
+          'Paint, wallpaper or plaster on the primed film. Plaster up to 1.5 mm. One-sided finish needs two straighteners.'
+        )
       }
     }
   },
@@ -342,11 +354,11 @@ export const messages = {
     kicker: L('Сравнение', 'Порівняння', 'Comparación', 'Compare'),
     spec: L('06 — Before / After', '06 — Before / After', '06 — Before / After', '06 — Before / After'),
     title: L('Обычная дверь. Затем — стена.', 'Звичайні двері. Потім — стіна.', 'Una puerta convencional. Luego, el muro.', 'A conventional door. Then — the wall.'),
-    before: L('Наличник', 'Лиштва', 'Tapajuntas', 'Architrave'),
-    after: L('Плоскость', 'Площина', 'Plano', 'Plane'),
-    aria: L('Сравнить до и после', 'Порівняти до і після', 'Comparar antes y después', 'Compare before and after'),
-    altAfter: L('Стена со скрытой дверью после интеграции', 'Стіна з прихованими дверима після інтеграції', 'Muro con puerta oculta tras la integración', 'Wall with a flush door after integration'),
-    altBefore: L('Обычная дверь с наличником до интеграции', 'Звичайні двері з лиштвою до інтеграції', 'Puerta convencional con tapajuntas', 'Conventional door with architrave')
+    before: L('Дверь', 'Двері', 'Puerta', 'Door'),
+    after: L('Стена', 'Стіна', 'Muro', 'Wall'),
+    aria: L('Сравнить дверь и стену', 'Порівняти двері і стіну', 'Comparar puerta y muro', 'Compare door and wall'),
+    altAfter: L('Скрытая дверь в цвет стены в конце коридора', 'Приховані двері в колір стіни в кінці коридору', 'Puerta oculta del color del muro al fondo del pasillo', 'Flush door in the wall colour at the end of the corridor'),
+    altBefore: L('Скрытые двери: одно полотно приоткрыто', 'Приховані двері: одне полотно прочинене', 'Puertas ocultas: una hoja entreabierta', 'Flush doors with one leaf slightly open')
   },
 
   projects: {
@@ -493,7 +505,7 @@ export const messages = {
         { title: 'Замер', text: 'Проём и примыкания снимаются на объекте, не по эскизу.' },
         { title: 'Спецификация', text: 'Модель, отделка, петли, ручка, сторона открывания.' },
         { title: 'Производство', text: 'Полотно и скрытая система собираются под конкретный проём.' },
-        { title: 'Монтаж', text: 'Коробка, полотно, регулировка, проверка плоскости.' },
+        { title: 'Монтаж', text: 'Короб на уголках, клинья, пена, петли ANSELMI, уплотнитель, проверка плоскости.' },
         { title: 'Финиш', text: 'Отделка вместе со стеной. Передача объекта.' }
       ],
       [
@@ -501,7 +513,7 @@ export const messages = {
         { title: 'Обмір', text: 'Проріз і примикання знімаються на об’єкті, не за ескізом.' },
         { title: 'Специфікація', text: 'Модель, оздоблення, петлі, ручка, бік відкривання.' },
         { title: 'Виробництво', text: 'Полотно і прихована система збираються під конкретний проріз.' },
-        { title: 'Монтаж', text: 'Коробка, полотно, регулювання, перевірка площини.' },
+        { title: 'Монтаж', text: 'Короб на кутниках, клини, піна, петлі ANSELMI, ущільнювач, перевірка площини.' },
         { title: 'Фініш', text: 'Оздоблення разом зі стіною. Передача об’єкта.' }
       ],
       [
@@ -509,7 +521,7 @@ export const messages = {
         { title: 'Medición', text: 'El hueco y los encuentros se levantan en obra, no del croquis.' },
         { title: 'Especificación', text: 'Modelo, acabado, bisagras, manilla, sentido de apertura.' },
         { title: 'Producción', text: 'Hoja y sistema oculto se fabrican para ese hueco.' },
-        { title: 'Montaje', text: 'Marco, hoja, ajuste, comprobación del plano.' },
+        { title: 'Montaje', text: 'Marco con escuadras, cuñas, espuma, bisagras ANSELMI, junta, plano.' },
         { title: 'Acabado', text: 'Acabado junto al muro. Entrega.' }
       ],
       [
@@ -517,7 +529,7 @@ export const messages = {
         { title: 'Survey', text: 'The opening and junctions are taken on site, not from a sketch.' },
         { title: 'Specification', text: 'Model, finish, hinges, handle, handing.' },
         { title: 'Production', text: 'Leaf and concealed system are built for that opening.' },
-        { title: 'Install', text: 'Frame, leaf, adjustment, plane check.' },
+        { title: 'Install', text: 'Frame on corner brackets, wedges, foam, ANSELMI hinges, seal, plane check.' },
         { title: 'Finish', text: 'Finishing with the wall. Handover.' }
       ]
     )
@@ -527,6 +539,12 @@ export const messages = {
     kicker: L('Детали', 'Деталі', 'Detalles', 'Details'),
     spec: L('09 — Precision', '09 — Precision', '09 — Precision', '09 — Precision'),
     title: L('Точность в деталях.', 'Точність у деталях.', 'La precisión está en el detalle.', 'Precision is in the details.'),
+    metrics: L(
+      '25 дБА · 50 000 циклов · плоскость ≤ 2 мм/м',
+      '25 дБА · 50 000 циклів · площина ≤ 2 мм/м',
+      '25 dBA · 50 000 ciclos · plano ≤ 2 mm/m',
+      '25 dBA · 50,000 cycles · plane ≤ 2 mm/m'
+    ),
     items: {
       gap: {
         title: L('Зазор', 'Зазор', 'Junta', 'Gap'),
@@ -534,11 +552,11 @@ export const messages = {
       },
       hinge: {
         title: L('Петля', 'Петля', 'Bisagra', 'Hinge'),
-        text: L('Скрытый механизм в кромке.', 'Прихований механізм у крайці.', 'Mecanismo oculto en el canto.', 'A concealed mechanism in the edge.')
+        text: L('Скрытые петли ANSELMI в кромке.', 'Приховані петлі ANSELMI в крайці.', 'Bisagras ocultas ANSELMI en el canto.', 'ANSELMI concealed hinges in the edge.')
       },
       handle: {
         title: L('Ручка', 'Ручка', 'Manilla', 'Handle'),
-        text: L('Линейный жест вместо розетки.', 'Лінійний жест замість розетки.', 'Un gesto lineal en lugar de un rosetón.', 'A linear gesture instead of a rose.')
+        text: L('Магнитный AGB Polaris: защёлка, WC или PZ.', 'Магнітний AGB Polaris: клямка, WC або PZ.', 'AGB Polaris magnético: picaporte, WC o PZ.', 'Magnetic AGB Polaris: latch, WC or PZ.')
       }
     }
   },
@@ -548,16 +566,40 @@ export const messages = {
     spec: L('10 — Practice', '10 — Practice', '10 — Practice', '10 — Practice'),
     title: L('Для архитекторов и дизайнеров.', 'Для архітекторів і дизайнерів.', 'Para arquitectos y diseñadores.', 'For architects and designers.'),
     text: L(
-      'Узлы, размеры и образцы — по запросу проекта. Комплект можно запросить заявкой.',
-      'Вузли, розміри й зразки — на запит проєкту. Комплект можна запросити заявкою.',
-      'Nudos, cotas y muestras — a petición del proyecto. El dossier se solicita en la consulta.',
-      'Details, sizes and samples — on project request. Request the pack from the inquiry.'
+      'Стандартные размеры, узел стыка и сетка — по запросу. Наличника нет: проём должен быть ровным.',
+      'Стандартні розміри, вузол стику і сітка — на запит. Лиштви немає: проріз має бути рівним.',
+      'Medidas estándar, nudo de encuentro y malla — a petición. Sin tapajuntas: el hueco tiene que estar a plomo.',
+      'Standard sizes, junction detail and mesh — on request. No architrave: the opening must be true.'
     ),
     points: L(
-      ['DWG / CAD — по запросу', 'BIM-семейства — под узел проекта', 'Образцы отделки', 'Консультация по примыканию'],
-      ['DWG / CAD — на запит', 'BIM-сімейства — під вузол проєкту', 'Зразки оздоблення', 'Консультація щодо примикання'],
-      ['DWG / CAD — a petición', 'Familias BIM — según el nudo', 'Muestras de acabado', 'Consulta de encuentro'],
-      ['DWG / CAD — on request', 'BIM families — for the project detail', 'Finish samples', 'Junction consultation']
+      [
+        'Standard 2000 мм / INSIDE 2012 мм · ширина 610–910',
+        'Проём: +30 мм по высоте, 30–40 мм по ширине',
+        'ГКЛ: усиленный профиль или брус в стойке',
+        'Штукатурная сетка на коробе · край короба как маяк',
+        'Штукатурка ≤ 1,5 мм · два выпрямителя при одностороннем финише'
+      ],
+      [
+        'Standard 2000 мм / INSIDE 2012 мм · ширина 610–910',
+        'Проріз: +30 мм по висоті, 30–40 мм по ширині',
+        'ГКЛ: посилений профіль або брус у стійці',
+        'Штукатурна сітка на коробі · край короба як маяк',
+        'Штукатурка ≤ 1,5 мм · два випрямлячі при однобічному фініші'
+      ],
+      [
+        'Standard 2000 mm / INSIDE 2012 mm · ancho 610–910',
+        'Hueco: +30 mm en altura, 30–40 mm en ancho',
+        'Pladur: perfil reforzado o madera en el montante',
+        'Malla de yeso en el marco · el canto hace de maestra',
+        'Enlucido ≤ 1,5 mm · dos tensores si el acabado es a una cara'
+      ],
+      [
+        'Standard 2000 mm / INSIDE 2012 mm · width 610–910',
+        'Opening: +30 mm on height, 30–40 mm on width',
+        'Drywall: reinforced stud or a timber insert',
+        'Plaster mesh on the frame · frame edge as a screed bead',
+        'Plaster ≤ 1.5 mm · two straighteners for a one-sided finish'
+      ]
     ),
     cta: L('Запросить комплект', 'Запросити комплект', 'Solicitar el dossier', 'Request the pack')
   },
@@ -595,116 +637,116 @@ export const messages = {
     'prime-al': {
       name: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
       latin: L('IDOORS · скрытый монтаж', 'IDOORS · прихований монтаж', 'IDOORS · instalación oculta', 'IDOORS · concealed install'),
-      kicker: L('Полотно под покраску', 'Полотно під фарбування', 'Hoja para pintar', 'Leaf for painting'),
+      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       summary: L(
-        'Дверь скрытого монтажа под дальнейшую отделку с алюминиевой коробкой. Полотно под покраску, торец и короб — анодированный серый или чёрный.',
-        'Двері прихованого монтажу під подальше оздоблення з алюмінієвою коробкою. Полотно під фарбування, торець і короб — анодований сірий або чорний.',
-        'Puerta de instalación oculta para acabado posterior con marco de aluminio. Hoja para pintar; canto y marco anodizados en gris o negro.',
-        'Concealed door for further finishing with an aluminium frame. Leaf for painting; edge and frame anodized grey or black.'
+        'Дверь скрытого монтажа. Праймированная плёнка (Германия) под краску, обои и штукатурку. Короб и торец — анодированный серый или чёрный.',
+        'Двері прихованого монтажу. Праймована плівка (Німеччина) під фарбу, шпалери й штукатурку. Короб і торець — анодований сірий або чорний.',
+        'Puerta de instalación oculta. Lámina imprimada (Alemania) para pintura, papel y enlucido. Marco y canto anodizados en gris o negro.',
+        'Concealed door. Primed film (Germany) for paint, wallpaper and plaster. Frame and edge anodized grey or black.'
       ),
       description: L(
-        'Три положения: INSIDE, закрыто, прямое открывание. Узел в гипсокартоне или в кирпиче со штукатуркой. Соединительный H-профиль для расширителей.',
-        'Три положення: INSIDE, закрито, пряме відкривання. Вузол у гіпсокартоні або в цеглі зі штукатуркою. З’єднувальний H-профіль для розширювачів.',
-        'Tres posiciones: INSIDE, cerrada y apertura directa. Nudo en pladur o en ladrillo con yeso. Perfil H de unión para ensanches.',
-        'Three positions: INSIDE, closed and direct opening. Detail in drywall or brick with plaster. Connecting H-profile for extensions.'
+        'Каркас из переклеенного массива, соты, МДФ 6 или 8 мм. Standard и INSIDE рядом выглядят одинаково. Высоты полотен 2000 и 2012 мм, чтобы плоскость совпала.',
+        'Каркас із переклеєного масиву, соти, МДФ 6 або 8 мм. Standard і INSIDE поруч виглядають однаково. Висоти полотен 2000 і 2012 мм, щоб площина збіглася.',
+        'Bastidor laminado, nido de abeja, MDF de 6 u 8 mm. Standard e INSIDE, juntas, se ven iguales. Hojas de 2000 y 2012 mm para alinear el plano.',
+        'Laminated timber core, honeycomb, 6 or 8 mm MDF. Standard and INSIDE look the same side by side. Leaf heights 2000 and 2012 mm so the flush faces align.'
       ),
       features: L(
-        ['Полотно под покраску', 'Анодированный короб и торец', 'Standard / INSIDE', 'Гипсокартон или кирпич', 'H-профиль для расширителей'],
-        ['Полотно під фарбування', 'Анодований короб і торець', 'Standard / INSIDE', 'Гіпсокартон або цегла', 'H-профіль для розширювачів'],
-        ['Hoja para pintar', 'Marco y canto anodizados', 'Standard / INSIDE', 'Pladur o ladrillo', 'Perfil H para ensanches'],
-        ['Leaf for painting', 'Anodized frame and edge', 'Standard / INSIDE', 'Drywall or brick', 'H-profile for extensions']
+        ['Праймированная плёнка (Германия)', 'МДФ 6 мм Standard / 8 мм INSIDE', 'Соты или вспененный полиэтилен', 'Анодированный короб и торец', 'Standard / INSIDE', 'Петли ANSELMI · замок AGB Polaris'],
+        ['Праймована плівка (Німеччина)', 'МДФ 6 мм Standard / 8 мм INSIDE', 'Соти або спінений поліетилен', 'Анодований короб і торець', 'Standard / INSIDE', 'Петлі ANSELMI · замок AGB Polaris'],
+        ['Lámina imprimada (Alemania)', 'MDF 6 mm Standard / 8 mm INSIDE', 'Nido de abeja o polietileno expandido', 'Marco y canto anodizados', 'Standard / INSIDE', 'Bisagras ANSELMI · cerradura AGB Polaris'],
+        ['Primed film (Germany)', '6 mm MDF Standard / 8 mm INSIDE', 'Honeycomb or expanded polyethylene', 'Anodized frame and edge', 'Standard / INSIDE', 'ANSELMI hinges · AGB Polaris lock']
       )
     },
     'prime-al-c': {
       name: L('Prime-AL(C)', 'Prime-AL(C)', 'Prime-AL(C)', 'Prime-AL(C)'),
       latin: L('IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard'),
-      kicker: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting'),
+      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       summary: L(
-        'Плёнка RENOLIT под покраску. Торец — алюминий серый. Прямое открывание.',
-        'Плівка RENOLIT під фарбування. Торець — алюміній сірий. Пряме відкривання.',
-        'Lámina RENOLIT para pintar. Canto de aluminio gris. Apertura directa.',
-        'RENOLIT film for painting. Grey aluminium edge. Direct opening.'
+        'Праймированная плёнка (Германия). Торец — алюминий серый. Прямое открывание. Полотно 2000 × 610–910 мм.',
+        'Праймована плівка (Німеччина). Торець — алюміній сірий. Пряме відкривання. Полотно 2000 × 610–910 мм.',
+        'Lámina imprimada (Alemania). Canto de aluminio gris. Apertura directa. Hoja 2000 × 610–910 mm.',
+        'Primed film (Germany). Grey aluminium edge. Direct opening. Leaf 2000 × 610–910 mm.'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевая коробка. Standard — наружу. Полотно под дальнейшую отделку.',
-        'Прихований монтаж, алюмінієва коробка. Standard — назовні. Полотно під подальше оздоблення.',
-        'Instalación oculta, marco de aluminio. Standard hacia fuera. Hoja para acabado posterior.',
-        'Concealed install, aluminium frame. Standard outward. Leaf for further finishing.'
+        'Скрытый монтаж, алюминиевый короб. МДФ 6 мм, сотовый заполнитель. Standard открывается в сторону плоскости.',
+        'Прихований монтаж, алюмінієвий короб. МДФ 6 мм, стільниковий заповнювач. Standard відчиняється в бік площини.',
+        'Instalación oculta, marco de aluminio. MDF de 6 mm, nido de abeja. Standard abre hacia el plano.',
+        'Concealed install, aluminium frame. 6 mm MDF, honeycomb core. Standard opens toward the flush face.'
       ),
       features: L(
-        ['Плёнка RENOLIT под покраску', 'Кромка алюминий серый', 'Standard · наружу'],
-        ['Плівка RENOLIT під фарбування', 'Кромка алюміній сірий', 'Standard · назовні'],
-        ['Lámina RENOLIT para pintar', 'Canto de aluminio gris', 'Standard · hacia fuera'],
-        ['RENOLIT film for painting', 'Grey aluminium edge', 'Standard · outward']
+        ['Праймированная плёнка (Германия)', 'МДФ 6 мм · соты', 'Кромка алюминий серый', 'Standard · наружу · 2000 мм'],
+        ['Праймована плівка (Німеччина)', 'МДФ 6 мм · соти', 'Кромка алюміній сірий', 'Standard · назовні · 2000 мм'],
+        ['Lámina imprimada (Alemania)', 'MDF 6 mm · nido de abeja', 'Canto de aluminio gris', 'Standard · hacia fuera · 2000 mm'],
+        ['Primed film (Germany)', '6 mm MDF · honeycomb', 'Grey aluminium edge', 'Standard · outward · 2000 mm']
       )
     },
     'prime-al-c-inside': {
       name: L('Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE'),
       latin: L('IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE'),
-      kicker: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting'),
+      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       summary: L(
-        'Плёнка RENOLIT под покраску. Торец — алюминий серый. Обратное открывание INSIDE.',
-        'Плівка RENOLIT під фарбування. Торець — алюміній сірий. Зворотне відкривання INSIDE.',
-        'Lámina RENOLIT para pintar. Canto de aluminio gris. Apertura inversa INSIDE.',
-        'RENOLIT film for painting. Grey aluminium edge. INSIDE reverse opening.'
+        'Праймированная плёнка (Германия). Торец — алюминий серый. Обратное открывание INSIDE. Полотно 2012 × 610–910 мм.',
+        'Праймована плівка (Німеччина). Торець — алюміній сірий. Зворотне відкривання INSIDE. Полотно 2012 × 610–910 мм.',
+        'Lámina imprimada (Alemania). Canto de aluminio gris. Apertura inversa INSIDE. Hoja 2012 × 610–910 mm.',
+        'Primed film (Germany). Grey aluminium edge. INSIDE reverse opening. Leaf 2012 × 610–910 mm.'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевая коробка. INSIDE — внутрь. Полотно под дальнейшую отделку.',
-        'Прихований монтаж, алюмінієва коробка. INSIDE — всередину. Полотно під подальше оздоблення.',
-        'Instalación oculta, marco de aluminio. INSIDE hacia dentro. Hoja para acabado posterior.',
-        'Concealed install, aluminium frame. INSIDE inward. Leaf for further finishing.'
+        'Скрытый монтаж, алюминиевый короб. МДФ 8 мм. INSIDE заподлицо с одной стороны, открывается в другую.',
+        'Прихований монтаж, алюмінієвий короб. МДФ 8 мм. INSIDE запідлицо з одного боку, відчиняється в інший.',
+        'Instalación oculta, marco de aluminio. MDF de 8 mm. INSIDE queda al ras por un lado y abre al contrario.',
+        'Concealed install, aluminium frame. 8 mm MDF. INSIDE is flush on one side and opens the other way.'
       ),
       features: L(
-        ['Плёнка RENOLIT под покраску', 'Кромка алюминий серый', 'INSIDE · внутрь'],
-        ['Плівка RENOLIT під фарбування', 'Кромка алюміній сірий', 'INSIDE · всередину'],
-        ['Lámina RENOLIT para pintar', 'Canto de aluminio gris', 'INSIDE · hacia dentro'],
-        ['RENOLIT film for painting', 'Grey aluminium edge', 'INSIDE · inward']
+        ['Праймированная плёнка (Германия)', 'МДФ 8 мм · соты', 'Кромка алюминий серый', 'INSIDE · внутрь · 2012 мм'],
+        ['Праймована плівка (Німеччина)', 'МДФ 8 мм · соти', 'Кромка алюміній сірий', 'INSIDE · всередину · 2012 мм'],
+        ['Lámina imprimada (Alemania)', 'MDF 8 mm · nido de abeja', 'Canto de aluminio gris', 'INSIDE · hacia dentro · 2012 mm'],
+        ['Primed film (Germany)', '8 mm MDF · honeycomb', 'Grey aluminium edge', 'INSIDE · inward · 2012 mm']
       )
     },
     'prime-al-ch': {
-      name: L('Prime-AL(Ч)', 'Prime-AL(Ч)', 'Prime-AL(Ч)', 'Prime-AL(Ч)'),
+      name: L('Prime-AL(Ч)', 'Prime-AL(Ч)', 'Prime-AL(N)', 'Prime-AL(B)'),
       latin: L('IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard'),
-      kicker: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting'),
+      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       summary: L(
-        'Плёнка RENOLIT под покраску. Торец — алюминий чёрный. Прямое открывание.',
-        'Плівка RENOLIT під фарбування. Торець — алюміній чорний. Пряме відкривання.',
-        'Lámina RENOLIT para pintar. Canto de aluminio negro. Apertura directa.',
-        'RENOLIT film for painting. Black aluminium edge. Direct opening.'
+        'Праймированная плёнка (Германия). Торец — алюминий чёрный. Прямое открывание. Полотно 2000 × 610–910 мм.',
+        'Праймована плівка (Німеччина). Торець — алюміній чорний. Пряме відкривання. Полотно 2000 × 610–910 мм.',
+        'Lámina imprimada (Alemania). Canto de aluminio negro. Apertura directa. Hoja 2000 × 610–910 mm.',
+        'Primed film (Germany). Black aluminium edge. Direct opening. Leaf 2000 × 610–910 mm.'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевая коробка. Standard — наружу. Полотно под дальнейшую отделку.',
-        'Прихований монтаж, алюмінієва коробка. Standard — назовні. Полотно під подальше оздоблення.',
-        'Instalación oculta, marco de aluminio. Standard hacia fuera. Hoja para acabado posterior.',
-        'Concealed install, aluminium frame. Standard outward. Leaf for further finishing.'
+        'Скрытый монтаж, алюминиевый короб. МДФ 6 мм, сотовый заполнитель. Standard открывается в сторону плоскости.',
+        'Прихований монтаж, алюмінієвий короб. МДФ 6 мм, стільниковий заповнювач. Standard відчиняється в бік площини.',
+        'Instalación oculta, marco de aluminio. MDF de 6 mm, nido de abeja. Standard abre hacia el plano.',
+        'Concealed install, aluminium frame. 6 mm MDF, honeycomb core. Standard opens toward the flush face.'
       ),
       features: L(
-        ['Плёнка RENOLIT под покраску', 'Кромка алюминий чёрный', 'Standard · наружу'],
-        ['Плівка RENOLIT під фарбування', 'Кромка алюміній чорний', 'Standard · назовні'],
-        ['Lámina RENOLIT para pintar', 'Canto de aluminio negro', 'Standard · hacia fuera'],
-        ['RENOLIT film for painting', 'Black aluminium edge', 'Standard · outward']
+        ['Праймированная плёнка (Германия)', 'МДФ 6 мм · соты', 'Кромка алюминий чёрный', 'Standard · наружу · 2000 мм'],
+        ['Праймована плівка (Німеччина)', 'МДФ 6 мм · соти', 'Кромка алюміній чорний', 'Standard · назовні · 2000 мм'],
+        ['Lámina imprimada (Alemania)', 'MDF 6 mm · nido de abeja', 'Canto de aluminio negro', 'Standard · hacia fuera · 2000 mm'],
+        ['Primed film (Germany)', '6 mm MDF · honeycomb', 'Black aluminium edge', 'Standard · outward · 2000 mm']
       )
     },
     'prime-al-ch-inside': {
-      name: L('Prime-AL(Ч) INSIDE', 'Prime-AL(Ч) INSIDE', 'Prime-AL(Ч) INSIDE', 'Prime-AL(Ч) INSIDE'),
+      name: L('Prime-AL(Ч) INSIDE', 'Prime-AL(Ч) INSIDE', 'Prime-AL(N) INSIDE', 'Prime-AL(B) INSIDE'),
       latin: L('IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE'),
-      kicker: L('Плёнка под покраску', 'Плівка під фарбування', 'Lámina para pintar', 'Film for painting'),
+      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
       summary: L(
-        'Плёнка RENOLIT под покраску. Торец — алюминий чёрный. Обратное открывание INSIDE.',
-        'Плівка RENOLIT під фарбування. Торець — алюміній чорний. Зворотне відкривання INSIDE.',
-        'Lámina RENOLIT para pintar. Canto de aluminio negro. Apertura inversa INSIDE.',
-        'RENOLIT film for painting. Black aluminium edge. INSIDE reverse opening.'
+        'Праймированная плёнка (Германия). Торец — алюминий чёрный. Обратное открывание INSIDE. Полотно 2012 × 610–910 мм.',
+        'Праймована плівка (Німеччина). Торець — алюміній чорний. Зворотне відкривання INSIDE. Полотно 2012 × 610–910 мм.',
+        'Lámina imprimada (Alemania). Canto de aluminio negro. Apertura inversa INSIDE. Hoja 2012 × 610–910 mm.',
+        'Primed film (Germany). Black aluminium edge. INSIDE reverse opening. Leaf 2012 × 610–910 mm.'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевая коробка. INSIDE — внутрь. Полотно под дальнейшую отделку.',
-        'Прихований монтаж, алюмінієва коробка. INSIDE — всередину. Полотно під подальше оздоблення.',
-        'Instalación oculta, marco de aluminio. INSIDE hacia dentro. Hoja para acabado posterior.',
-        'Concealed install, aluminium frame. INSIDE inward. Leaf for further finishing.'
+        'Скрытый монтаж, алюминиевый короб. МДФ 8 мм. INSIDE заподлицо с одной стороны, открывается в другую.',
+        'Прихований монтаж, алюмінієвий короб. МДФ 8 мм. INSIDE запідлицо з одного боку, відчиняється в інший.',
+        'Instalación oculta, marco de aluminio. MDF de 8 mm. INSIDE queda al ras por un lado y abre al contrario.',
+        'Concealed install, aluminium frame. 8 mm MDF. INSIDE is flush on one side and opens the other way.'
       ),
       features: L(
-        ['Плёнка RENOLIT под покраску', 'Кромка алюминий чёрный', 'INSIDE · внутрь'],
-        ['Плівка RENOLIT під фарбування', 'Кромка алюміній чорний', 'INSIDE · всередину'],
-        ['Lámina RENOLIT para pintar', 'Canto de aluminio negro', 'INSIDE · hacia dentro'],
-        ['RENOLIT film for painting', 'Black aluminium edge', 'INSIDE · inward']
+        ['Праймированная плёнка (Германия)', 'МДФ 8 мм · соты', 'Кромка алюминий чёрный', 'INSIDE · внутрь · 2012 мм'],
+        ['Праймована плівка (Німеччина)', 'МДФ 8 мм · соти', 'Кромка алюміній чорний', 'INSIDE · всередину · 2012 мм'],
+        ['Lámina imprimada (Alemania)', 'MDF 8 mm · nido de abeja', 'Canto de aluminio negro', 'INSIDE · hacia dentro · 2012 mm'],
+        ['Primed film (Germany)', '8 mm MDF · honeycomb', 'Black aluminium edge', 'INSIDE · inward · 2012 mm']
       )
     }
   },
@@ -715,7 +757,14 @@ export const messages = {
     height: L('Высота', 'Висота', 'Altura', 'Height'),
     color: L('Цвет', 'Колір', 'Color', 'Colour'),
     edge: L('Окантовка', 'Окантовка', 'Canto', 'Edging'),
-    threshold: L('Выпадающий порог', 'Випадний поріг', 'Umbral automático', 'Drop seal')
+    threshold: L('Выпадающий порог', 'Випадний поріг', 'Umbral automático', 'Drop seal'),
+    leafSize: L('Полотно', 'Полотно', 'Hoja', 'Leaf'),
+    openingSize: L('Проём', 'Проріз', 'Hueco', 'Opening'),
+    mdf: L('Облицовка МДФ', 'Облицювання МДФ', 'Revestimiento MDF', 'MDF skin'),
+    fill: L('Заполнение', 'Заповнення', 'Relleno', 'Core'),
+    fillValue: L('Соты или вспененный полиэтилен', 'Соти або спінений поліетилен', 'Nido de abeja o polietileno expandido', 'Honeycomb or expanded polyethylene'),
+    sound: L('Звук / ресурс', 'Звук / ресурс', 'Sonido / ciclos', 'Sound / cycles'),
+    cycles: L('циклов', 'циклів', 'ciclos', 'cycles')
   },
 
   legal: {

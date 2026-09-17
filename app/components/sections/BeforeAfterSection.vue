@@ -70,9 +70,9 @@ function onKey(event: KeyboardEvent) {
       @pointerup="end"
       @pointercancel="end"
     >
-      <img src="/images/after-flush.jpg" :alt="t('beforeAfter.altAfter')">
+      <img class="ba__after" src="/images/after-flush.jpg" :alt="t('beforeAfter.altAfter')">
       <div class="ba__before" :style="{ clipPath: `inset(0 ${100 - pos}% 0 0)` }">
-        <img src="/images/idoors-install.jpg" :alt="t('beforeAfter.altBefore')">
+        <img src="/images/work-pair.jpg" :alt="t('beforeAfter.altBefore')">
       </div>
       <div class="ba__handle" :style="{ left: pos + '%' }">
         <button
@@ -111,7 +111,7 @@ h2 {
 .ba__frame {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   background: var(--stone);
   touch-action: none;
   cursor: ew-resize;
@@ -126,6 +126,14 @@ h2 {
   height: 100%;
   max-width: none;
   object-fit: cover;
+}
+
+.ba__after {
+  object-position: 50% 58%;
+}
+
+.ba__before img {
+  object-position: 42% 88%;
 }
 
 .ba__before {

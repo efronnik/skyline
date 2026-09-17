@@ -62,8 +62,9 @@ onMounted(() => {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
+  align-content: center;
   gap: 0.8rem;
-  min-height: var(--header);
+  height: var(--header);
   padding: 0 var(--pad);
   border-bottom: var(--hair) solid var(--line);
   background: color-mix(in srgb, var(--paper) 92%, transparent);
