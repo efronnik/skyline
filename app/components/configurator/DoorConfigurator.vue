@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { floorFinishes, sameHex, wallFinishes } from '~/data/roomFinishes'
+import { leafFinishes } from '~/data/doorFinishes'
 
 const { t } = useLocale()
 const { edge, swing, selectedSlug } = useConfigurator()
@@ -21,8 +22,9 @@ const spec = reactive({
   height: 'ceiling' as (typeof heights)[number],
   handlePos: 'standard' as (typeof handlePositions)[number],
   threshold: 'yes' as (typeof thresholds)[number],
-  wall: wallFinishes[0].hex,
-  floor: floorFinishes[0].hex
+  leaf: 'oakLight' as (typeof leafFinishes)[number]['id'],
+  wall: wallFinishes.find(item => item.id === 'chalk')!.hex,
+  floor: floorFinishes.find(item => item.id === 'stone')!.hex
 })
 
 const opened = ref(true)
@@ -45,11 +47,11 @@ function toggleThreshold() {
       <p>{{ t('config.lead') }}</p>
     </div>
 
-    <div class="room" :style="{ background: spec.wall }">
+    <div class="room">
       <ClientOnly>
         <DoorStage
           :edge="edge"
-          leaf="paint"
+          :leaf="spec.leaf"
           :wall="spec.wall"
           :floor="spec.floor"
           :side="spec.side"
@@ -94,6 +96,27 @@ function toggleThreshold() {
             <input v-model="edge" class="sr" type="radio" name="cfg-edge" :value="item">
             <span class="chip__sw" :style="{ background: edgeTones[item] }" />
             <em>{{ t(`config.edges.${item}`) }}</em>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="seg">
+        <legend>{{ t('config.leaf') }}</legend>
+        <div class="swatches">
+          <label
+            v-for="item in leafFinishes"
+            :key="item.id"
+            class="swatch"
+            :class="{ 'is-on': spec.leaf === item.id }"
+            :title="t(`config.colors.${item.id}`)"
+          >
+            <input v-model="spec.leaf" class="sr" type="radio" name="cfg-leaf" :value="item.id">
+            <span
+              :style="item.map
+                ? { backgroundImage: `url(${item.map})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                : { background: item.preview }"
+              :aria-label="t(`config.colors.${item.id}`)"
+            />
           </label>
         </div>
       </fieldset>

@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { getLeafFinish, type LeafFinish } from '~/data/doorFinishes'
+import { floorFinishByHex, wallFinishByHex } from '~/data/roomFinishes'
 
 const props = defineProps<{
   edge: 'silver' | 'black'
@@ -54,6 +55,7 @@ let controls: OrbitControls | null = null
 let frame = 0
 let leafPivot: THREE.Group | null = null
 let handleMesh: THREE.Object3D | null = null
+let handleTemplate: THREE.Object3D | null = null
 let sillMesh: THREE.Mesh | null = null
 let doorRoot: THREE.Group | null = null
 let wallMesh: THREE.Mesh | null = null
@@ -65,11 +67,51 @@ let sillDroppedY = 0
 let sillRetractedY = 0
 let primed = false
 const textures = new Map<string, THREE.Texture>()
+let roomNoise: THREE.CanvasTexture | null = null
 const pointer = new THREE.Vector2()
 const raycaster = new THREE.Raycaster()
 const clickable: THREE.Object3D[] = []
 let pointerDown = new THREE.Vector2()
 let resizeObs: ResizeObserver | null = null
+
+function noiseTexture() {
+  if (roomNoise) return roomNoise
+  const size = 256
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return null
+  const image = ctx.createImageData(size, size)
+  for (let i = 0; i < image.data.length; i += 4) {
+    const n = 160 + Math.floor(Math.random() * 70)
+    image.data[i] = n
+    image.data[i + 1] = n
+    image.data[i + 2] = n
+    image.data[i + 3] = 255
+  }
+  ctx.putImageData(image, 0, 0)
+  roomNoise = new THREE.CanvasTexture(canvas)
+  roomNoise.wrapS = THREE.RepeatWrapping
+  roomNoise.wrapT = THREE.RepeatWrapping
+  roomNoise.colorSpace = THREE.NoColorSpace
+  return roomNoise
+}
+
+async function roomMap(path: string | null, repeat = 4) {
+  if (!path) return null
+  const key = `${path}:${repeat}`
+  const cached = textures.get(key)
+  if (cached) return cached
+  const map = await new THREE.TextureLoader().loadAsync(path)
+  map.colorSpace = THREE.SRGBColorSpace
+  map.wrapS = THREE.RepeatWrapping
+  map.wrapT = THREE.RepeatWrapping
+  map.repeat.set(repeat, repeat)
+  map.anisotropy = 8
+  textures.set(key, map)
+  return map
+}
 
 function disposeObject(object: THREE.Object3D) {
   object.traverse((child) => {
@@ -133,19 +175,21 @@ async function textureFor(id: LeafFinish) {
   map.colorSpace = THREE.SRGBColorSpace
   map.wrapS = THREE.RepeatWrapping
   map.wrapT = THREE.RepeatWrapping
+  map.repeat.set(1, 2)
   map.anisotropy = 8
   textures.set(finish.map, map)
   return map
 }
 
 async function applyLeaf() {
+  const map = await textureFor(props.leaf)
   for (const mesh of leafMeshes) {
     const material = mesh.material
     if (!(material instanceof THREE.MeshStandardMaterial)) continue
-    material.map = null
+    material.map = map
     material.vertexColors = false
     material.color.set(0xffffff)
-    material.roughness = 0.62
+    material.roughness = map ? 0.58 : 0.62
     material.metalness = 0
     material.needsUpdate = true
   }
@@ -294,19 +338,45 @@ function playEdge() {
 
 function playRoomColor(slot: 'wall' | 'floor', mesh: THREE.Mesh | null, hex: string) {
   if (!mesh) return
-  const material = mesh.material
-  if (!(material instanceof THREE.MeshStandardMaterial)) return
+  void applyRoomSurface(slot, mesh, hex)
+}
+
+async function applyRoomSurface(slot: 'wall' | 'floor', mesh: THREE.Mesh, hex: string) {
+  const finish = slot === 'wall' ? wallFinishByHex(hex) : floorFinishByHex(hex)
+  let material = mesh.material
+  if (!(material instanceof THREE.MeshStandardMaterial)) {
+    material = new THREE.MeshStandardMaterial({ side: THREE.DoubleSide })
+    mesh.material = material
+  }
+
   const target = new THREE.Color(hex)
+  const mapPath = 'map' in finish ? finish.map : null
+  const map = await roomMap(mapPath, slot === 'floor' ? 3 : 2)
+  const bump = finish.bumpScale > 0 ? noiseTexture() : null
+
+  material.map = map
+  material.bumpMap = bump
+  material.bumpScale = finish.bumpScale
+  material.roughness = finish.roughness
+  material.metalness = finish.metalness
+  material.side = THREE.DoubleSide
+  if (bump) {
+    bump.repeat.set(slot === 'floor' ? 10 : 6, slot === 'floor' ? 6 : 8)
+  }
+  material.needsUpdate = true
+
   if (reduced.value) {
-    material.color.copy(target)
+    material.color.copy(map ? new THREE.Color(0xffffff) : target)
     return
   }
+
+  const colorTarget = map ? new THREE.Color(0xffffff) : target
   play(
     slot,
     animate(material.color, {
-      r: target.r,
-      g: target.g,
-      b: target.b,
+      r: colorTarget.r,
+      g: colorTarget.g,
+      b: colorTarget.b,
       duration: 420,
       ease: 'outQuad',
       composition: 'replace'
@@ -417,12 +487,17 @@ function makeWall(opening: THREE.Box3) {
     curveSegments: 1
   })
   geometry.translate(0, 0, wallFront(opening) - 96)
+  const finish = wallFinishByHex(props.wall)
+  const bump = finish.bumpScale > 0 ? noiseTexture() : null
+  if (bump) bump.repeat.set(6, 8)
   const mesh = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
       color: props.wall,
-      roughness: 0.94,
-      metalness: 0,
+      roughness: finish.roughness,
+      metalness: finish.metalness,
+      bumpMap: bump,
+      bumpScale: finish.bumpScale,
       side: THREE.DoubleSide
     })
   )
@@ -462,13 +537,35 @@ function addEdgeBand(box: THREE.Box3, parent: THREE.Object3D) {
 function makeHandle(box: THREE.Box3) {
   const group = new THREE.Group()
   group.name = 'handle'
-  const barGeo = new THREE.CylinderGeometry(6, 6, 168, 20)
-  barGeo.rotateZ(Math.PI / 2)
-  const bar = new THREE.Mesh(barGeo, metal(edgeTones[props.edge]))
-  const plate = new THREE.Mesh(new THREE.BoxGeometry(188, 18, 4), metal(edgeTones[props.edge]))
-  plate.position.z = -8
-  group.add(plate)
-  group.add(bar)
+  const finish = metal(edgeTones[props.edge])
+
+  if (handleTemplate) {
+    const model = handleTemplate.clone(true)
+    model.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return
+      child.material = finish
+    })
+    // Source units are ~cm; door stage is mm. Lever ≈ 145 mm.
+    model.scale.set(5, 5, 5)
+    // Rose sits in XZ in the source file — tip it to face the camera (+Z).
+    model.rotation.x = Math.PI / 2
+    // Mirror left-right on the door face.
+    model.scale.x *= -1
+    model.updateWorldMatrix(true, true)
+    const local = new THREE.Box3().setFromObject(model)
+    const center = local.getCenter(new THREE.Vector3())
+    model.position.sub(center)
+    group.add(model)
+  } else {
+    const barGeo = new THREE.CylinderGeometry(6, 6, 168, 20)
+    barGeo.rotateZ(Math.PI / 2)
+    const bar = new THREE.Mesh(barGeo, finish)
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(188, 18, 4), finish)
+    plate.position.z = -8
+    group.add(plate)
+    group.add(bar)
+  }
+
   group.position.set(box.max.x - 120, handleHeight.standard, box.max.z + 10)
   group.userData.part = 'handle'
   return group
@@ -676,15 +773,21 @@ onMounted(async () => {
   floor.name = 'floor'
   scene.add(floor)
   floorMesh = floor
+  await applyRoomSurface('floor', floor, props.floor)
 
   let gltfScene: THREE.Object3D | null = null
-  try {
-    const gltf = await new GLTFLoader().loadAsync('/models/idoors.glb')
-    scene.add(gltf.scene)
+  const doorLoad = new GLTFLoader().loadAsync('/models/idoors.glb').then((gltf) => {
+    scene!.add(gltf.scene)
     gltfScene = gltf.scene
-  } catch {
+  }).catch(() => {
     gltfScene = null
-  }
+  })
+  const handleLoad = new GLTFLoader().loadAsync('/models/door-handle.glb').then((gltf) => {
+    handleTemplate = gltf.scene
+  }).catch(() => {
+    handleTemplate = null
+  })
+  await Promise.all([doorLoad, handleLoad])
 
   setupDoor(gltfScene)
   await applyLeaf()
@@ -730,6 +833,7 @@ onUnmounted(() => {
   controls?.dispose()
   if (scene) disposeObject(scene)
   for (const map of textures.values()) map.dispose()
+  roomNoise?.dispose()
   renderer?.dispose()
   renderer?.domElement.remove()
 })
