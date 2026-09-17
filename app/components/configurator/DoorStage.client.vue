@@ -203,7 +203,7 @@ function playDoor() {
     tl.add(leafPivot.rotation, { y: angle, duration: 980, ease: 'inOutCubic' }, hasSeal ? 90 : 0)
   } else {
     if (handleMesh) {
-      tl.add(handleMesh.rotation, { z: rad(-7), duration: 150, ease: 'outQuad' }, 0)
+      tl.add(handleMesh.rotation, { z: rad(8), duration: 150, ease: 'outQuad' }, 0)
       tl.add(handleMesh.rotation, { z: 0, duration: 320, ease: 'inOutQuad' }, 160)
     }
     tl.add(leafPivot.rotation, { y: 0, duration: 920, ease: 'inOutCubic' }, 40)
@@ -462,12 +462,14 @@ function addEdgeBand(box: THREE.Box3, parent: THREE.Object3D) {
 function makeHandle(box: THREE.Box3) {
   const group = new THREE.Group()
   group.name = 'handle'
-  const bar = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 168, 20), metal(edgeTones[props.edge]))
-  const plate = new THREE.Mesh(new THREE.BoxGeometry(18, 188, 4), metal(edgeTones[props.edge]))
+  const barGeo = new THREE.CylinderGeometry(6, 6, 168, 20)
+  barGeo.rotateZ(Math.PI / 2)
+  const bar = new THREE.Mesh(barGeo, metal(edgeTones[props.edge]))
+  const plate = new THREE.Mesh(new THREE.BoxGeometry(188, 18, 4), metal(edgeTones[props.edge]))
   plate.position.z = -8
   group.add(plate)
   group.add(bar)
-  group.position.set(box.max.x - 36, handleHeight.standard, box.max.z + 10)
+  group.position.set(box.max.x - 120, handleHeight.standard, box.max.z + 10)
   group.userData.part = 'handle'
   return group
 }
