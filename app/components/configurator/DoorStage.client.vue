@@ -3,12 +3,10 @@ import { animate, createTimeline } from 'animejs'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { getLeafFinish, type LeafFinish } from '~/data/doorFinishes'
 import { getFloorFinish, getWallFinish, HERRINGBONE_MAP, WALL_MAP, type FloorFinish, type WallFinish } from '~/data/roomFinishes'
 
 const props = defineProps<{
   edge: 'silver' | 'black'
-  leaf: LeafFinish
   wall: WallFinish
   floor: FloorFinish
   side: 'left' | 'right'
@@ -168,30 +166,14 @@ function shrinkLeaf(mesh: THREE.Mesh, inset: number) {
   geometry.translate(center.x, center.y, center.z)
 }
 
-async function textureFor(id: LeafFinish) {
-  const finish = getLeafFinish(id)
-  if (!finish.map) return null
-  const cached = textures.get(finish.map)
-  if (cached) return cached
-  const map = await new THREE.TextureLoader().loadAsync(finish.map)
-  map.colorSpace = THREE.SRGBColorSpace
-  map.wrapS = THREE.RepeatWrapping
-  map.wrapT = THREE.RepeatWrapping
-  map.repeat.set(1, 2)
-  map.anisotropy = 8
-  textures.set(finish.map, map)
-  return map
-}
-
-async function applyLeaf() {
-  const map = await textureFor(props.leaf)
+function applyLeaf() {
   for (const mesh of leafMeshes) {
     const material = mesh.material
     if (!(material instanceof THREE.MeshStandardMaterial)) continue
-    material.map = map
+    material.map = null
     material.vertexColors = false
     material.color.set(0xffffff)
-    material.roughness = map ? 0.58 : 0.62
+    material.roughness = 0.62
     material.metalness = 0
     material.needsUpdate = true
   }
@@ -749,7 +731,7 @@ onMounted(async () => {
   await Promise.all([doorLoad, handleLoad])
 
   setupDoor(gltfScene)
-  await applyLeaf()
+  applyLeaf()
   applySide()
   if (doorRoot) doorRoot.scale.y = heightScale[props.height]
   snapDoor()
@@ -768,7 +750,6 @@ onMounted(async () => {
   }
 })
 
-watch(() => props.leaf, applyLeaf)
 watch(() => props.edge, playEdge)
 watch(() => props.wall, id => playRoomColor('wall', wallMesh, id))
 watch(() => props.floor, id => playRoomColor('floor', floorMesh, id))

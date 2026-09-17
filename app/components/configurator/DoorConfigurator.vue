@@ -49,7 +49,6 @@ function toggleThreshold() {
       <ClientOnly>
         <DoorStage
           :edge="edge"
-          leaf="paint"
           :wall="spec.wall"
           :floor="spec.floor"
           :side="spec.side"

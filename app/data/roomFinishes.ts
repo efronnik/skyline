@@ -27,10 +27,6 @@ export const floorFinishes = [
 export type WallFinish = (typeof wallFinishes)[number]['id']
 export type FloorFinish = (typeof floorFinishes)[number]['id']
 
-export function sameHex(a: string, b: string) {
-  return a.replace('#', '').toLowerCase() === b.replace('#', '').toLowerCase()
-}
-
 export function getWallFinish(id: string) {
   return wallFinishes.find(item => item.id === id) ?? wallFinishes[0]
 }
