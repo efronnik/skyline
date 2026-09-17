@@ -584,35 +584,6 @@ function makeSill(box: THREE.Box3) {
   return sill
 }
 
-function makeHinges(box: THREE.Box3) {
-  if (!scene || !doorRoot || !leafPivot) return
-  const ys = [box.min.y + 240, (box.min.y + box.max.y) * 0.5, box.max.y - 240]
-  const z = (box.min.z + box.max.z) / 2
-  const hx = box.min.x
-  for (const y of ys) {
-    const cup = new THREE.Mesh(new THREE.BoxGeometry(12, 46, 24), metal(edgeTones[props.edge]))
-    cup.position.set(hx - 2, y, z)
-    cup.name = 'hinge-cup'
-    scene.add(cup)
-    doorRoot.attach(cup)
-    edgeMeshes.push(cup)
-
-    const pin = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 3.5, 50, 12), metal(edgeTones[props.edge]))
-    pin.position.set(hx, y, z)
-    pin.name = 'hinge-pin'
-    scene.add(pin)
-    doorRoot.attach(pin)
-    edgeMeshes.push(pin)
-
-    const flap = new THREE.Mesh(new THREE.BoxGeometry(28, 40, 6), metal(edgeTones[props.edge]))
-    flap.position.set(hx + 16, y, z + 8)
-    flap.name = 'hinge-flap'
-    scene.add(flap)
-    leafPivot.attach(flap)
-    edgeMeshes.push(flap)
-  }
-}
-
 function makeProceduralLeaf() {
   const leaf = new THREE.Mesh(new THREE.BoxGeometry(800, 1996, 40), paintMaterial())
   leaf.position.set(400, 1000, 20)
@@ -663,7 +634,6 @@ function setupDoor(root: THREE.Object3D | null) {
   leafPivot.attach(leaf)
 
   addEdgeBand(leafBox, leafPivot)
-  makeHinges(leafBox)
 
   const handle = makeHandle(leafBox)
   scene.add(handle)
