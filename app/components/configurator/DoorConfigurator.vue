@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { floorFinishes, sameHex, wallFinishes } from '~/data/roomFinishes'
+
 const { t } = useLocale()
 const { edge, swing, selectedSlug } = useConfigurator()
 
@@ -18,7 +20,9 @@ const spec = reactive({
   side: 'left' as (typeof sides)[number],
   height: 'ceiling' as (typeof heights)[number],
   handlePos: 'standard' as (typeof handlePositions)[number],
-  threshold: 'yes' as (typeof thresholds)[number]
+  threshold: 'yes' as (typeof thresholds)[number],
+  wall: wallFinishes[0].hex,
+  floor: floorFinishes[0].hex
 })
 
 const opened = ref(true)
@@ -41,11 +45,13 @@ function toggleThreshold() {
       <p>{{ t('config.lead') }}</p>
     </div>
 
-    <div class="room">
+    <div class="room" :style="{ background: spec.wall }">
       <ClientOnly>
         <DoorStage
           :edge="edge"
           leaf="paint"
+          :wall="spec.wall"
+          :floor="spec.floor"
           :side="spec.side"
           :swing="swing"
           :handle-pos="spec.handlePos"
@@ -91,6 +97,56 @@ function toggleThreshold() {
           </label>
         </div>
       </fieldset>
+
+      <div class="cfg__pair">
+        <fieldset class="seg">
+          <legend>{{ t('config.wall') }}</legend>
+          <div class="swatches">
+            <label
+              v-for="item in wallFinishes"
+              :key="item.id"
+              class="swatch"
+              :class="{ 'is-on': sameHex(spec.wall, item.hex) }"
+              :title="t(`config.colors.${item.id}`)"
+            >
+              <input v-model="spec.wall" class="sr" type="radio" name="cfg-wall" :value="item.hex">
+              <span :style="{ background: item.hex }" :aria-label="t(`config.colors.${item.id}`)" />
+            </label>
+            <label
+              class="swatch"
+              :class="{ 'is-on': !wallFinishes.some(item => sameHex(spec.wall, item.hex)) }"
+              :title="t('config.wallPick')"
+            >
+              <input v-model="spec.wall" class="sr" type="color" :aria-label="t('config.wallPick')">
+              <span :style="{ background: spec.wall }" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend>{{ t('config.floor') }}</legend>
+          <div class="swatches">
+            <label
+              v-for="item in floorFinishes"
+              :key="item.id"
+              class="swatch"
+              :class="{ 'is-on': sameHex(spec.floor, item.hex) }"
+              :title="t(`config.colors.${item.id}`)"
+            >
+              <input v-model="spec.floor" class="sr" type="radio" name="cfg-floor" :value="item.hex">
+              <span :style="{ background: item.hex }" :aria-label="t(`config.colors.${item.id}`)" />
+            </label>
+            <label
+              class="swatch"
+              :class="{ 'is-on': !floorFinishes.some(item => sameHex(spec.floor, item.hex)) }"
+              :title="t('config.floorPick')"
+            >
+              <input v-model="spec.floor" class="sr" type="color" :aria-label="t('config.floorPick')">
+              <span :style="{ background: spec.floor }" />
+            </label>
+          </div>
+        </fieldset>
+      </div>
 
       <fieldset class="seg">
         <legend>{{ t('config.side') }}</legend>
@@ -301,6 +357,34 @@ h2 {
   color: var(--paper);
 }
 
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.swatch {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.swatch span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.22);
+}
+
+.swatch.is-on span {
+  box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.22), 0 0 0 2px var(--paper), 0 0 0 3px var(--ink);
+}
+
 .seg__row {
   display: grid;
   grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
@@ -358,6 +442,7 @@ h2 {
 
 .pill:focus-within,
 .chip:focus-within,
+.swatch:focus-within,
 .open-btn:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;

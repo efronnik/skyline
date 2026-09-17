@@ -1,5 +1,5 @@
 export const leafFinishes = [
-  { id: 'paint', map: null, preview: '#F7F6F3' }
+  { id: 'paint', map: null, preview: '#FFFFFF' }
 ] as const
 
 export type LeafFinish = (typeof leafFinishes)[number]['id']

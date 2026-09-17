@@ -153,6 +153,10 @@ export const messages = {
     handle: L('Ручка', 'Ручка', 'Manilla', 'Handle'),
     handlePos: L('Положение ручки', 'Положення ручки', 'Posición de la manilla', 'Handle position'),
     edge: L('Окантовка', 'Окантовка', 'Canto', 'Edging'),
+    wall: L('Стена', 'Стіна', 'Muro', 'Wall'),
+    floor: L('Пол', 'Підлога', 'Suelo', 'Floor'),
+    wallPick: L('Цвет стены', 'Колір стіни', 'Color del muro', 'Wall colour'),
+    floorPick: L('Цвет пола', 'Колір підлоги', 'Color del suelo', 'Floor colour'),
     leaf: L('Цвет двери', 'Колір дверей', 'Color de la puerta', 'Door colour'),
     leafFinish: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)'),
     finishes: {
@@ -201,6 +205,7 @@ export const messages = {
     },
     colors: {
       white: L('Белый', 'Білий', 'Blanco', 'White'),
+      plaster: L('Штукатурка', 'Штукатурка', 'Yeso', 'Plaster'),
       chalk: L('Мел', 'Крейда', 'Tiza', 'Chalk'),
       linen: L('Лён', 'Льон', 'Lino', 'Linen'),
       sand: L('Песок', 'Пісок', 'Arena', 'Sand'),
@@ -211,6 +216,9 @@ export const messages = {
       ink: L('Чернила', 'Чорнило', 'Tinta', 'Ink'),
       oak: L('Дуб', 'Дуб', 'Roble', 'Oak'),
       walnut: L('Орех', 'Горіх', 'Nogal', 'Walnut'),
+      stone: L('Камень', 'Камінь', 'Piedra', 'Stone'),
+      concrete: L('Бетон', 'Бетон', 'Hormigón', 'Concrete'),
+      charcoal: L('Уголь', 'Вугілля', 'Carbón', 'Charcoal'),
       frost: L('Матовое', 'Матове', 'Mate', 'Frosted'),
       clear: L('Прозрачное', 'Прозоре', 'Transparente', 'Clear'),
       custom: L('По образцу', 'За зразком', 'Según muestra', 'To sample')

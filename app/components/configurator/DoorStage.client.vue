@@ -8,6 +8,8 @@ import { getLeafFinish, type LeafFinish } from '~/data/doorFinishes'
 const props = defineProps<{
   edge: 'silver' | 'black'
   leaf: LeafFinish
+  wall: string
+  floor: string
   side: 'left' | 'right'
   swing: 'in' | 'out'
   handlePos: 'standard' | 'high' | 'custom'
@@ -55,6 +57,7 @@ let handleMesh: THREE.Object3D | null = null
 let sillMesh: THREE.Mesh | null = null
 let doorRoot: THREE.Group | null = null
 let wallMesh: THREE.Mesh | null = null
+let floorMesh: THREE.Mesh | null = null
 let frameMesh: THREE.Mesh | null = null
 let leafMeshes: THREE.Mesh[] = []
 let edgeMeshes: THREE.Mesh[] = []
@@ -78,11 +81,11 @@ function disposeObject(object: THREE.Object3D) {
 }
 
 function paintMaterial() {
-  const finish = getLeafFinish(props.leaf)
   return new THREE.MeshStandardMaterial({
-    color: finish.preview,
-    roughness: 0.84,
-    metalness: 0
+    color: 0xffffff,
+    roughness: 0.62,
+    metalness: 0,
+    vertexColors: false
   })
 }
 
@@ -101,6 +104,7 @@ function bake(mesh: THREE.Mesh) {
   mesh.updateWorldMatrix(true, false)
   const geometry = mesh.geometry.clone()
   geometry.applyMatrix4(mesh.matrixWorld)
+  geometry.deleteAttribute('color')
   const baked = new THREE.Mesh(geometry, paintMaterial())
   baked.name = mesh.name
   return baked
@@ -135,14 +139,13 @@ async function textureFor(id: LeafFinish) {
 }
 
 async function applyLeaf() {
-  const finish = getLeafFinish(props.leaf)
-  const map = await textureFor(props.leaf)
   for (const mesh of leafMeshes) {
     const material = mesh.material
     if (!(material instanceof THREE.MeshStandardMaterial)) continue
-    material.map = map
-    material.color.set(map ? 0xffffff : finish.preview)
-    material.roughness = map ? 0.68 : 0.84
+    material.map = null
+    material.vertexColors = false
+    material.color.set(0xffffff)
+    material.roughness = 0.62
     material.metalness = 0
     material.needsUpdate = true
   }
@@ -289,6 +292,28 @@ function playEdge() {
   )
 }
 
+function playRoomColor(slot: 'wall' | 'floor', mesh: THREE.Mesh | null, hex: string) {
+  if (!mesh) return
+  const material = mesh.material
+  if (!(material instanceof THREE.MeshStandardMaterial)) return
+  const target = new THREE.Color(hex)
+  if (reduced.value) {
+    material.color.copy(target)
+    return
+  }
+  play(
+    slot,
+    animate(material.color, {
+      r: target.r,
+      g: target.g,
+      b: target.b,
+      duration: 420,
+      ease: 'outQuad',
+      composition: 'replace'
+    })
+  )
+}
+
 function playHeight() {
   if (!doorRoot) return
   if (reduced.value) {
@@ -395,7 +420,7 @@ function makeWall(opening: THREE.Box3) {
   const mesh = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
-      color: 0xb7b1a6,
+      color: props.wall,
       roughness: 0.94,
       metalness: 0,
       side: THREE.DoubleSide
@@ -629,24 +654,26 @@ onMounted(async () => {
   controls.enablePan = false
   if (reduced.value) controls.enableRotate = false
 
-  scene.add(new THREE.HemisphereLight(0xf4efe6, 0x5c574e, 0.95))
-  const key = new THREE.DirectionalLight(0xfff6ea, 1.45)
+  scene.add(new THREE.HemisphereLight(0xf4f2ee, 0x8a8680, 1.05))
+  const key = new THREE.DirectionalLight(0xffffff, 1.55)
   key.position.set(900, 2200, 1600)
   scene.add(key)
-  const fill = new THREE.DirectionalLight(0xd7ddd8, 0.55)
+  const fill = new THREE.DirectionalLight(0xf2f0ec, 0.62)
   fill.position.set(-1200, 900, 600)
   scene.add(fill)
-  const rim = new THREE.DirectionalLight(0xe8e2d6, 0.35)
+  const rim = new THREE.DirectionalLight(0xf7f4ee, 0.32)
   rim.position.set(200, 1400, -800)
   scene.add(rim)
 
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(3600, 1600),
-    new THREE.MeshStandardMaterial({ color: 0xcbb79a, roughness: 0.9, metalness: 0 })
+    new THREE.MeshStandardMaterial({ color: props.floor, roughness: 0.9, metalness: 0 })
   )
   floor.rotation.x = -Math.PI / 2
   floor.position.set(0, 0, 800)
+  floor.name = 'floor'
   scene.add(floor)
+  floorMesh = floor
 
   let gltfScene: THREE.Object3D | null = null
   try {
@@ -679,6 +706,8 @@ onMounted(async () => {
 
 watch(() => props.leaf, applyLeaf)
 watch(() => props.edge, playEdge)
+watch(() => props.wall, hex => playRoomColor('wall', wallMesh, hex))
+watch(() => props.floor, hex => playRoomColor('floor', floorMesh, hex))
 watch(() => props.handlePos, playHandle)
 watch(() => props.threshold, playSill)
 watch(() => props.opened, playDoor)
