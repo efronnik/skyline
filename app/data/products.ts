@@ -1,13 +1,11 @@
 import type { CatalogProduct, ExtraId, ProductLook } from '~/types/content'
 
-// PDP gallery — portrait 3:4 container, use portrait-friendly shots
+// PDP gallery — portrait 3:4 container
 const flushInteriors = [
-  '/images/prime-al-c.jpg',
-  '/images/prime-al-c-inside.jpg',
-  '/images/prime-al-ch.jpg',
-  '/images/prime-al-ch-inside.jpg',
   '/images/work-room.jpg',
   '/images/interior-flush.jpg',
+  '/images/work-corridor.jpg',
+  '/images/after-flush.jpg',
   '/images/idoors-interior-light.jpg',
   '/images/idoors-interior-dark.jpg',
 ]
