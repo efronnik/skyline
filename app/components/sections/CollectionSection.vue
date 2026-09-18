@@ -73,7 +73,7 @@ function liftShot(event: PointerEvent, on: boolean) {
 
 <style scoped>
 .col {
-  padding: 0 var(--pad) var(--section);
+  padding: var(--pad) var(--section);
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
