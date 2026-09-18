@@ -1,4 +1,4 @@
-import { pdp } from './pdp'
+﻿import { pdp } from './pdp'
 
 export const localeList = [
   { id: 'ru', label: 'RU' },
@@ -57,7 +57,7 @@ export const messages = {
   hero: {
     spec: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
     title: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas de instalación oculta', 'Flush doors'),
-    slogan: L('Двери, которые чувствуют интерьер.', 'Двері, що відчувають інтер'єр.', 'Puertas que sienten el interior.', 'Doors that feel the interior.'),
+    slogan: L('Двери, которые чувствуют интерьер.', "Двері, що відчувають інтер'єр.", 'Puertas que sienten el interior.', 'Doors that feel the interior.'),
     lead: L(
       'Под ваши желания.',
       'Під ваші бажання.',
@@ -252,7 +252,7 @@ export const messages = {
       ),
       comingSoon: L(
         'Каталог ручек и замков Spinoff скоро появится здесь. Пока напишите нам — подберём под ваш проект.',
-        'Каталог ручок і замків Spinoff незабаром з'явиться тут. Поки напишіть нам — підберемо під ваш проєкт.',
+        "Каталог ручок і замків Spinoff незабаром з'явиться тут. Поки напишіть нам — підберемо під ваш проєкт.",
         'El catálogo de manillas y cerraduras Spinoff estará aquí pronto. Por ahora escríbanos — lo seleccionamos para su proyecto.',
         'The Spinoff handles and locks catalogue is coming soon. Write to us in the meantime — we will match it to your project.'
       )
@@ -670,7 +670,7 @@ export const messages = {
     ),
     network: L(
       'Мы развиваем партнёрскую сеть и предлагаем выгодные условия прямой кооперации для профессионалов строительной и интерьерной отрасли:',
-      'Ми розвиваємо партнерську мережу і пропонуємо вигідні умови прямої кооперації для професіоналів будівельної та інтер'єрної галузі:',
+      "Ми розвиваємо партнерську мережу і пропонуємо вигідні умови прямої кооперації для професіоналів будівельної та інтер'єрної галузі:",
       'Desarrollamos nuestra red de partners y ofrecemos condiciones ventajosas de cooperación directa para profesionales del sector de la construcción e interiorismo:',
       'We are growing our partner network and offering attractive direct cooperation terms for professionals in construction and interior design:'
     ),
@@ -683,7 +683,7 @@ export const messages = {
       [
         'Дилерам і салонам дверей — розширення матриці преміальною продукцією прихованого монтажу з гарантованою маржинальністю і складською програмою.',
         'Дизайнерам і архітекторам — комплексна технічна підтримка, надання 3D/CAD-моделей, індивідуальні розміри до 2400 мм і гнучкі умови спецпроєктів.',
-        'Будівельним компаніям і бригадирам — прямі заводські ціни, дотримання термінів поставок, повна виконавча документація і персональний менеджер об'єкта.'
+        "Будівельним компаніям і бригадирам — прямі заводські ціни, дотримання термінів поставок, повна виконавча документація і персональний менеджер об'єкта."
       ],
       [
         'Distribuidores y salones de puertas — ampliación de la gama con producto premium de instalación oculta, margen garantizado y programa de stock.',
