@@ -14,10 +14,10 @@ const { t, ta } = useLocale()
       </div>
       <div class="studio__visual" aria-hidden="true">
         <NuxtImg
-          src="/images/idoors-install-standard.jpg"
+          src="/images/factory-craft.jpg"
           alt=""
           width="640"
-          height="800"
+          height="420"
           sizes="(min-width: 980px) 42vw, 100vw"
           fit="cover"
           class="studio__img"
@@ -72,7 +72,7 @@ h2 {
 
 .studio__visual {
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
 }
 
 .studio__img {
@@ -90,7 +90,7 @@ h2 {
   }
 
   .studio__visual {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
   }
 
   h2 {
