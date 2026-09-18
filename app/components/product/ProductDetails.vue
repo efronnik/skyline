@@ -150,6 +150,13 @@ const stepsHeading = computed(() => props.kind === 'base' ? t('pdp.stepsTitle') 
   display: grid;
   gap: var(--space-8);
   padding-top: var(--space-8);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.block {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .block h2 {
@@ -187,12 +194,22 @@ h3 {
   margin: 0.4rem 0 0;
 }
 
+.block {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .table-wrap {
   overflow-x: auto;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  overscroll-behavior-x: contain;
 }
 
 table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.95rem;
 }
@@ -203,6 +220,7 @@ td {
   vertical-align: top;
   padding: 0.75rem 0.85rem 0.75rem 0;
   border-bottom: var(--hair) solid var(--line);
+  overflow-wrap: anywhere;
 }
 
 thead th {
@@ -217,7 +235,7 @@ thead th {
 tbody th {
   font-family: var(--font-display);
   font-weight: 600;
-  width: 9.5rem;
+  width: 32%;
 }
 
 .specs {

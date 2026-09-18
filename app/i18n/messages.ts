@@ -30,7 +30,10 @@ export const messages = {
     technology: L('Технология', 'Технологія', 'Tecnología', 'Technology'),
     projects: L('Проекты', 'Проєкти', 'Proyectos', 'Projects'),
     contact: L('Заявка', 'Заявка', 'Consulta', 'Inquiry'),
-    about: L('О студии', 'Про студію', 'Estudio', 'Studio')
+    quote: L('Рассчитать проект', 'Розрахувати проєкт', 'Calcular el proyecto', 'Request a quote'),
+    ask: L('Задать вопрос', 'Задати питання', 'Hacer una pregunta', 'Ask a question'),
+    about: L('О студии', 'Про студію', 'Estudio', 'Studio'),
+    partners: L('Партнёрам', 'Партнерам', 'Partners', 'Partners')
   },
 
   footer: {
@@ -52,21 +55,49 @@ export const messages = {
   },
 
   hero: {
-    spec: L('Flush · Hidden frame · iDOORS Prime', 'Flush · Hidden frame · iDOORS Prime', 'Flush · Marco oculto · iDOORS Prime', 'Flush · Hidden frame · iDOORS Prime'),
-    title: L('Стена продолжается.', 'Стіна продовжується.', 'El muro continúa.', 'The wall continues.'),
+    spec: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+    title: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas de instalación oculta', 'Flush doors'),
     lead: L(
-      'Полотно в плоскости стены — часть архитектуры.',
-      'Полотно в площині стіни — частина архітектури.',
-      'La hoja al ras del muro: arquitectura.',
-      'The leaf in the wall plane — architecture.'
+      'Под ваши желания.',
+      'Під ваші бажання.',
+      'A medida de lo que queréis.',
+      'Made to what you want.'
     ),
-    cta1: L('Смотреть iDOORS Prime', 'Дивитися iDOORS Prime', 'Ver iDOORS Prime', 'See iDOORS Prime'),
-    cta2: L('Рассчитать проект', 'Розрахувати проєкт', 'Calcular el proyecto', 'Request a quote'),
+    cta1: L('Задать вопрос', 'Задати питання', 'Hacer una pregunta', 'Ask a question'),
+    cta2: L('Рассчитать заказ', 'Розрахувати замовлення', 'Calcular el pedido', 'Request an order'),
     alt: L(
       'Скрытая дверь iDOORS в интерьере',
       'Приховані двері iDOORS в інтер’єрі',
       'Puerta oculta iDOORS en un interior',
       'iDOORS flush door in an interior'
+    )
+  },
+
+  studio: {
+    kicker: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+    spec: L('Испания · Португалия', 'Іспанія · Португалія', 'España · Portugal', 'Spain · Portugal'),
+    title: L('О компании iDOORS', 'Про компанію iDOORS', 'Sobre iDOORS', 'About iDOORS'),
+    paragraphs: L(
+      [
+        'iDOORS — официальное представительство одного из крупнейших дверных производств Украины и Восточной Европы на территории Испании и Португалии.',
+        'Мы специализируемся на проектировании, комплектации и прямых поставках современных систем дверей скрытого монтажа (под отделку, шпон, зеркало, стекло) — как в стандартных габаритах, так и по индивидуальным размерам высотой до 2400 мм.',
+        'Объединяя мощности высокотехнологичного европейского завода, итальянскую фурнитуру и локальный склад в Испании, мы обеспечиваем строительный сектор Пиренейского полуострова надёжными инженерными решениями «под ключ».'
+      ],
+      [
+        'iDOORS — офіційне представництво одного з найбільших дверних виробництв України та Східної Європи на території Іспанії та Португалії.',
+        'Ми спеціалізуємося на проєктуванні, комплектації та прямих поставках сучасних систем дверей прихованого монтажу (під оздоблення, шпон, дзеркало, скло) — як у стандартних габаритах, так і за індивідуальними розмірами висотою до 2400 мм.',
+        'Об’єднуючи потужності високотехнологічного європейського заводу, італійську фурнітуру та локальний склад в Іспанії, ми забезпечуємо будівельний сектор Піренейського півострова надійними інженерними рішеннями «під ключ».'
+      ],
+      [
+        'iDOORS es la representación oficial en España y Portugal de una de las mayores fábricas de puertas de Ucrania y Europa del Este.',
+        'Nos especializamos en el diseño, la configuración y el suministro directo de sistemas contemporáneos de puertas de instalación oculta (para acabado, chapa, espejo, vidrio), tanto en medidas estándar como a medida, con altura hasta 2400 mm.',
+        'Al unir la capacidad de una fábrica europea de alta tecnología, herrajes italianos y un almacén local en España, damos al sector de la construcción de la península ibérica soluciones de ingeniería llave en mano y fiables.'
+      ],
+      [
+        'iDOORS is the official representation in Spain and Portugal of one of the largest door manufacturers in Ukraine and Eastern Europe.',
+        'We specialise in design, specification and direct supply of contemporary flush door systems (for finishing, veneer, mirror, glass) — in standard sizes and made to measure, with height up to 2400 mm.',
+        'Combining a high-tech European factory, Italian hardware and a local warehouse in Spain, we supply the Iberian construction sector with reliable turnkey engineering solutions.'
+      ]
     )
   },
 
@@ -614,6 +645,70 @@ export const messages = {
     cta: L('Запросить комплект', 'Запросити комплект', 'Solicitar el dossier', 'Request the pack')
   },
 
+  partners: {
+    kicker: L('Партнёрам', 'Партнерам', 'Partners', 'Partners'),
+    spec: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+    title: L('Стать партнёром', 'Стати партнером', 'Hacerse partner', 'Become a partner'),
+    lead: L(
+      'Для дилеров, дизайнеров, архитекторов, магазинов дверей и бригадиров строительных бригад.',
+      'Для дилерів, дизайнерів, архітекторів, магазинів дверей і бригадирів будівельних бригад.',
+      'Para distribuidores, diseñadores, arquitectos, tiendas de puertas y jefes de brigada.',
+      'For dealers, designers, architects, door shops and construction crew leaders.'
+    ),
+    note: L(
+      'Заявка только от компаний. Обсудим сотрудничество, скидки и поставки.',
+      'Заявка лише від компаній. Обговоримо співпрацю, знижки та поставки.',
+      'Solo empresas. Hablamos de colaboración, descuentos y suministro.',
+      'Companies only. We will talk cooperation, discounts and supply.'
+    ),
+    audience: L(
+      ['Дилеры', 'Дизайнеры', 'Архитекторы', 'Магазины дверей', 'Бригадиры строительных бригад'],
+      ['Дилери', 'Дизайнери', 'Архітектори', 'Магазини дверей', 'Бригадири будівельних бригад'],
+      ['Distribuidores', 'Diseñadores', 'Arquitectos', 'Tiendas de puertas', 'Jefes de brigada'],
+      ['Dealers', 'Designers', 'Architects', 'Door shops', 'Construction crew leaders']
+    ),
+    paragraphs: L(
+      [] as string[],
+      [] as string[],
+      [] as string[],
+      [] as string[]
+    ),
+    cta: L('Стать партнёром', 'Стати партнером', 'Hacerse partner', 'Become a partner'),
+    modalTitle: L('Заявка на партнёрство', 'Заявка на партнерство', 'Solicitud de partnership', 'Partnership inquiry'),
+    modalLead: L(
+      'Юридические данные компании. С частными лицами по этому каналу не работаем.',
+      'Юридичні дані компанії. З приватними особами цим каналом не працюємо.',
+      'Datos jurídicos de la empresa. Este canal no es para particulares.',
+      'Company legal details. This channel is not for private individuals.'
+    ),
+    role: L('Тип компании', 'Тип компанії', 'Tipo de empresa', 'Company type'),
+    roleErr: L('Укажите тип', 'Вкажіть тип', 'Indique el tipo', 'Choose a type'),
+    dealer: L('Дилер', 'Дилер', 'Distribuidor', 'Dealer'),
+    designer: L('Дизайнер', 'Дизайнер', 'Diseñador', 'Designer'),
+    architect: L('Архитектор', 'Архітектор', 'Arquitecto', 'Architect'),
+    shop: L('Магазин дверей', 'Магазин дверей', 'Tienda de puertas', 'Door shop'),
+    foreman: L('Бригадир строительной бригады', 'Бригадир будівельної бригади', 'Jefe de brigada', 'Construction crew leader'),
+    company: L('Юридическое название', 'Юридична назва', 'Razón social', 'Legal company name'),
+    companyErr: L('Укажите компанию', 'Вкажіть компанію', 'Indique la empresa', 'Enter the company'),
+    taxId: L('NIF / CIF', 'NIF / CIF', 'NIF / CIF', 'NIF / CIF'),
+    taxErr: L('Укажите NIF/CIF', 'Вкажіть NIF/CIF', 'Indique el NIF/CIF', 'Enter the NIF/CIF'),
+    address: L('Юридический адрес', 'Юридична адреса', 'Domicilio social', 'Registered address'),
+    addressErr: L('Укажите адрес', 'Вкажіть адресу', 'Indique el domicilio', 'Enter the address'),
+    city: L('Город', 'Місто', 'Ciudad', 'City'),
+    country: L('Страна', 'Країна', 'País', 'Country'),
+    countryEs: L('Испания', 'Іспанія', 'España', 'Spain'),
+    countryPt: L('Португалия', 'Португалія', 'Portugal', 'Portugal'),
+    person: L('Контактное лицо', 'Контактна особа', 'Persona de contacto', 'Contact person'),
+    position: L('Должность', 'Посада', 'Cargo', 'Position'),
+    comment: L('О сотрудничестве', 'Про співпрацю', 'Sobre la colaboración', 'About the cooperation'),
+    success: L(
+      'Заявку приняли. Свяжемся по сотрудничеству.',
+      'Заявку прийняли. Зв’яжемося щодо співпраці.',
+      'Solicitud recibida. Hablaremos de la colaboración.',
+      'Request received. We will be in touch about working together.'
+    )
+  },
+
   contact: {
     kicker: L('Контакт', 'Контакт', 'Contacto', 'Contact'),
     spec: L('10 — Request', '10 — Request', '10 — Request', '10 — Request'),
@@ -1025,9 +1120,10 @@ export const messages = {
   },
 
   cta: {
-    title: L('Обсудить проём.', 'Обговорити проріз.', 'Hablar del hueco.', 'Discuss the opening.'),
+    title: L('Обсудить проект.', 'Обговорити проєкт.', 'Hablar del proyecto.', 'Discuss the project.'),
     text: L('Чертеж, фото стены или задача. Считаем систему под архитектуру.', 'Креслення, фото стіни або задача. Рахуємо систему під архітектуру.', 'Plano, foto del muro o encargo. Calculamos el sistema para la arquitectura.', 'A drawing, a wall photo, or the brief. We size the system to the architecture.'),
     consult: L('Получить консультацию', 'Отримати консультацію', 'Pedir consulta', 'Get a consultation'),
+    ask: L('Задать вопрос', 'Задати питання', 'Hacer una pregunta', 'Ask a question'),
     quote: L('Получить просчёт', 'Отримати прорахунок', 'Pedir cálculo', 'Request a quote'),
     price: L('Запросить стоимость', 'Запросити вартість', 'Pedir presupuesto', 'Request pricing'),
     more: L('Узнать больше', 'Дізнатися більше', 'Saber más', 'Learn more')

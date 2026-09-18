@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const pageKey = (route: { fullPath: string }) => route.fullPath
+function pageKey(route: { path: string }) {
+  return route.path
+}
 </script>
 
 <template>

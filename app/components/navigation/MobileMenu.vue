@@ -6,6 +6,7 @@ const open = defineModel<boolean>({ default: false })
 const panel = ref<HTMLElement | null>(null)
 const route = useRoute()
 const { open: openInquiry } = useInquiryModal()
+const { open: openAsk } = useConsultModal()
 const quote = useQuoteList()
 
 useScrollLock(open)
@@ -29,6 +30,11 @@ function openQuote() {
     intent: 'quote',
     message: quote.message()
   })
+}
+
+function openAskForm() {
+  close()
+  openAsk()
 }
 
 onMounted(() => {
@@ -63,7 +69,12 @@ onMounted(() => {
       >
         {{ t(`nav.${item.label}`) }}
       </NavLink>
-      <HashLink to="#contact" class="menu__link" @click="close">{{ t('nav.contact') }}</HashLink>
+      <NavLink to="/partners" class="menu__link" @click="close">
+        {{ t('nav.partners') }}
+      </NavLink>
+      <button type="button" class="menu__link" @click="openQuote">
+        {{ t('nav.quote') }}
+      </button>
       <button
         v-if="quote.total.value"
         type="button"
@@ -75,7 +86,9 @@ onMounted(() => {
     </nav>
     <div class="menu__cta">
       <LangSwitch />
-      <HashLink to="#contact" class="menu__request" @click="close">{{ t('cta.consult') }}</HashLink>
+      <button type="button" class="menu__request" @click="openAskForm">
+        {{ t('cta.ask') }}
+      </button>
     </div>
     </div>
   </div>
@@ -94,7 +107,7 @@ onMounted(() => {
   grid-template-rows: auto 1fr auto;
   background: var(--night);
   color: var(--paper);
-  padding: calc(var(--header) * 0.4) var(--pad) var(--pad);
+  padding: calc(env(safe-area-inset-top, 0px) + 0.8rem) var(--pad) var(--pad);
 }
 
 .menu__top,
@@ -153,6 +166,11 @@ onMounted(() => {
   min-height: 48px;
   display: inline-flex;
   align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .menu__cta {

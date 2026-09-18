@@ -63,6 +63,9 @@ onMounted(() => {
   <div>
     <HomeHero />
     <RevealOnView>
+      <StudioIntro />
+    </RevealOnView>
+    <RevealOnView>
       <CopyOffer
         id="primed"
         copy-key="offers.primed"

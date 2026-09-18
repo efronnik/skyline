@@ -19,5 +19,6 @@ export type {
   InquiryPayload,
   InquiryResult,
   InquiryDraft,
-  QuoteLine
+  QuoteLine,
+  PartnerRole
 } from '#shared/types/content'

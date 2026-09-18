@@ -9,21 +9,27 @@ const { t } = useLocale()
 
 <template>
   <section class="cta">
-    <h2>{{ props.title || t('cta.title') }}</h2>
-    <p>{{ props.text || t('cta.text') }}</p>
-    <div>
-      <AppButton to="#contact" invert>{{ t('cta.consult') }}</AppButton>
-      <AppButton to="#contact" variant="ghost" invert>{{ t('cta.price') }}</AppButton>
+    <div class="cta__inner">
+      <h2>{{ props.title || t('cta.title') }}</h2>
+      <p>{{ props.text || t('cta.text') }}</p>
+      <div class="cta__actions">
+        <AppButton to="#contact" invert>{{ t('cta.consult') }}</AppButton>
+        <AppButton to="#contact" variant="ghost" invert>{{ t('cta.price') }}</AppButton>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
 .cta {
-  margin: 0 var(--pad) var(--section);
-  padding: var(--space-7) var(--pad);
+  padding: var(--section) var(--pad);
   background: var(--night);
   color: var(--paper);
+}
+
+.cta__inner {
+  max-width: var(--max);
+  margin: 0 auto;
 }
 
 h2 {
@@ -39,7 +45,7 @@ p {
   font-size: 1.1rem;
 }
 
-div {
+.cta__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;

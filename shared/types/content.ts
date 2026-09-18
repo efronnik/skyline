@@ -87,12 +87,22 @@ export interface TechnicalStep {
   index: string
 }
 
+export type PartnerRole = 'dealer' | 'designer' | 'architect' | 'shop' | 'foreman'
+
 export interface InquiryPayload {
   name: string
   phone: string
   email: string
   message: string
   config?: string
+  intent?: 'quote' | 'consult' | 'partner' | ''
+  role?: PartnerRole | ''
+  company?: string
+  taxId?: string
+  legalAddress?: string
+  city?: string
+  country?: 'es' | 'pt' | ''
+  position?: string
 }
 
 export interface InquiryResult {

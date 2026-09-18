@@ -9,6 +9,7 @@ export default defineEventHandler((event) => {
     '/projects/gallery',
     '/projects/cabinet',
     '/projects/bedroom',
+    '/partners',
     '/privacy',
     '/cookies'
   ]

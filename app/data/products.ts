@@ -19,6 +19,8 @@ const finishInteriors = [
   '/images/idoors-interior-light.jpg'
 ]
 
+export const homeHeroShot = '/images/idoors-interior-light.jpg'
+
 export const homeSlides = {
   hero: flushInteriors,
   primed: [

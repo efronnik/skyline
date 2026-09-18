@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'ru' },
       charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
       meta: [
         { name: 'theme-color', content: '#e4e0d7' }
       ],
@@ -62,6 +62,7 @@ export default defineNuxtConfig({
         '/materials',
         '/technology',
         '/architects',
+        '/partners',
         '/about',
         '/contact',
         '/privacy',
@@ -79,6 +80,7 @@ export default defineNuxtConfig({
     '/materials': { prerender: true },
     '/technology': { prerender: true },
     '/architects': { prerender: true },
+    '/partners': { prerender: true },
     '/about': { prerender: true },
     '/contact': { prerender: true },
     '/privacy': { prerender: true },

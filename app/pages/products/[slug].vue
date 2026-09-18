@@ -47,6 +47,8 @@ useJsonLd(() => ({
 .page {
   padding: calc(var(--header) + 1.2rem) var(--pad) var(--section);
   max-width: var(--max);
+  width: 100%;
+  min-width: 0;
   margin: 0 auto;
   display: grid;
   gap: 1.4rem;

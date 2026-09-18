@@ -55,11 +55,11 @@ export function usePrimeConfig(kind: ProductKind) {
   })
 
   if (import.meta.client) {
-    watch(querySnapshot, (next) => {
+    watch(querySnapshot, async (next) => {
       const same = Object.keys(next).every(key => String(route.query[key] ?? '') === next[key])
         && Object.keys(route.query).every(key => key in next || !route.query[key])
       if (same) return
-      router.replace({ query: next })
+      await router.replace({ path: route.path, query: next })
     }, { deep: true })
   }
 

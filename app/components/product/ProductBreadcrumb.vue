@@ -26,6 +26,8 @@ const { t } = useLocale()
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
+  min-width: 0;
+  max-width: 100%;
 }
 
 ol {
@@ -35,6 +37,12 @@ ol {
   margin: 0;
   padding: 0;
   list-style: none;
+  min-width: 0;
+}
+
+li {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 li:not(:last-child)::after {

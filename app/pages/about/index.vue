@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useLocale()
+const { t, ta } = useLocale()
 
 usePageSeo(() => ({
   title: t('nav.about'),
@@ -14,8 +14,8 @@ usePageSeo(() => ({
   <div class="page">
     <header>
       <SectionLabel :kicker="t('nav.about')" :spec="t('nav.about')" />
-      <h1>{{ t('hero.title') }}</h1>
-      <p>{{ t('philosophy.text') }}</p>
+      <h1>{{ t('studio.title') }}</h1>
+      <p v-for="item in ta('studio.paragraphs')" :key="item">{{ item }}</p>
     </header>
     <CtaBand />
   </div>
@@ -33,9 +33,15 @@ h1 {
   font-size: var(--fs-xl);
   line-height: var(--lh-display);
   margin: 0.8rem 0;
+  max-width: 8.2em;
+  overflow-wrap: break-word;
 }
 
 p {
   font-size: 1.12rem;
+}
+
+p + p {
+  margin-top: 0.9rem;
 }
 </style>

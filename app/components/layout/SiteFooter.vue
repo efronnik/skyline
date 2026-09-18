@@ -19,11 +19,12 @@ function footerLabel(item: { label: string, to: string }) {
       <div>
         <p class="foot__brand">{{ site.name }}</p>
         <p class="foot__tag">{{ t('hero.title') }}</p>
-        <AppButton to="#contact">{{ t('hero.cta2') }}</AppButton>
+        <AppButton to="#contact">{{ t('nav.quote') }}</AppButton>
       </div>
       <nav :aria-label="t('footer.studio')">
         <p class="foot__h">{{ t('footer.studio') }}</p>
         <NavLink v-for="item in primaryNav" :key="item.to" :to="item.to">{{ t(`nav.${item.label}`) }}</NavLink>
+        <NavLink to="/partners">{{ t('nav.partners') }}</NavLink>
         <HashLink to="#contact">{{ t('nav.contact') }}</HashLink>
       </nav>
       <nav :aria-label="t('footer.collection')">
@@ -67,6 +68,8 @@ function footerLabel(item: { label: string, to: string }) {
   background: var(--night);
   color: var(--paper);
   padding: var(--space-8) var(--pad) var(--space-6);
+  min-width: 0;
+  overflow-x: clip;
 }
 
 .foot__grid {
@@ -133,6 +136,8 @@ nav,
   justify-content: space-between;
   gap: 1rem;
   max-width: var(--max);
+  width: 100%;
+  min-width: 0;
   margin: var(--space-7) auto 0;
   padding-top: 1.1rem;
   border-top: var(--hair) solid var(--line-on-night);
@@ -144,7 +149,10 @@ nav,
 
 .foot__base nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 @media (min-width: 900px) {

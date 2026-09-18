@@ -13,6 +13,12 @@ function validate(payload: InquiryPayload) {
   if (payload.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
     errors.push('Проверьте формат почты.')
   }
+  if (payload.intent === 'partner') {
+    if (!payload.company?.trim()) errors.push('Укажите компанию.')
+    if (!payload.taxId?.trim()) errors.push('Укажите NIF/CIF.')
+    if (!payload.legalAddress?.trim()) errors.push('Укажите юридический адрес.')
+    if (!payload.role) errors.push('Укажите тип партнёра.')
+  }
   return errors
 }
 

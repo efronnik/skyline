@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { primaryNav } from '~/data/site'
-
 const { t } = useLocale()
 const route = useRoute()
 const { open } = useInquiryModal()
@@ -34,18 +32,10 @@ onMounted(() => {
       <span class="bar__mark" aria-hidden="true" />
       <span>LIMEN</span>
     </NuxtLink>
-    <nav class="bar__nav" :aria-label="t('navAria')">
-      <NavLink
-        v-for="item in primaryNav"
-        :key="item.to"
-        :to="item.to"
-        class="bar__link"
-      >
-        {{ t(`nav.${item.label}`) }}
-      </NavLink>
-    </nav>
     <div class="bar__actions">
-      <LangSwitch class="bar__lang" />
+      <div class="bar__lang">
+        <LangSwitch />
+      </div>
       <button
         v-if="quote.total.value"
         type="button"
@@ -56,7 +46,6 @@ onMounted(() => {
         {{ t('pdp.quoteAria') }}
         <span>{{ quote.total.value }}</span>
       </button>
-      <HashLink to="#contact" class="bar__link bar__cta-link">{{ t('nav.contact') }}</HashLink>
       <button
         class="bar__burger"
         type="button"
@@ -79,16 +68,16 @@ onMounted(() => {
   left: 0;
   right: 0;
   z-index: 50;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  align-content: center;
+  justify-content: space-between;
   gap: 0.8rem;
   height: var(--header);
-  padding: 0 var(--pad);
+  padding: env(safe-area-inset-top, 0px) var(--pad) 0;
   border-bottom: var(--hair) solid var(--line);
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   color: var(--ink);
+  min-width: 0;
 }
 
 .bar.is-invert {
@@ -122,39 +111,20 @@ onMounted(() => {
   background: currentColor;
 }
 
-.bar__nav {
-  display: none;
-  justify-content: center;
-  gap: 0.15rem 0.85rem;
-  min-width: 0;
-}
-
-.bar__link {
-  font-family: var(--font-spec);
-  font-size: 0.64rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.72;
-  white-space: nowrap;
-}
-
-.bar__link:hover {
-  opacity: 1;
-}
-
 .bar__actions {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  justify-self: end;
+  gap: 0.55rem;
+  min-width: 0;
 }
 
-.bar__cta-link {
-  display: none;
-  opacity: 1;
+.bar__lang {
+  color: var(--ink);
+}
+
+.bar__lang :deep(.lang) {
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
 }
 
 .bar__quote {
@@ -173,6 +143,19 @@ onMounted(() => {
   text-transform: uppercase;
 }
 
+@media (max-width: 640px) {
+  .bar__quote {
+    font-size: 0;
+    letter-spacing: 0;
+    gap: 0;
+  }
+
+  .bar__quote span {
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+}
+
 .bar__quote span {
   min-width: 1.4rem;
   min-height: 1.4rem;
@@ -181,11 +164,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   border: var(--hair) solid currentColor;
-}
-
-.bar__lang {
-  display: none;
-  margin-right: 0.2rem;
 }
 
 .bar__burger {
@@ -199,17 +177,5 @@ onMounted(() => {
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-}
-
-@media (min-width: 1180px) {
-  .bar__nav,
-  .bar__cta-link,
-  .bar__lang {
-    display: flex;
-  }
-
-  .bar__burger {
-    display: none;
-  }
 }
 </style>

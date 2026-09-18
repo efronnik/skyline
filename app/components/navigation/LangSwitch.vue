@@ -21,26 +21,43 @@ const { locale, locales, setLocale, t } = useLocale()
 <style scoped>
 .lang {
   display: inline-flex;
-  align-items: center;
-  gap: 0.15rem;
+  align-items: stretch;
+  flex-shrink: 0;
+  border: var(--hair) solid color-mix(in srgb, currentColor 45%, transparent);
 }
 
 .lang__btn {
-  min-height: 36px;
-  min-width: 36px;
-  padding: 0 0.35rem;
+  min-height: 2.2rem;
+  min-width: 2.2rem;
+  padding: 0 0.42rem;
   border: 0;
   background: none;
   color: inherit;
   cursor: pointer;
   font-family: var(--font-spec);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  opacity: 0.45;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.48;
 }
 
 .lang__btn.is-on,
-.lang__btn:hover {
+.lang__btn:hover,
+.lang__btn:focus-visible {
   opacity: 1;
+}
+
+.lang__btn.is-on {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  box-shadow: inset 0 -2px 0 currentColor;
+}
+
+@media (max-width: 420px) {
+  .lang__btn {
+    min-width: 1.9rem;
+    padding: 0 0.28rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+  }
 }
 </style>

@@ -325,6 +325,8 @@ onUnmounted(() => {
   display: grid;
   gap: 1.6rem;
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero__stage {
@@ -396,18 +398,23 @@ onUnmounted(() => {
   color: var(--muted);
 }
 
+.hero__gallery {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .hero__thumbs {
-  display: flex;
-  gap: 0.45rem;
-  overflow-x: auto;
-  padding-bottom: 0.2rem;
-  scrollbar-width: thin;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(4.4rem, 100%), 1fr));
+  gap: 0.4rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero__thumb {
-  flex: 0 0 auto;
-  width: 4.4rem;
-  height: 5.6rem;
+  width: auto;
+  aspect-ratio: 3 / 4;
+  height: auto;
   padding: 0;
   border: var(--hair) solid var(--line-strong);
   background: #eceae6;
@@ -442,18 +449,26 @@ onUnmounted(() => {
   margin: 0;
 }
 
+.hero__copy {
+  min-width: 0;
+  max-width: 100%;
+}
+
 h1 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   line-height: var(--lh-display);
   letter-spacing: -0.04em;
-  max-width: 16em;
+  max-width: min(16em, 100%);
+  overflow-wrap: break-word;
   margin: 0.45rem 0 1.1rem;
 }
 
 .cfg {
   display: grid;
   gap: 1.15rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 fieldset {
@@ -584,6 +599,11 @@ legend {
   flex-wrap: wrap;
   gap: 0.7rem;
   margin-top: 0.3rem;
+  max-width: 100%;
+}
+
+.hero__cta :deep(.btn) {
+  max-width: 100%;
 }
 
 .qty {
@@ -622,27 +642,12 @@ legend {
 }
 
 @media (max-width: 979px) {
-  .hero {
-    display: block;
-  }
-
-  .hero__stage {
-    display: contents;
-  }
-
-  .hero__shot {
-    position: sticky;
-    top: var(--header);
-    z-index: 4;
-  }
-
   .hero__gallery {
-    margin: 0.7rem 0 1.6rem;
+    margin: 0.7rem 0 0;
   }
 
   .hero__shot :deep(.media) {
     aspect-ratio: 16 / 10;
-    max-height: 32svh;
   }
 
   .hero__shot.is-drop :deep(.media__img) {
@@ -672,11 +677,6 @@ legend {
   .hero {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 2.4rem;
-  }
-
-  .hero__stage {
-    position: sticky;
-    top: calc(var(--header) + 0.8rem);
   }
 
   .dims {

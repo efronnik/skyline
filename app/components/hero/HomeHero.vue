@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { animate, stagger } from 'animejs'
-import { homeSlides } from '~/data/products'
+import { homeHeroShot } from '~/data/products'
 
 const { t } = useLocale()
 const reduced = useReducedMotion()
 const copy = ref<HTMLElement | null>(null)
 const { play } = useAnimeJob()
+const { open: openQuote } = useInquiryModal()
+const { open: openAsk } = useConsultModal()
+const quote = useQuoteList()
+
+function quoteOrder() {
+  openQuote({
+    intent: 'quote',
+    message: quote.message()
+  })
+}
 
 onMounted(async () => {
   await nextTick()
@@ -26,22 +36,22 @@ onMounted(async () => {
 <template>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__visual">
-      <PhotoShow
-        :slides="[...homeSlides.hero]"
+      <MediaFrame
+        :src="homeHeroShot"
         :alt="t('hero.alt')"
-        fill
-        :controls="false"
+        ratio="16 / 9"
         fit="cover"
+        position="78% 46%"
+        priority
+        sizes="100vw"
       />
       <span class="hero__ticks" aria-hidden="true" />
     </div>
     <div ref="copy" class="hero__copy">
-      <p class="hero__spec">{{ t('hero.spec') }}</p>
       <h1 id="hero-title">{{ t('hero.title') }}</h1>
-      <p class="hero__lead">{{ t('hero.lead') }}</p>
       <div class="hero__cta">
-        <AppButton to="#primed" invert>{{ t('hero.cta1') }}</AppButton>
-        <AppButton to="#contact" variant="ghost" invert>{{ t('hero.cta2') }}</AppButton>
+        <AppButton variant="ghost" invert @click="openAsk()">{{ t('hero.cta1') }}</AppButton>
+        <AppButton invert @click="quoteOrder">{{ t('hero.cta2') }}</AppButton>
       </div>
     </div>
   </section>
@@ -49,7 +59,7 @@ onMounted(async () => {
 
 <style scoped>
 .hero {
-  min-height: min(58svh, 520px);
+  min-height: min(88svh, 820px);
   display: grid;
   background: var(--night);
   color: var(--paper);
@@ -62,13 +72,21 @@ onMounted(async () => {
   inset: 0;
 }
 
+.hero__visual :deep(.media) {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
 .hero__visual::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(20,18,16,0.34) 0%, rgba(20,18,16,0.5) 42%, rgba(20,18,16,0.82) 100%);
+  background:
+    linear-gradient(180deg, rgba(20,18,16,0.58) 0%, rgba(20,18,16,0.2) 26%, rgba(20,18,16,0.28) 52%, rgba(20,18,16,0.82) 100%);
 }
 
 .hero__ticks {
@@ -83,32 +101,17 @@ onMounted(async () => {
   position: relative;
   z-index: 2;
   align-self: end;
-  padding: calc(var(--header) + 1.1rem) var(--pad) 1.4rem;
+  padding: calc(var(--header) + 1.1rem) var(--pad) 1.6rem;
   max-width: min(40rem, calc(100% - 1.2rem));
-}
-
-.hero__spec {
-  font-family: var(--font-spec);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 0.9rem;
-  color: color-mix(in srgb, var(--paper) 70%, transparent);
 }
 
 h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
   font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.04em;
-}
-
-.hero__lead {
-  margin: 1rem 0 1.4rem;
-  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
-  font-weight: 300;
-  max-width: 28rem;
+  margin-bottom: 1.4rem;
 }
 
 .hero__cta {
@@ -119,7 +122,7 @@ h1 {
 
 @media (min-width: 980px) {
   .hero__copy {
-    padding-bottom: var(--space-7);
+    padding-bottom: var(--space-8);
   }
 }
 </style>
