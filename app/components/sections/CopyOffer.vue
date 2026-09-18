@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   invert: false,
   image: 'left',
-  ratio: '16 / 10',
+  ratio: '4 / 3',
   slides: () => []
 })
 
