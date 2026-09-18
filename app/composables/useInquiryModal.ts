@@ -1,7 +1,17 @@
+import type { InquiryDraft } from '~/types/content'
+
 export function useInquiryModal() {
   const isOpen = useState('inquiry-modal', () => false)
+  const draft = useState<InquiryDraft>('inquiry-draft', () => ({
+    message: '',
+    intent: ''
+  }))
 
-  function open() {
+  function open(opts?: Partial<InquiryDraft>) {
+    draft.value = {
+      message: opts?.message ?? '',
+      intent: opts?.intent ?? ''
+    }
     isOpen.value = true
   }
 
@@ -9,5 +19,5 @@ export function useInquiryModal() {
     isOpen.value = false
   }
 
-  return { isOpen, open, close }
+  return { isOpen, draft, open, close }
 }

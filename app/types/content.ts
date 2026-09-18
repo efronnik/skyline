@@ -2,11 +2,21 @@ export type {
   NavItem,
   ContactField,
   SiteContact,
+  MessengerLink,
   ColorOption,
+  ProductKind,
+  DoorSwing,
+  EdgeTone,
+  LeafFinish,
+  ExtraId,
+  LeafSizeId,
+  CatalogProduct,
+  ProductLook,
   Product,
   Project,
   Material,
   TechnicalStep,
   InquiryPayload,
-  InquiryResult
+  InquiryResult,
+  InquiryDraft
 } from '#shared/types/content'

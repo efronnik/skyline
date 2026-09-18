@@ -1,4 +1,4 @@
-import type { NavItem, SiteContact } from '~/types/content'
+import type { MessengerLink, NavItem, SiteContact } from '~/types/content'
 
 export const site = {
   name: 'LIMEN',
@@ -40,8 +40,13 @@ export const contact: SiteContact = {
   }
 }
 
+export const messengers: MessengerLink[] = [
+  { id: 'telegram', href: '', placeholder: true },
+  { id: 'whatsapp', href: '', placeholder: true }
+]
+
 export const primaryNav: NavItem[] = [
-  { label: 'collection', to: '#collection' },
+  { label: 'collection', to: '#primed' },
   { label: 'finished', to: '#finished' },
   { label: 'size', to: '#size' },
   { label: 'hardware', to: '#hardware' }

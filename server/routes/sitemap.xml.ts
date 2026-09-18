@@ -2,10 +2,9 @@ export default defineEventHandler((event) => {
   const config = useRuntimeConfig()
   const urls = [
     '/',
-    '/products/prime-al-c',
-    '/products/prime-al-c-inside',
-    '/products/prime-al-ch',
-    '/products/prime-al-ch-inside',
+    '/products/prime-base',
+    '/products/prime-finish',
+    '/products/prime-custom',
     '/projects/anfilade',
     '/projects/gallery',
     '/projects/cabinet',

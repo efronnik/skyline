@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { animate } from 'animejs'
-import { products } from '~/data/products'
+import { productLooks } from '~/data/products'
 
 const { t } = useLocale()
 const reduced = useReducedMotion()
@@ -44,10 +44,10 @@ function liftShot(event: PointerEvent, on: boolean) {
       tabindex="0"
     >
       <NuxtLink
-        v-for="item in products"
+        v-for="item in productLooks"
         :key="item.slug"
         class="sku"
-        :to="`/products/${item.slug}`"
+        :to="{ path: '/products/prime-base', query: { swing: item.swing, edge: item.edge } }"
         :data-slug="item.slug"
         @pointerenter="liftShot($event, true)"
         @pointerleave="liftShot($event, false)"

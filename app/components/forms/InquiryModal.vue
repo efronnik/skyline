@@ -2,7 +2,19 @@
 import { contact } from '~/data/site'
 
 const { t } = useLocale()
-const { isOpen, close } = useInquiryModal()
+const { isOpen, close, draft } = useInquiryModal()
+
+const title = computed(() => {
+  if (draft.value.intent === 'quote') return t('pdp.quoteFormTitle')
+  if (draft.value.intent === 'consult') return t('pdp.consultTitle')
+  return t('contact.title')
+})
+
+const lead = computed(() => {
+  if (draft.value.intent === 'quote') return t('pdp.quoteFormLead')
+  if (draft.value.intent === 'consult') return t('pdp.consultLead')
+  return t('contact.lead')
+})
 const root = ref<HTMLDialogElement | null>(null)
 
 watch(isOpen, async (open) => {
@@ -40,12 +52,12 @@ function onBackdrop(event: MouseEvent) {
       <header class="modal__head">
         <SectionLabel :kicker="t('contact.kicker')" :spec="t('contact.spec')" />
         <div class="modal__title">
-          <h2 id="inquiry-title">{{ t('contact.title') }}</h2>
+          <h2 id="inquiry-title">{{ title }}</h2>
           <button class="modal__close" type="button" :aria-label="t('contact.close')" @click="close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <p>{{ t('contact.lead') }}</p>
+        <p>{{ lead }}</p>
       </header>
 
       <ConsultationForm />

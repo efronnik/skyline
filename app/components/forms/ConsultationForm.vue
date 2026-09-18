@@ -3,6 +3,7 @@ import { submitInquiry } from '~/utils/inquiryClient'
 import type { InquiryPayload } from '~/types/content'
 
 const { t } = useLocale()
+const { draft } = useInquiryModal()
 
 const form = reactive<InquiryPayload>({
   name: '',
@@ -10,6 +11,10 @@ const form = reactive<InquiryPayload>({
   email: '',
   message: ''
 })
+
+watch(() => draft.value.message, (msg) => {
+  if (msg) form.message = msg
+}, { immediate: true })
 
 const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const message = ref('')

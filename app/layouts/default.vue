@@ -11,5 +11,6 @@ const { t } = useLocale()
     </main>
     <SiteFooter />
     <InquiryModal />
+    <ConsultModal />
   </div>
 </template>

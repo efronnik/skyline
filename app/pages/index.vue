@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products } from '~/data/products'
+import { catalogProducts } from '~/data/products'
 
 const { t, locale } = useLocale()
 const route = useRoute()
@@ -37,8 +37,8 @@ useJsonLd(() => ({
     {
       '@type': 'ItemList',
       name: t('collection.kicker'),
-      numberOfItems: products.length,
-      itemListElement: products.map((item, index) => ({
+      numberOfItems: catalogProducts.length,
+      itemListElement: catalogProducts.map((item, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         url: `${config.public.siteUrl}/products/${item.slug}`,
@@ -68,11 +68,8 @@ onMounted(() => {
         copy-key="offers.primed"
         src="/images/after-flush.jpg"
         image="right"
-        cta-to="#collection"
+        cta-to="/products/prime-base"
       />
-    </RevealOnView>
-    <RevealOnView stagger=".sku">
-      <CollectionSection />
     </RevealOnView>
     <RevealOnView>
       <CopyOffer
@@ -80,7 +77,7 @@ onMounted(() => {
         copy-key="offers.finished"
         src="/images/project-living-oak.jpg"
         invert
-        cta-to="#contact"
+        cta-to="/products/prime-finish"
       />
     </RevealOnView>
     <RevealOnView>
@@ -89,7 +86,7 @@ onMounted(() => {
         copy-key="offers.size"
         src="/images/idoors-install-standard.jpg"
         image="right"
-        cta-to="#contact"
+        cta-to="/products/prime-custom"
       />
     </RevealOnView>
     <RevealOnView>
@@ -101,6 +98,9 @@ onMounted(() => {
         cta-to="#contact"
         ratio="1 / 1"
       />
+    </RevealOnView>
+    <RevealOnView stagger=".sku">
+      <CollectionSection />
     </RevealOnView>
     <CtaBand />
   </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products } from '~/data/products'
+import { catalogProducts } from '~/data/products'
 
 const { t } = useLocale()
 
@@ -21,7 +21,7 @@ usePageSeo(() => ({
     </header>
     <div class="list">
       <NuxtLink
-        v-for="item in products"
+        v-for="item in catalogProducts"
         :key="item.slug"
         :to="`/products/${item.slug}`"
       >
@@ -93,7 +93,7 @@ a p:first-of-type {
 
 @media (min-width: 1100px) {
   .list {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 </style>

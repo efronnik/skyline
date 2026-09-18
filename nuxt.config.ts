@@ -51,10 +51,9 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/products',
-        '/products/prime-al-c',
-        '/products/prime-al-c-inside',
-        '/products/prime-al-ch',
-        '/products/prime-al-ch-inside',
+        '/products/prime-base',
+        '/products/prime-finish',
+        '/products/prime-custom',
         '/projects',
         '/projects/anfilade',
         '/projects/gallery',
@@ -74,7 +73,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
-    '/products/prime-al': { redirect: { to: '/products/prime-al-c', statusCode: 301 } },
+    '/products/prime-al': { redirect: { to: '/products/prime-base', statusCode: 301 } },
     '/products/**': { prerender: true },
     '/projects/**': { prerender: true },
     '/materials': { prerender: true },

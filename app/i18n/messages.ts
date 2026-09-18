@@ -1,3 +1,5 @@
+import { pdp } from './pdp'
+
 export const localeList = [
   { id: 'ru', label: 'RU' },
   { id: 'uk', label: 'UA' },
@@ -50,7 +52,7 @@ export const messages = {
   },
 
   hero: {
-    spec: L('Flush · Hidden frame · Prime-AL', 'Flush · Hidden frame · Prime-AL', 'Flush · Marco oculto · Prime-AL', 'Flush · Hidden frame · Prime-AL'),
+    spec: L('Flush · Hidden frame · iDOORS Prime', 'Flush · Hidden frame · iDOORS Prime', 'Flush · Marco oculto · iDOORS Prime', 'Flush · Hidden frame · iDOORS Prime'),
     title: L('Стена продолжается.', 'Стіна продовжується.', 'El muro continúa.', 'The wall continues.'),
     lead: L(
       'Полотно в плоскости стены — часть архитектуры.',
@@ -58,7 +60,7 @@ export const messages = {
       'La hoja al ras del muro: arquitectura.',
       'The leaf in the wall plane — architecture.'
     ),
-    cta1: L('Смотреть Prime-AL', 'Дивитися Prime-AL', 'Ver Prime-AL', 'See Prime-AL'),
+    cta1: L('Смотреть iDOORS Prime', 'Дивитися iDOORS Prime', 'Ver iDOORS Prime', 'See iDOORS Prime'),
     cta2: L('Рассчитать проект', 'Розрахувати проєкт', 'Calcular el proyecto', 'Request a quote'),
     alt: L(
       'Производство скрытых дверей: полотно и алюминиевый профиль',
@@ -70,7 +72,7 @@ export const messages = {
 
   philosophy: {
     kicker: L('Философия', 'Філософія', 'Filosofía', 'Philosophy'),
-    spec: L('01 — Prime-AL', '01 — Prime-AL', '01 — Prime-AL', '01 — Prime-AL'),
+    spec: L('01 — iDOORS Prime', '01 — iDOORS Prime', '01 — iDOORS Prime', '01 — iDOORS Prime'),
     not: L('Не дверь.', 'Не двері.', 'No es una puerta.', 'Not a door.'),
     title: L('Продолжение архитектуры.', 'Продовження архітектури.', 'Continuación de la arquitectura.', 'A continuation of architecture.'),
     text: L(
@@ -91,22 +93,22 @@ export const messages = {
 
   collection: {
     kicker: L('IDOORS', 'IDOORS', 'IDOORS', 'IDOORS'),
-    spec: L('02 — Prime-AL', '02 — Prime-AL', '02 — Prime-AL', '02 — Prime-AL'),
-    title: L('Prime-AL.', 'Prime-AL.', 'Prime-AL.', 'Prime-AL.'),
+    spec: L('02 — iDOORS Prime', '02 — iDOORS Prime', '02 — iDOORS Prime', '02 — iDOORS Prime'),
+    title: L('iDOORS Prime.', 'iDOORS Prime.', 'iDOORS Prime.', 'iDOORS Prime.'),
     hint: L(
-      'Праймированная плёнка (Германия) под краску, обои и штукатурку. Кромка серая или чёрная. Standard или INSIDE.',
-      'Праймована плівка (Німеччина) під фарбу, шпалери й штукатурку. Кромка сіра або чорна. Standard або INSIDE.',
-      'Lámina imprimada (Alemania) para pintura, papel y enlucido. Canto gris o negro. Standard o INSIDE.',
-      'Primed film (Germany) for paint, wallpaper and plaster. Grey or black edge. Standard or INSIDE.'
+      'Под финишную отделку. На себя (Outside) или от себя / реверс (Inside). Кромка и короб: натуральный алюминий (серебро) или чёрный матовый (RAL 9005).',
+      'Під фінішне оздоблення. На себе (Outside) або від себе / реверс (Inside). Крайка і короб: натуральний алюміній (срібло) або чорний матовий (RAL 9005).',
+      'Para el acabado. Hacia sí (Outside) o reverso (Inside). Canto y marco: aluminio natural (plata) o negro mate (RAL 9005).',
+      'For finishing. Towards you (Outside) or reverse (Inside). Edge and frame: natural aluminium (silver) or matt black (RAL 9005).'
     ),
-    shelfAria: L('Четыре модели Prime-AL, листайте в сторону', 'Чотири моделі Prime-AL, гортайте вбік', 'Cuatro modelos Prime-AL, deslice hacia el lado', 'Four Prime-AL models, swipe sideways'),
+    shelfAria: L('Четыре варианта iDOORS Prime, листайте в сторону', 'Чотири варіанти iDOORS Prime, гортайте вбік', 'Cuatro variantes iDOORS Prime, deslice hacia el lado', 'Four iDOORS Prime variants, swipe sideways'),
     doorColor: L('Цвет двери', 'Колір дверей', 'Color de la puerta', 'Door colour'),
     edgeColor: L('Цвет кромки', 'Колір кромки', 'Color del canto', 'Edge colour'),
     trioAlt: L(
-      'Prime-AL: обратное открывание, закрытое положение и прямое открывание',
-      'Prime-AL: зворотне відкривання, закрите положення і пряме відкривання',
-      'Prime-AL: apertura inversa, posición cerrada y apertura directa',
-      'Prime-AL: reverse opening, closed position and direct opening'
+      'iDOORS Prime: открывание от себя, закрытое положение и открывание на себя',
+      'iDOORS Prime: відчиняння від себе, закрите положення і відчиняння на себе',
+      'iDOORS Prime: apertura inversa, posición cerrada y apertura hacia sí',
+      'iDOORS Prime: reverse opening, closed position and opening towards you'
     ),
     interiors: L('В интерьере', 'В інтер’єрі', 'En el interior', 'In interiors'),
     views: {
@@ -121,9 +123,9 @@ export const messages = {
       room: L('Белая скрытая дверь в жилом холле', 'Білі приховані двері в житловому холі', 'Puerta oculta blanca en un hall residencial', 'White flush door in a residential hall')
     },
     facts: {
-      leaf: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
-      frame: L('Анодированный короб и торец', 'Анодований короб і торець', 'Marco y canto anodizados', 'Anodized frame and edge'),
-      swing: L('Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE'),
+      leaf: L('Заводской грунт under-paint', 'Заводський ґрунт under-paint', 'Imprimación under-paint de fábrica', 'Factory under-paint primer'),
+      frame: L('Анодированный короб Prime', 'Анодований короб Prime', 'Marco Prime anodizado', 'Anodized Prime frame'),
+      swing: L('Outside / Inside', 'Outside / Inside', 'Outside / Inside', 'Outside / Inside'),
       wall: L('Гипсокартон или кирпич', 'Гіпсокартон або цегла', 'Pladur o ladrillo', 'Drywall or brick')
     }
   },
@@ -391,7 +393,7 @@ export const messages = {
         typology: L('Квартира', 'Квартира', 'Vivienda', 'Apartment'),
         setting: L('Объект', 'Об’єкт', 'Obra', 'Project'),
         yearLabel: L('Объект', 'Об’єкт', 'Obra', 'Installed'),
-        product: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
+        product: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
         finish: L('Белое полотно, чёрный анод', 'Біле полотно, чорний анод', 'Hoja blanca, anodizado negro', 'White leaf, black anodized'),
         dimensions: L('По проекту', 'За проєктом', 'A medida', 'Bespoke'),
         story: L(
@@ -401,10 +403,10 @@ export const messages = {
           'Two openings on adjacent walls. White leaf, flush with the plaster.'
         ),
         solution: L(
-          'Prime-AL с чёрной алюминиевой кромкой. Наличник отсутствует.',
-          'Prime-AL із чорною алюмінієвою кромкою. Лиштви немає.',
-          'Prime-AL con canto de aluminio negro. Sin tapajuntas.',
-          'Prime-AL with a black aluminium edge. No architrave.'
+          'iDOORS Prime с чёрной алюминиевой кромкой. Наличник отсутствует.',
+          'iDOORS Prime із чорною алюмінієвою кромкою. Лиштви немає.',
+          'iDOORS Prime con canto de aluminio negro. Sin tapajuntas.',
+          'iDOORS Prime with a black aluminium edge. No architrave.'
         ),
         result: L(
           'Стена читается целиком. Дверь — шов и ручка.',
@@ -418,7 +420,7 @@ export const messages = {
         typology: L('Коридор', 'Коридор', 'Pasillo', 'Corridor'),
         setting: L('Объект', 'Об’єкт', 'Obra', 'Project'),
         yearLabel: L('Объект', 'Об’єкт', 'Obra', 'Installed'),
-        product: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
+        product: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
         finish: L('Белое полотно, чёрный анод', 'Біле полотно, чорний анод', 'Hoja blanca, anodizado negro', 'White leaf, black anodized'),
         dimensions: L('По проекту', 'За проєктом', 'A medida', 'Bespoke'),
         story: L(
@@ -428,10 +430,10 @@ export const messages = {
           'A long volume. White leaves sit in the wall plane; the frame does not read.'
         ),
         solution: L(
-          'Prime-AL с чёрной кромкой. Проёмы на торце и по ходу коридора.',
-          'Prime-AL із чорною кромкою. Прорізи на торці й уздовж коридору.',
-          'Prime-AL con canto negro. Huecos al fondo y a lo largo del pasillo.',
-          'Prime-AL with a black edge. Openings at the end and along the corridor.'
+          'iDOORS Prime с чёрной кромкой. Проёмы на торце и по ходу коридора.',
+          'iDOORS Prime із чорною кромкою. Прорізи на торці й уздовж коридору.',
+          'iDOORS Prime con canto negro. Huecos al fondo y a lo largo del pasillo.',
+          'iDOORS Prime with a black edge. Openings at the end and along the corridor.'
         ),
         result: L(
           'Коридор остаётся архитектурой, а не набором дверных блоков.',
@@ -445,7 +447,7 @@ export const messages = {
         typology: L('Квартира', 'Квартира', 'Vivienda', 'Apartment'),
         setting: L('Объект', 'Об’єкт', 'Obra', 'Project'),
         yearLabel: L('Объект', 'Об’єкт', 'Obra', 'Installed'),
-        product: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
+        product: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
         finish: L('Белое полотно, чёрный анод', 'Біле полотно, чорний анод', 'Hoja blanca, anodizado negro', 'White leaf, black anodized'),
         dimensions: L('По проекту', 'За проєктом', 'A medida', 'Bespoke'),
         story: L(
@@ -455,10 +457,10 @@ export const messages = {
           'Two leaves meet in a corner. White plane, black joint.'
         ),
         solution: L(
-          'Одинаковая система Prime-AL на обеих стенах. Кромка чёрная.',
-          'Однакова система Prime-AL на обох стінах. Кромка чорна.',
-          'El mismo sistema Prime-AL en ambos muros. Canto negro.',
-          'The same Prime-AL system on both walls. Black edge.'
+          'Одинаковая система iDOORS Prime на обеих стенах. Кромка чёрная.',
+          'Однакова система iDOORS Prime на обох стінах. Кромка чорна.',
+          'El mismo sistema iDOORS Prime en ambos muros. Canto negro.',
+          'The same iDOORS Prime system on both walls. Black edge.'
         ),
         result: L(
           'Угол собирается без порталов. Проёмы читаются как швы.',
@@ -472,7 +474,7 @@ export const messages = {
         typology: L('Квартира', 'Квартира', 'Vivienda', 'Apartment'),
         setting: L('Объект', 'Об’єкт', 'Obra', 'Project'),
         yearLabel: L('Объект', 'Об’єкт', 'Obra', 'Installed'),
-        product: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
+        product: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
         finish: L('Белое полотно, чёрный анод', 'Біле полотно, чорний анод', 'Hoja blanca, anodizado negro', 'White leaf, black anodized'),
         dimensions: L('По проекту', 'За проєктом', 'A medida', 'Bespoke'),
         story: L(
@@ -482,10 +484,10 @@ export const messages = {
           'One opening in a white wall. Leaf for painting, black edge.'
         ),
         solution: L(
-          'Prime-AL стоит заподлицо. Ручка и шов — единственные акценты.',
-          'Prime-AL стоїть запідлицо. Ручка і шов — єдині акценти.',
-          'Prime-AL queda al ras. Manilla y junta son los únicos acentos.',
-          'Prime-AL sits flush. Handle and joint are the only accents.'
+          'iDOORS Prime стоит заподлицо. Ручка и шов — единственные акценты.',
+          'iDOORS Prime стоїть запідлицо. Ручка і шов — єдині акценти.',
+          'iDOORS Prime queda al ras. Manilla y junta son los únicos acentos.',
+          'iDOORS Prime sits flush. Handle and joint are the only accents.'
         ),
         result: L(
           'Стена непрерывна. Дверь не собирает на себе взгляд.',
@@ -641,120 +643,191 @@ export const messages = {
     error: L('Сервер не ответил. Повторите отправку.', 'Сервер не відповів. Повторіть надсилання.', 'El servidor no respondió. Inténtelo de nuevo.', 'The server did not respond. Please try again.')
   },
 
+  pdp,
+
   products: {
-    'prime-al': {
-      name: L('Prime-AL', 'Prime-AL', 'Prime-AL', 'Prime-AL'),
-      latin: L('IDOORS · скрытый монтаж', 'IDOORS · прихований монтаж', 'IDOORS · instalación oculta', 'IDOORS · concealed install'),
-      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
+    'prime-base': {
+      name: L('iDOORS Prime (Под финишную отделку)', 'iDOORS Prime (Під фінішне оздоблення)', 'iDOORS Prime (Para el acabado)', 'iDOORS Prime (For finishing)'),
+      latin: L('iD-PRIME-BASE', 'iD-PRIME-BASE', 'iD-PRIME-BASE', 'iD-PRIME-BASE'),
+      kicker: L('Под финишную отделку', 'Під фінішне оздоблення', 'Para el acabado', 'For finishing'),
       summary: L(
-        'Дверь скрытого монтажа. Праймированная плёнка (Германия) под краску, обои и штукатурку. Короб и торец — анодированный серый или чёрный.',
-        'Двері прихованого монтажу. Праймована плівка (Німеччина) під фарбу, шпалери й штукатурку. Короб і торець — анодований сірий або чорний.',
-        'Puerta de instalación oculta. Lámina imprimada (Alemania) para pintura, papel y enlucido. Marco y canto anodizados en gris o negro.',
-        'Concealed door. Primed film (Germany) for paint, wallpaper and plaster. Frame and edge anodized grey or black.'
+        'Дверь скрытого монтажа iDOORS Prime под финишную отделку',
+        'Двері прихованого монтажу iDOORS Prime під фінішне оздоблення',
+        'Puerta de instalación oculta iDOORS Prime para el acabado',
+        'iDOORS Prime flush door for finishing'
       ),
       description: L(
-        'Каркас из переклеенного массива, соты, МДФ 6 или 8 мм. Standard и INSIDE рядом выглядят одинаково. Высоты полотен 2000 и 2012 мм, чтобы плоскость совпала.',
-        'Каркас із переклеєного масиву, соти, МДФ 6 або 8 мм. Standard і INSIDE поруч виглядають однаково. Висоти полотен 2000 і 2012 мм, щоб площина збіглася.',
-        'Bastidor laminado, nido de abeja, MDF de 6 u 8 mm. Standard e INSIDE, juntas, se ven iguales. Hojas de 2000 y 2012 mm para alinear el plano.',
-        'Laminated timber core, honeycomb, 6 or 8 mm MDF. Standard and INSIDE look the same side by side. Leaf heights 2000 and 2012 mm so the flush faces align.'
+        'Полотно с заводской полиуретановой грунтовкой under-paint. Короб Prime, скрытые петли Anselmi / Simonswerk.',
+        'Полотно із заводським поліуретановим ґрунтом under-paint. Короб Prime, приховані петлі Anselmi / Simonswerk.',
+        'Hoja con imprimación de poliuretano under-paint de fábrica. Marco Prime, bisagras ocultas Anselmi / Simonswerk.',
+        'Leaf with factory polyurethane under-paint primer. Prime frame, concealed Anselmi / Simonswerk hinges.'
       ),
       features: L(
-        ['Праймированная плёнка (Германия)', 'МДФ 6 мм Standard / 8 мм INSIDE', 'Соты или вспененный полиэтилен', 'Анодированный короб и торец', 'Standard / INSIDE', 'Петли ANSELMI · замок AGB Polaris'],
-        ['Праймована плівка (Німеччина)', 'МДФ 6 мм Standard / 8 мм INSIDE', 'Соти або спінений поліетилен', 'Анодований короб і торець', 'Standard / INSIDE', 'Петлі ANSELMI · замок AGB Polaris'],
-        ['Lámina imprimada (Alemania)', 'MDF 6 mm Standard / 8 mm INSIDE', 'Nido de abeja o polietileno expandido', 'Marco y canto anodizados', 'Standard / INSIDE', 'Bisagras ANSELMI · cerradura AGB Polaris'],
-        ['Primed film (Germany)', '6 mm MDF Standard / 8 mm INSIDE', 'Honeycomb or expanded polyethylene', 'Anodized frame and edge', 'Standard / INSIDE', 'ANSELMI hinges · AGB Polaris lock']
+        ['Грунт under-paint', 'Короб Prime', 'Anselmi / Simonswerk', 'Магнитный замок'],
+        ['Ґрунт under-paint', 'Короб Prime', 'Anselmi / Simonswerk', 'Магнітний замок'],
+        ['Imprimación under-paint', 'Marco Prime', 'Anselmi / Simonswerk', 'Cerradura magnética'],
+        ['Under-paint primer', 'Prime frame', 'Anselmi / Simonswerk', 'Magnetic lock']
+      )
+    },
+    'prime-finish': {
+      name: L('iDOORS Prime (Шпон / Зеркало)', 'iDOORS Prime (Шпон / Дзеркало)', 'iDOORS Prime (Chapa / Espejo)', 'iDOORS Prime (Veneer / Mirror)'),
+      latin: L('iD-PRIME-FINISH', 'iD-PRIME-FINISH', 'iD-PRIME-FINISH', 'iD-PRIME-FINISH'),
+      kicker: L('Шпон / Зеркало', 'Шпон / Дзеркало', 'Chapa / Espejo', 'Veneer / Mirror'),
+      summary: L(
+        'Дверь скрытого монтажа iDOORS Prime (Шпон / Зеркало)',
+        'Двері прихованого монтажу iDOORS Prime (Шпон / Дзеркало)',
+        'Puerta de instalación oculta iDOORS Prime (Chapa / Espejo)',
+        'iDOORS Prime flush door (Veneer / Mirror)'
+      ),
+      description: L(
+        'Готовая отделка: натуральный шпон или влагостойкое зеркало. Алюминиевая кромка в цвет короба.',
+        'Готове оздоблення: натуральний шпон або вологостійке дзеркало. Алюмінієва крайка в колір короба.',
+        'Acabado de fábrica: chapa natural o espejo resistente a la humedad. Canto de aluminio al color del marco.',
+        'Factory finish: natural veneer or moisture-resistant mirror. Aluminium edge matching the frame.'
+      ),
+      features: L(
+        ['Натуральный шпон', 'Зеркало 4 мм', 'Кромка алюминий', 'Короб Prime'],
+        ['Натуральний шпон', 'Дзеркало 4 мм', 'Крайка алюміній', 'Короб Prime'],
+        ['Chapa natural', 'Espejo 4 mm', 'Canto de aluminio', 'Marco Prime'],
+        ['Natural veneer', '4 mm mirror', 'Aluminium edge', 'Prime frame']
+      )
+    },
+    'prime-custom': {
+      name: L('iDOORS Prime (Индивидуальный размер)', 'iDOORS Prime (Індивідуальний розмір)', 'iDOORS Prime (Medida individual)', 'iDOORS Prime (Custom size)'),
+      latin: L('iD-PRIME-CUSTOM', 'iD-PRIME-CUSTOM', 'iD-PRIME-CUSTOM', 'iD-PRIME-CUSTOM'),
+      kicker: L('До 2400 мм', 'До 2400 мм', 'Hasta 2400 mm', 'Up to 2400 mm'),
+      summary: L(
+        'Дверь скрытого монтажа iDOORS Prime (Индивидуальный размер до 2400 мм)',
+        'Двері прихованого монтажу iDOORS Prime (Індивідуальний розмір до 2400 мм)',
+        'Puerta de instalación oculta iDOORS Prime (Medida individual hasta 2400 mm)',
+        'iDOORS Prime flush door (Custom size up to 2400 mm)'
+      ),
+      description: L(
+        'Полотно по индивидуальным габаритам. Три скрытые петли Anselmi / Simonswerk в базовом комплекте.',
+        'Полотно за індивідуальними габаритами. Три приховані петлі Anselmi / Simonswerk у базовому комплекті.',
+        'Hoja a medida. Tres bisagras ocultas Anselmi / Simonswerk en el kit base.',
+        'Leaf to individual sizes. Three concealed Anselmi / Simonswerk hinges in the base kit.'
+      ),
+      features: L(
+        ['Высота до 2400 мм', 'Ширина до 1000 мм', '3 петли', 'Короб Prime'],
+        ['Висота до 2400 мм', 'Ширина до 1000 мм', '3 петлі', 'Короб Prime'],
+        ['Altura hasta 2400 mm', 'Ancho hasta 1000 mm', '3 bisagras', 'Marco Prime'],
+        ['Height up to 2400 mm', 'Width up to 1000 mm', '3 hinges', 'Prime frame']
+      )
+    },
+    'prime-al': {
+      name: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+      latin: L('iD-PRIME-BASE', 'iD-PRIME-BASE', 'iD-PRIME-BASE', 'iD-PRIME-BASE'),
+      kicker: L('Под финишную отделку', 'Під фінішне оздоблення', 'Para el acabado', 'For finishing'),
+      summary: L(
+        'Дверь скрытого монтажа iDOORS Prime под финишную отделку',
+        'Двері прихованого монтажу iDOORS Prime під фінішне оздоблення',
+        'Puerta de instalación oculta iDOORS Prime para el acabado',
+        'iDOORS Prime flush door for finishing'
+      ),
+      description: L(
+        'Полотно с заводской полиуретановой грунтовкой under-paint. Короб Prime, скрытые петли Anselmi / Simonswerk.',
+        'Полотно із заводським поліуретановим ґрунтом under-paint. Короб Prime, приховані петлі Anselmi / Simonswerk.',
+        'Hoja con imprimación de poliuretano under-paint de fábrica. Marco Prime, bisagras ocultas Anselmi / Simonswerk.',
+        'Leaf with factory polyurethane under-paint primer. Prime frame, concealed Anselmi / Simonswerk hinges.'
+      ),
+      features: L(
+        ['Грунт under-paint', 'Короб Prime', 'Anselmi / Simonswerk', 'Магнитный замок'],
+        ['Ґрунт under-paint', 'Короб Prime', 'Anselmi / Simonswerk', 'Магнітний замок'],
+        ['Imprimación under-paint', 'Marco Prime', 'Anselmi / Simonswerk', 'Cerradura magnética'],
+        ['Under-paint primer', 'Prime frame', 'Anselmi / Simonswerk', 'Magnetic lock']
       )
     },
     'prime-al-c': {
-      name: L('Prime-AL(C)', 'Prime-AL(C)', 'Prime-AL(C)', 'Prime-AL(C)'),
-      latin: L('IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard'),
-      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
+      name: L('На себя (Outside)', 'На себе (Outside)', 'Hacia sí (Outside)', 'Towards you (Outside)'),
+      latin: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+      kicker: L('Натуральный алюминий (Серебро)', 'Натуральний алюміній (Срібло)', 'Aluminio natural (Plata)', 'Natural aluminium (Silver)'),
       summary: L(
-        'Праймированная плёнка (Германия). Торец — алюминий серый. Прямое открывание. Полотно 2000 × 610–910 мм.',
-        'Праймована плівка (Німеччина). Торець — алюміній сірий. Пряме відкривання. Полотно 2000 × 610–910 мм.',
-        'Lámina imprimada (Alemania). Canto de aluminio gris. Apertura directa. Hoja 2000 × 610–910 mm.',
-        'Primed film (Germany). Grey aluminium edge. Direct opening. Leaf 2000 × 610–910 mm.'
+        'На себя (Outside). Натуральный алюминий (Серебро).',
+        'На себе (Outside). Натуральний алюміній (Срібло).',
+        'Hacia sí (Outside). Aluminio natural (Plata).',
+        'Towards you (Outside). Natural aluminium (Silver).'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевый короб. МДФ 6 мм, сотовый заполнитель. Standard открывается в сторону плоскости.',
-        'Прихований монтаж, алюмінієвий короб. МДФ 6 мм, стільниковий заповнювач. Standard відчиняється в бік площини.',
-        'Instalación oculta, marco de aluminio. MDF de 6 mm, nido de abeja. Standard abre hacia el plano.',
-        'Concealed install, aluminium frame. 6 mm MDF, honeycomb core. Standard opens toward the flush face.'
+        'iDOORS Prime под финишную отделку. Открывание на себя, кромка и короб — натуральный алюминий (серебро).',
+        'iDOORS Prime під фінішне оздоблення. Відчиняння на себе, крайка і короб — натуральний алюміній (срібло).',
+        'iDOORS Prime para el acabado. Apertura hacia sí, canto y marco de aluminio natural (plata).',
+        'iDOORS Prime for finishing. Opening towards you, edge and frame in natural aluminium (silver).'
       ),
       features: L(
-        ['Праймированная плёнка (Германия)', 'МДФ 6 мм · соты', 'Кромка алюминий серый', 'Standard · наружу · 2000 мм'],
-        ['Праймована плівка (Німеччина)', 'МДФ 6 мм · соти', 'Кромка алюміній сірий', 'Standard · назовні · 2000 мм'],
-        ['Lámina imprimada (Alemania)', 'MDF 6 mm · nido de abeja', 'Canto de aluminio gris', 'Standard · hacia fuera · 2000 mm'],
-        ['Primed film (Germany)', '6 mm MDF · honeycomb', 'Grey aluminium edge', 'Standard · outward · 2000 mm']
+        ['На себя (Outside)', 'Натуральный алюминий (Серебро)', 'Короб Prime', 'Грунт under-paint'],
+        ['На себе (Outside)', 'Натуральний алюміній (Срібло)', 'Короб Prime', 'Ґрунт under-paint'],
+        ['Hacia sí (Outside)', 'Aluminio natural (Plata)', 'Marco Prime', 'Imprimación under-paint'],
+        ['Towards you (Outside)', 'Natural aluminium (Silver)', 'Prime frame', 'Under-paint primer']
       )
     },
     'prime-al-c-inside': {
-      name: L('Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE', 'Prime-AL(C) INSIDE'),
-      latin: L('IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE'),
-      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
+      name: L('От себя / Реверс (Inside)', 'Від себе / Реверс (Inside)', 'Hacia fuera / Reverso (Inside)', 'Away / Reverse (Inside)'),
+      latin: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+      kicker: L('Натуральный алюминий (Серебро)', 'Натуральний алюміній (Срібло)', 'Aluminio natural (Plata)', 'Natural aluminium (Silver)'),
       summary: L(
-        'Праймированная плёнка (Германия). Торец — алюминий серый. Обратное открывание INSIDE. Полотно 2012 × 610–910 мм.',
-        'Праймована плівка (Німеччина). Торець — алюміній сірий. Зворотне відкривання INSIDE. Полотно 2012 × 610–910 мм.',
-        'Lámina imprimada (Alemania). Canto de aluminio gris. Apertura inversa INSIDE. Hoja 2012 × 610–910 mm.',
-        'Primed film (Germany). Grey aluminium edge. INSIDE reverse opening. Leaf 2012 × 610–910 mm.'
+        'От себя / Реверс (Inside). Натуральный алюминий (Серебро).',
+        'Від себе / Реверс (Inside). Натуральний алюміній (Срібло).',
+        'Hacia fuera / Reverso (Inside). Aluminio natural (Plata).',
+        'Away / Reverse (Inside). Natural aluminium (Silver).'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевый короб. МДФ 8 мм. INSIDE заподлицо с одной стороны, открывается в другую.',
-        'Прихований монтаж, алюмінієвий короб. МДФ 8 мм. INSIDE запідлицо з одного боку, відчиняється в інший.',
-        'Instalación oculta, marco de aluminio. MDF de 8 mm. INSIDE queda al ras por un lado y abre al contrario.',
-        'Concealed install, aluminium frame. 8 mm MDF. INSIDE is flush on one side and opens the other way.'
+        'iDOORS Prime под финишную отделку. Открывание от себя / реверс, кромка и короб — натуральный алюминий (серебро).',
+        'iDOORS Prime під фінішне оздоблення. Відчиняння від себе / реверс, крайка і короб — натуральний алюміній (срібло).',
+        'iDOORS Prime para el acabado. Apertura inversa, canto y marco de aluminio natural (plata).',
+        'iDOORS Prime for finishing. Reverse opening, edge and frame in natural aluminium (silver).'
       ),
       features: L(
-        ['Праймированная плёнка (Германия)', 'МДФ 8 мм · соты', 'Кромка алюминий серый', 'INSIDE · внутрь · 2012 мм'],
-        ['Праймована плівка (Німеччина)', 'МДФ 8 мм · соти', 'Кромка алюміній сірий', 'INSIDE · всередину · 2012 мм'],
-        ['Lámina imprimada (Alemania)', 'MDF 8 mm · nido de abeja', 'Canto de aluminio gris', 'INSIDE · hacia dentro · 2012 mm'],
-        ['Primed film (Germany)', '8 mm MDF · honeycomb', 'Grey aluminium edge', 'INSIDE · inward · 2012 mm']
+        ['От себя / Реверс (Inside)', 'Натуральный алюминий (Серебро)', 'Короб Prime', 'Грунт under-paint'],
+        ['Від себе / Реверс (Inside)', 'Натуральний алюміній (Срібло)', 'Короб Prime', 'Ґрунт under-paint'],
+        ['Hacia fuera / Reverso (Inside)', 'Aluminio natural (Plata)', 'Marco Prime', 'Imprimación under-paint'],
+        ['Away / Reverse (Inside)', 'Natural aluminium (Silver)', 'Prime frame', 'Under-paint primer']
       )
     },
     'prime-al-ch': {
-      name: L('Prime-AL(Ч)', 'Prime-AL(Ч)', 'Prime-AL(N)', 'Prime-AL(B)'),
-      latin: L('IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard', 'IDOORS · Standard'),
-      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
+      name: L('На себя (Outside)', 'На себе (Outside)', 'Hacia sí (Outside)', 'Towards you (Outside)'),
+      latin: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+      kicker: L('Чёрный матовый (RAL 9005)', 'Чорний матовий (RAL 9005)', 'Negro mate (RAL 9005)', 'Matt black (RAL 9005)'),
       summary: L(
-        'Праймированная плёнка (Германия). Торец — алюминий чёрный. Прямое открывание. Полотно 2000 × 610–910 мм.',
-        'Праймована плівка (Німеччина). Торець — алюміній чорний. Пряме відкривання. Полотно 2000 × 610–910 мм.',
-        'Lámina imprimada (Alemania). Canto de aluminio negro. Apertura directa. Hoja 2000 × 610–910 mm.',
-        'Primed film (Germany). Black aluminium edge. Direct opening. Leaf 2000 × 610–910 mm.'
+        'На себя (Outside). Чёрный матовый (RAL 9005).',
+        'На себе (Outside). Чорний матовий (RAL 9005).',
+        'Hacia sí (Outside). Negro mate (RAL 9005).',
+        'Towards you (Outside). Matt black (RAL 9005).'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевый короб. МДФ 6 мм, сотовый заполнитель. Standard открывается в сторону плоскости.',
-        'Прихований монтаж, алюмінієвий короб. МДФ 6 мм, стільниковий заповнювач. Standard відчиняється в бік площини.',
-        'Instalación oculta, marco de aluminio. MDF de 6 mm, nido de abeja. Standard abre hacia el plano.',
-        'Concealed install, aluminium frame. 6 mm MDF, honeycomb core. Standard opens toward the flush face.'
+        'iDOORS Prime под финишную отделку. Открывание на себя, кромка и короб — чёрный матовый (RAL 9005).',
+        'iDOORS Prime під фінішне оздоблення. Відчиняння на себе, крайка і короб — чорний матовий (RAL 9005).',
+        'iDOORS Prime para el acabado. Apertura hacia sí, canto y marco negro mate (RAL 9005).',
+        'iDOORS Prime for finishing. Opening towards you, edge and frame matt black (RAL 9005).'
       ),
       features: L(
-        ['Праймированная плёнка (Германия)', 'МДФ 6 мм · соты', 'Кромка алюминий чёрный', 'Standard · наружу · 2000 мм'],
-        ['Праймована плівка (Німеччина)', 'МДФ 6 мм · соти', 'Кромка алюміній чорний', 'Standard · назовні · 2000 мм'],
-        ['Lámina imprimada (Alemania)', 'MDF 6 mm · nido de abeja', 'Canto de aluminio negro', 'Standard · hacia fuera · 2000 mm'],
-        ['Primed film (Germany)', '6 mm MDF · honeycomb', 'Black aluminium edge', 'Standard · outward · 2000 mm']
+        ['На себя (Outside)', 'Чёрный матовый (RAL 9005)', 'Короб Prime', 'Грунт under-paint'],
+        ['На себе (Outside)', 'Чорний матовий (RAL 9005)', 'Короб Prime', 'Ґрунт under-paint'],
+        ['Hacia sí (Outside)', 'Negro mate (RAL 9005)', 'Marco Prime', 'Imprimación under-paint'],
+        ['Towards you (Outside)', 'Matt black (RAL 9005)', 'Prime frame', 'Under-paint primer']
       )
     },
     'prime-al-ch-inside': {
-      name: L('Prime-AL(Ч) INSIDE', 'Prime-AL(Ч) INSIDE', 'Prime-AL(N) INSIDE', 'Prime-AL(B) INSIDE'),
-      latin: L('IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE', 'IDOORS · INSIDE'),
-      kicker: L('Праймированная плёнка', 'Праймована плівка', 'Lámina imprimada', 'Primed film'),
+      name: L('От себя / Реверс (Inside)', 'Від себе / Реверс (Inside)', 'Hacia fuera / Reverso (Inside)', 'Away / Reverse (Inside)'),
+      latin: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
+      kicker: L('Чёрный матовый (RAL 9005)', 'Чорний матовий (RAL 9005)', 'Negro mate (RAL 9005)', 'Matt black (RAL 9005)'),
       summary: L(
-        'Праймированная плёнка (Германия). Торец — алюминий чёрный. Обратное открывание INSIDE. Полотно 2012 × 610–910 мм.',
-        'Праймована плівка (Німеччина). Торець — алюміній чорний. Зворотне відкривання INSIDE. Полотно 2012 × 610–910 мм.',
-        'Lámina imprimada (Alemania). Canto de aluminio negro. Apertura inversa INSIDE. Hoja 2012 × 610–910 mm.',
-        'Primed film (Germany). Black aluminium edge. INSIDE reverse opening. Leaf 2012 × 610–910 mm.'
+        'От себя / Реверс (Inside). Чёрный матовый (RAL 9005).',
+        'Від себе / Реверс (Inside). Чорний матовий (RAL 9005).',
+        'Hacia fuera / Reverso (Inside). Negro mate (RAL 9005).',
+        'Away / Reverse (Inside). Matt black (RAL 9005).'
       ),
       description: L(
-        'Скрытый монтаж, алюминиевый короб. МДФ 8 мм. INSIDE заподлицо с одной стороны, открывается в другую.',
-        'Прихований монтаж, алюмінієвий короб. МДФ 8 мм. INSIDE запідлицо з одного боку, відчиняється в інший.',
-        'Instalación oculta, marco de aluminio. MDF de 8 mm. INSIDE queda al ras por un lado y abre al contrario.',
-        'Concealed install, aluminium frame. 8 mm MDF. INSIDE is flush on one side and opens the other way.'
+        'iDOORS Prime под финишную отделку. Открывание от себя / реверс, кромка и короб — чёрный матовый (RAL 9005).',
+        'iDOORS Prime під фінішне оздоблення. Відчиняння від себе / реверс, крайка і короб — чорний матовий (RAL 9005).',
+        'iDOORS Prime para el acabado. Apertura inversa, canto y marco negro mate (RAL 9005).',
+        'iDOORS Prime for finishing. Reverse opening, edge and frame matt black (RAL 9005).'
       ),
       features: L(
-        ['Праймированная плёнка (Германия)', 'МДФ 8 мм · соты', 'Кромка алюминий чёрный', 'INSIDE · внутрь · 2012 мм'],
-        ['Праймована плівка (Німеччина)', 'МДФ 8 мм · соти', 'Кромка алюміній чорний', 'INSIDE · всередину · 2012 мм'],
-        ['Lámina imprimada (Alemania)', 'MDF 8 mm · nido de abeja', 'Canto de aluminio negro', 'INSIDE · hacia dentro · 2012 mm'],
-        ['Primed film (Germany)', '8 mm MDF · honeycomb', 'Black aluminium edge', 'INSIDE · inward · 2012 mm']
+        ['От себя / Реверс (Inside)', 'Чёрный матовый (RAL 9005)', 'Короб Prime', 'Грунт under-paint'],
+        ['Від себе / Реверс (Inside)', 'Чорний матовий (RAL 9005)', 'Короб Prime', 'Ґрунт under-paint'],
+        ['Hacia fuera / Reverso (Inside)', 'Negro mate (RAL 9005)', 'Marco Prime', 'Imprimación under-paint'],
+        ['Away / Reverse (Inside)', 'Matt black (RAL 9005)', 'Prime frame', 'Under-paint primer']
       )
     }
   },
@@ -775,16 +848,16 @@ export const messages = {
     cycles: L('циклов', 'циклів', 'ciclos', 'cycles'),
     mm: L('мм', 'мм', 'mm', 'mm'),
     dba: L('дБА', 'дБА', 'dBA', 'dBA'),
-    leafFinish: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)'),
+    leafFinish: L('Полиуретановый грунт under-paint', 'Поліуретановий ґрунт under-paint', 'Imprimación de poliuretano under-paint', 'Polyurethane under-paint primer'),
     edges: {
-      silver: L('Анодированный алюминий', 'Анодований алюміній', 'Aluminio anodizado', 'Anodized aluminum'),
-      black: L('Анодированный чёрный', 'Анодований чорний', 'Anodizado negro', 'Anodized black')
+      silver: L('Натуральный алюминий (Серебро)', 'Натуральний алюміній (Срібло)', 'Aluminio natural (Plata)', 'Natural aluminium (Silver)'),
+      black: L('Чёрный матовый (RAL 9005)', 'Чорний матовий (RAL 9005)', 'Negro mate (RAL 9005)', 'Matt black (RAL 9005)')
     },
     openings: {
       left: L('Левое', 'Ліве', 'Izquierda', 'Left'),
       right: L('Правое', 'Праве', 'Derecha', 'Right'),
-      in: L('INSIDE · внутрь', 'INSIDE · всередину', 'INSIDE · dentro', 'INSIDE · inward'),
-      out: L('Standard · наружу', 'Standard · назовні', 'Standard · fuera', 'Standard · outward')
+      in: L('От себя / Реверс (Inside)', 'Від себе / Реверс (Inside)', 'Hacia fuera / Reverso (Inside)', 'Away / Reverse (Inside)'),
+      out: L('На себя (Outside)', 'На себе (Outside)', 'Hacia sí (Outside)', 'Towards you (Outside)')
     }
   },
 
@@ -955,6 +1028,7 @@ export const messages = {
     title: L('Обсудить проём.', 'Обговорити проріз.', 'Hablar del hueco.', 'Discuss the opening.'),
     text: L('Чертеж, фото стены или задача. Считаем систему под архитектуру.', 'Креслення, фото стіни або задача. Рахуємо систему під архітектуру.', 'Plano, foto del muro o encargo. Calculamos el sistema para la arquitectura.', 'A drawing, a wall photo, or the brief. We size the system to the architecture.'),
     consult: L('Получить консультацию', 'Отримати консультацію', 'Pedir consulta', 'Get a consultation'),
+    quote: L('Получить просчёт', 'Отримати прорахунок', 'Pedir cálculo', 'Request a quote'),
     price: L('Запросить стоимость', 'Запросити вартість', 'Pedir presupuesto', 'Request pricing'),
     more: L('Узнать больше', 'Дізнатися більше', 'Saber más', 'Learn more')
   },

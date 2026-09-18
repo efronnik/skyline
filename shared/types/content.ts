@@ -22,9 +22,39 @@ export interface SiteContact {
   }
 }
 
+export interface MessengerLink {
+  id: 'telegram' | 'whatsapp'
+  href: string
+  placeholder: boolean
+}
+
 export interface ColorOption {
   id: string
   value: string
+}
+
+export type ProductKind = 'base' | 'finish' | 'custom'
+export type DoorSwing = 'in' | 'out'
+export type EdgeTone = 'silver' | 'black'
+export type LeafFinish = 'primer' | 'veneer' | 'mirror'
+export type ExtraId = 'dropSeal' | 'sound' | 'closer' | 'spinoff'
+export type LeafSizeId = '2000x600' | '2000x700' | '2000x800' | '2000x900'
+
+export interface CatalogProduct {
+  slug: string
+  sku: string
+  kind: ProductKind
+  image: string
+  gallery: string[]
+  ratio: string
+}
+
+export interface ProductLook {
+  slug: string
+  image: string
+  ratio: string
+  edge: EdgeTone
+  swing: DoorSwing
 }
 
 export interface Product {
@@ -34,8 +64,8 @@ export interface Product {
   colors: ColorOption[]
   leaf: 'single' | 'double' | 'sliding' | 'glass'
   ratio: string
-  edge: 'silver' | 'black'
-  swing: 'in' | 'out'
+  edge: EdgeTone
+  swing: DoorSwing
 }
 
 export interface Project {
@@ -62,10 +92,16 @@ export interface InquiryPayload {
   phone: string
   email: string
   message: string
+  config?: string
 }
 
 export interface InquiryResult {
   ok: boolean
   mode: 'mock' | 'live'
   message: string
+}
+
+export interface InquiryDraft {
+  message: string
+  intent: 'quote' | 'consult' | ''
 }
