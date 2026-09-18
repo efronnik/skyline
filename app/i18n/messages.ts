@@ -652,32 +652,87 @@ export const messages = {
   },
 
   partners: {
-    kicker: L('Партнёрам', 'Партнерам', 'Partners', 'Partners'),
-    spec: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+    kicker: L('Партнёрам iDOORS', 'Партнерам iDOORS', 'Partners iDOORS', 'iDOORS Partners'),
+    spec: L('B2B', 'B2B', 'B2B', 'B2B'),
     title: L('Стать партнёром', 'Стати партнером', 'Hacerse partner', 'Become a partner'),
     lead: L(
-      'Для дилеров, дизайнеров, архитекторов, магазинов дверей и бригадиров строительных бригад.',
-      'Для дилерів, дизайнерів, архітекторів, магазинів дверей і бригадирів будівельних бригад.',
-      'Para distribuidores, diseñadores, arquitectos, tiendas de puertas y jefes de brigada.',
-      'For dealers, designers, architects, door shops and construction crew leaders.'
+      'Приглашаем к сотрудничеству B2B-сегмент',
+      'Запрошуємо до співпраці B2B-сегмент',
+      'Invitamos al segmento B2B a colaborar',
+      'We invite the B2B segment to cooperate'
+    ),
+    intro: L(
+      'Компания iDOORS — официальное представительство одного из крупнейших производителей дверных систем скрытого монтажа в Восточной Европе на территории Испании и Португалии.',
+      'Компанія iDOORS — офіційне представництво одного з найбільших виробників дверних систем прихованого монтажу в Східній Європі на території Іспанії та Португалії.',
+      'iDOORS es la representación oficial en España y Portugal de uno de los mayores fabricantes de sistemas de puertas de instalación oculta de Europa del Este.',
+      'iDOORS is the official representation in Spain and Portugal of one of the largest manufacturers of flush-mount door systems in Eastern Europe.'
+    ),
+    network: L(
+      'Мы развиваем партнёрскую сеть и предлагаем выгодные условия прямой кооперации для профессионалов строительной и интерьерной отрасли:',
+      'Ми розвиваємо партнерську мережу і пропонуємо вигідні умови прямої кооперації для професіоналів будівельної та інтер'єрної галузі:',
+      'Desarrollamos nuestra red de partners y ofrecemos condiciones ventajosas de cooperación directa para profesionales del sector de la construcción e interiorismo:',
+      'We are growing our partner network and offering attractive direct cooperation terms for professionals in construction and interior design:'
+    ),
+    segments: L(
+      [
+        'Дилерам и салонам дверей — расширение матрицы премиальной продукцией скрытого монтажа с гарантированной маржинальностью и складской программой.',
+        'Дизайнерам и архитекторам — комплексная техническая поддержка, предоставление 3D/CAD-моделей, индивидуальные размеры до 2400 мм и гибкие условия спецпроектов.',
+        'Строительным компаниям и бригадирам — прямые заводские цены, соблюдение сроков поставок, полная исполнительная документация и персональный менеджер объекта.'
+      ],
+      [
+        'Дилерам і салонам дверей — розширення матриці преміальною продукцією прихованого монтажу з гарантованою маржинальністю і складською програмою.',
+        'Дизайнерам і архітекторам — комплексна технічна підтримка, надання 3D/CAD-моделей, індивідуальні розміри до 2400 мм і гнучкі умови спецпроєктів.',
+        'Будівельним компаніям і бригадирам — прямі заводські ціни, дотримання термінів поставок, повна виконавча документація і персональний менеджер об'єкта.'
+      ],
+      [
+        'Distribuidores y salones de puertas — ampliación de la gama con producto premium de instalación oculta, margen garantizado y programa de stock.',
+        'Diseñadores y arquitectos — soporte técnico integral, modelos 3D/CAD, medidas a medida hasta 2400 mm y condiciones flexibles para proyectos especiales.',
+        'Empresas de construcción y jefes de brigada — precios directos de fábrica, plazos cumplidos, documentación ejecutiva completa y gestor personal de obra.'
+      ],
+      [
+        'Dealers and door showrooms — expanding your range with premium flush-mount products, guaranteed margin and a stock programme.',
+        'Designers and architects — full technical support, 3D/CAD models, bespoke sizes up to 2400 mm and flexible terms for special projects.',
+        'Construction companies and crew leaders — direct factory prices, on-time delivery, full as-built documentation and a dedicated site manager.'
+      ]
+    ),
+    formatTitle: L('Формат взаимодействия', 'Формат взаємодії', 'Formato de colaboración', 'Cooperation format'),
+    formatText: L(
+      'Партнёрская программа предназначена исключительно для юридических лиц, индивидуальных предпринимателей и профильных специалистов (B2B).',
+      'Партнерська програма призначена виключно для юридичних осіб, фізичних осіб-підприємців і профільних спеціалістів (B2B).',
+      'El programa de partners está destinado exclusivamente a personas jurídicas, autónomos y profesionales del sector (B2B).',
+      'The partner programme is intended exclusively for legal entities, sole traders and industry professionals (B2B).'
+    ),
+    offers: L(
+      [
+        'Персональные оптовые скидки и дифференцированную систему ценообразования.',
+        'Прямые заводские поставки без посредников.',
+        'Обеспечение образцами материалов, выставочными стендами и каталогами.',
+        'Техническое сопровождение на всех этапах проектирования и реализации.'
+      ],
+      [
+        'Персональні оптові знижки і диференційовану систему ціноутворення.',
+        'Прямі заводські поставки без посередників.',
+        'Забезпечення зразками матеріалів, виставковими стендами та каталогами.',
+        'Технічний супровід на всіх етапах проєктування та реалізації.'
+      ],
+      [
+        'Descuentos mayoristas personalizados y sistema de precios diferenciado.',
+        'Suministro directo de fábrica sin intermediarios.',
+        'Muestras de materiales, expositores y catálogos.',
+        'Asistencia técnica en todas las fases de diseño y ejecución.'
+      ],
+      [
+        'Personal wholesale discounts and a differentiated pricing system.',
+        'Direct factory supply with no intermediaries.',
+        'Material samples, display stands and catalogues.',
+        'Technical support at every stage of design and execution.'
+      ]
     ),
     note: L(
-      'Заявка только от компаний. Обсудим сотрудничество, скидки и поставки.',
-      'Заявка лише від компаній. Обговоримо співпрацю, знижки та поставки.',
-      'Solo empresas. Hablamos de colaboración, descuentos y suministro.',
-      'Companies only. We will talk cooperation, discounts and supply.'
-    ),
-    audience: L(
-      ['Дилеры', 'Дизайнеры', 'Архитекторы', 'Магазины дверей', 'Бригадиры строительных бригад'],
-      ['Дилери', 'Дизайнери', 'Архітектори', 'Магазини дверей', 'Бригадири будівельних бригад'],
-      ['Distribuidores', 'Diseñadores', 'Arquitectos', 'Tiendas de puertas', 'Jefes de brigada'],
-      ['Dealers', 'Designers', 'Architects', 'Door shops', 'Construction crew leaders']
-    ),
-    paragraphs: L(
-      [] as string[],
-      [] as string[],
-      [] as string[],
-      [] as string[]
+      'Оставьте заявку для обсуждения индивидуальных условий сотрудничества, получения оптового прайс-листа и каталога продукции.',
+      'Залиште заявку для обговорення індивідуальних умов співпраці, отримання оптового прайс-листа і каталогу продукції.',
+      'Deje su solicitud para hablar de condiciones individuales de colaboración, obtener la lista de precios mayorista y el catálogo.',
+      'Submit your request to discuss individual cooperation terms, receive the wholesale price list and product catalogue.'
     ),
     cta: L('Стать партнёром', 'Стати партнером', 'Hacerse partner', 'Become a partner'),
     modalTitle: L('Заявка на партнёрство', 'Заявка на партнерство', 'Solicitud de partnership', 'Partnership inquiry'),
