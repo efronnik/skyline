@@ -73,24 +73,20 @@ onMounted(() => {
   gap: 0.8rem;
   height: var(--header);
   padding: env(safe-area-inset-top, 0px) var(--pad) 0;
-  border-bottom: var(--hair) solid var(--line);
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
-  color: var(--ink);
+  border-bottom: var(--hair) solid var(--line-on-night);
+  background: var(--night);
+  color: var(--paper);
   min-width: 0;
 }
 
 .bar.is-invert {
   background: transparent;
-  border-bottom-color: var(--line-on-night);
-  color: var(--paper);
+  border-bottom-color: transparent;
 }
 
 .bar.is-solid {
-  background-color: var(--paper);
-  background-image: var(--grain);
-  background-size: 180px 180px;
-  color: var(--ink);
-  border-bottom-color: var(--line);
+  background: var(--night);
+  border-bottom-color: var(--line-on-night);
 }
 
 .bar__brand {
@@ -118,12 +114,12 @@ onMounted(() => {
 }
 
 .bar__lang {
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .bar__lang :deep(.lang) {
-  background: color-mix(in srgb, var(--paper) 94%, transparent);
-  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--paper) 35%, transparent);
 }
 
 .bar__quote {
