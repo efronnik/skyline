@@ -101,7 +101,7 @@ onMounted(() => {
         copy-key="offers.hardware"
         src="/images/detail-handle.jpg"
         invert
-        cta-to="#contact"
+        cta-to="/hardware"
         ratio="1 / 1"
       />
     </RevealOnView>

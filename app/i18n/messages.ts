@@ -248,6 +248,12 @@ export const messages = {
         'Дверна ручка Spinoff на полотні прихованих дверей',
         'Manilla Spinoff en una hoja de puerta oculta',
         'Spinoff handle on a flush-door leaf'
+      ),
+      comingSoon: L(
+        'Каталог ручек и замков Spinoff скоро появится здесь. Пока напишите нам — подберём под ваш проект.',
+        'Каталог ручок і замків Spinoff незабаром з'явиться тут. Поки напишіть нам — підберемо під ваш проєкт.',
+        'El catálogo de manillas y cerraduras Spinoff estará aquí pronto. Por ahora escríbanos — lo seleccionamos para su proyecto.',
+        'The Spinoff handles and locks catalogue is coming soon. Write to us in the meantime — we will match it to your project.'
       )
     }
   },
