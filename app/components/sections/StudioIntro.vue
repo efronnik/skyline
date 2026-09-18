@@ -45,7 +45,6 @@ const { t, ta } = useLocale()
   display: grid;
   align-content: start;
   gap: 0;
-  padding: 0 var(--pad);
 }
 
 h2 {
