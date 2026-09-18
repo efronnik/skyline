@@ -3,6 +3,7 @@ const props = withDefaults(defineProps<{
   id: string
   copyKey: string
   src: string
+  slides?: string[]
   ctaTo: string
   invert?: boolean
   image?: 'left' | 'right'
@@ -10,7 +11,8 @@ const props = withDefaults(defineProps<{
 }>(), {
   invert: false,
   image: 'left',
-  ratio: '4 / 5'
+  ratio: '4 / 5',
+  slides: () => []
 })
 
 const { t } = useLocale()
@@ -25,7 +27,14 @@ const { t } = useLocale()
     :invert="props.invert"
     :image="props.image"
   >
+    <PhotoShow
+      v-if="props.slides.length"
+      :slides="props.slides"
+      :alt="t(`${copyKey}.alt`)"
+      :ratio="props.ratio"
+    />
     <MediaFrame
+      v-else
       :src="props.src"
       :alt="t(`${copyKey}.alt`)"
       :ratio="props.ratio"

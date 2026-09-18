@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { catalogProducts } from '~/data/products'
+import { catalogProducts, homeSlides } from '~/data/products'
 
 const { t, locale } = useLocale()
 const route = useRoute()
@@ -13,7 +13,7 @@ usePageSeo(() => ({
   title: t('seo.homeTitle'),
   description: t('seo.homeDesc'),
   path: '/',
-  image: '/images/hero-poster.jpg'
+  image: '/images/idoors-interior-light.jpg'
 }))
 
 const config = useRuntimeConfig()
@@ -67,6 +67,7 @@ onMounted(() => {
         id="primed"
         copy-key="offers.primed"
         src="/images/after-flush.jpg"
+        :slides="[...homeSlides.primed]"
         image="right"
         cta-to="/products/prime-base"
       />
@@ -76,6 +77,7 @@ onMounted(() => {
         id="finished"
         copy-key="offers.finished"
         src="/images/project-living-oak.jpg"
+        :slides="[...homeSlides.finished]"
         invert
         cta-to="/products/prime-finish"
       />
@@ -85,6 +87,7 @@ onMounted(() => {
         id="size"
         copy-key="offers.size"
         src="/images/idoors-install-standard.jpg"
+        :slides="[...homeSlides.size]"
         image="right"
         cta-to="/products/prime-custom"
       />
@@ -98,9 +101,6 @@ onMounted(() => {
         cta-to="#contact"
         ratio="1 / 1"
       />
-    </RevealOnView>
-    <RevealOnView stagger=".sku">
-      <CollectionSection />
     </RevealOnView>
     <CtaBand />
   </div>

@@ -1,19 +1,53 @@
-import type { CatalogProduct, ProductLook } from '~/types/content'
+import type { CatalogProduct, ExtraId, ProductLook } from '~/types/content'
 
-const sharedGallery = [
-  '/images/work-pair.jpg',
-  '/images/work-corner.jpg',
+const flushInteriors = [
+  '/images/idoors-interior-light.jpg',
   '/images/work-corridor.jpg',
-  '/images/work-room.jpg'
+  '/images/after-flush.jpg',
+  '/images/interior-flush.jpg',
+  '/images/project-living-oak.jpg',
+  '/images/idoors-interior-dark.jpg'
 ]
+
+const finishInteriors = [
+  '/images/project-living-oak.jpg',
+  '/images/material-paint.jpg',
+  '/images/idoors-interior-dark.jpg',
+  '/images/product-glass.jpg',
+  '/images/work-corridor.jpg',
+  '/images/after-flush.jpg',
+  '/images/idoors-interior-light.jpg'
+]
+
+export const homeSlides = {
+  hero: flushInteriors,
+  primed: [
+    '/images/after-flush.jpg',
+    '/images/work-corridor.jpg',
+    '/images/interior-flush.jpg',
+    '/images/idoors-interior-light.jpg'
+  ],
+  finished: [
+    '/images/project-living-oak.jpg',
+    '/images/idoors-interior-dark.jpg',
+    '/images/material-paint.jpg',
+    '/images/product-glass.jpg'
+  ],
+  size: [
+    '/images/work-corridor.jpg',
+    '/images/after-flush.jpg',
+    '/images/idoors-install-standard.jpg',
+    '/images/project-living-oak.jpg'
+  ]
+} as const
 
 export const catalogProducts: CatalogProduct[] = [
   {
     slug: 'prime-base',
     sku: 'iD-PRIME-BASE',
     kind: 'base',
-    image: '/images/after-flush.jpg',
-    gallery: ['/images/after-flush.jpg', '/images/prime-al-c.jpg', '/images/idoors-gray.jpg', ...sharedGallery],
+    image: '/images/idoors-interior-light.jpg',
+    gallery: flushInteriors,
     ratio: '3 / 4'
   },
   {
@@ -21,15 +55,15 @@ export const catalogProducts: CatalogProduct[] = [
     sku: 'iD-PRIME-FINISH',
     kind: 'finish',
     image: '/images/project-living-oak.jpg',
-    gallery: ['/images/project-living-oak.jpg', '/images/material-glass.jpg', '/images/interior-flush.jpg', ...sharedGallery],
+    gallery: finishInteriors,
     ratio: '3 / 4'
   },
   {
     slug: 'prime-custom',
     sku: 'iD-PRIME-CUSTOM',
     kind: 'custom',
-    image: '/images/idoors-install-standard.jpg',
-    gallery: ['/images/idoors-install-standard.jpg', '/images/after-flush.jpg', '/images/project-living-oak.jpg', ...sharedGallery],
+    image: '/images/work-corridor.jpg',
+    gallery: finishInteriors,
     ratio: '3 / 4'
   }
 ]
@@ -65,14 +99,14 @@ export function heroImage(params: {
   edge: ProductLook['edge']
   finish: 'primer' | 'veneer' | 'mirror'
 }) {
-  if (params.finish === 'mirror' && (params.kind === 'finish' || params.kind === 'custom')) {
-    return '/images/material-glass.jpg'
-  }
-  if (params.finish === 'veneer' && (params.kind === 'finish' || params.kind === 'custom')) {
-    return '/images/project-living-oak.jpg'
-  }
-  if (params.edge === 'black') {
-    return params.swing === 'in' ? '/images/prime-al-ch-inside.jpg' : '/images/prime-al-ch.jpg'
-  }
-  return params.swing === 'in' ? '/images/prime-al-c-inside.jpg' : '/images/prime-al-c.jpg'
+  if (params.finish === 'mirror' && (params.kind === 'finish' || params.kind === 'custom'))
+    return '/images/product-glass.jpg'
+  if (params.finish === 'veneer' && (params.kind === 'finish' || params.kind === 'custom'))
+    return '/images/idoors-interior-dark.jpg'
+  return '/images/idoors-interior-light.jpg'
+}
+
+/** Factory shots for extras. Empty until the file is in public/images. */
+export const optionShots: Partial<Record<ExtraId, string>> = {
+  dropSeal: ''
 }

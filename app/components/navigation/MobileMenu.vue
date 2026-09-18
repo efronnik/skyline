@@ -5,6 +5,8 @@ const { t } = useLocale()
 const open = defineModel<boolean>({ default: false })
 const panel = ref<HTMLElement | null>(null)
 const route = useRoute()
+const { open: openInquiry } = useInquiryModal()
+const quote = useQuoteList()
 
 useScrollLock(open)
 useFocusTrap(panel, open)
@@ -19,6 +21,14 @@ function onKey(event: KeyboardEvent) {
 
 function close() {
   open.value = false
+}
+
+function openQuote() {
+  close()
+  openInquiry({
+    intent: 'quote',
+    message: quote.message()
+  })
 }
 
 onMounted(() => {
@@ -54,6 +64,14 @@ onMounted(() => {
         {{ t(`nav.${item.label}`) }}
       </NavLink>
       <HashLink to="#contact" class="menu__link" @click="close">{{ t('nav.contact') }}</HashLink>
+      <button
+        v-if="quote.total.value"
+        type="button"
+        class="menu__link"
+        @click="openQuote"
+      >
+        {{ t('pdp.quoteAria') }} · {{ quote.total.value }}
+      </button>
     </nav>
     <div class="menu__cta">
       <LangSwitch />
@@ -114,6 +132,13 @@ onMounted(() => {
   font-size: clamp(2rem, 8vw, 3.2rem);
   line-height: 1.05;
   font-weight: 600;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
 }
 
 .menu__link:hover {

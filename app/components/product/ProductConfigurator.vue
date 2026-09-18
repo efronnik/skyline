@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import type { ExtraId, ProductKind } from '~/types/content'
 import { extraIds, leafSizes } from '~/data/primeConfig'
-import { heroImage } from '~/data/products'
+import { heroImage, optionShots } from '~/data/products'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   kind: ProductKind
   sku: string
-}>()
+  gallery?: string[]
+}>(), {
+  gallery: () => []
+})
 
 const { t } = useLocale()
 const { open: openQuote } = useInquiryModal()
 const { open: openConsult } = useConsultModal()
+const quote = useQuoteList()
 const { finish, swing, edge, size, height, width, extras, summary, sizeError, clampCustomSize, validateCustomSize } = usePrimeConfig(props.kind)
+const selected = ref(0)
+const qty = ref(1)
+const added = ref(false)
+let addedTimer: ReturnType<typeof setTimeout> | undefined
 
 const extrasList = computed(() => props.kind === 'base'
   ? extraIds
@@ -23,12 +31,48 @@ function extraKey(id: ExtraId) {
     : `pdp.extras.${id}`
 }
 
-const image = computed(() => heroImage({
-  kind: props.kind,
-  swing: swing.value,
-  edge: edge.value,
-  finish: props.kind === 'base' ? 'primer' : finish.value
-}))
+const shots = computed(() => {
+  const unique = [...new Set(props.gallery.filter(Boolean))]
+  if (unique.length) return unique
+  return [heroImage({
+    kind: props.kind,
+    swing: swing.value,
+    edge: edge.value,
+    finish: props.kind === 'base' ? 'primer' : finish.value
+  })]
+})
+
+const dropSealPhoto = computed(() => optionShots.dropSeal || '')
+const showDropSeal = computed(() => extras.dropSeal)
+
+const image = computed(() => {
+  if (showDropSeal.value && dropSealPhoto.value)
+    return dropSealPhoto.value
+  return shots.value[selected.value] ?? shots.value[0] ?? ''
+})
+
+function pickShot(finishKind: 'primer' | 'veneer' | 'mirror') {
+  const list = shots.value
+  if (finishKind === 'mirror') {
+    const index = list.findIndex(src => src.includes('product-glass') || src.includes('project-bedroom'))
+    selected.value = index >= 0 ? index : selected.value
+    return
+  }
+  if (finishKind === 'veneer') {
+    const index = list.findIndex(src => src.includes('interior-dark') || src.includes('living-oak'))
+    selected.value = index >= 0 ? index : selected.value
+    return
+  }
+  selected.value = 0
+}
+
+watch(finish, (value) => {
+  if (props.kind === 'base') return
+  pickShot(value)
+})
+watch(shots, () => {
+  if (selected.value >= shots.value.length) selected.value = 0
+})
 
 const customLink = computed(() => ({
   path: '/products/prime-custom',
@@ -39,35 +83,106 @@ const customLink = computed(() => ({
   }
 }))
 
-function quote() {
-  if (props.kind === 'custom' && !validateCustomSize()) return
+function currentLine() {
+  return {
+    kind: props.kind,
+    sku: props.sku,
+    summary: summary.value,
+    qty: qty.value
+  }
+}
+
+function addLine() {
+  if (props.kind === 'custom' && !validateCustomSize()) return false
+  quote.add(currentLine())
+  added.value = true
+  if (addedTimer) clearTimeout(addedTimer)
+  addedTimer = setTimeout(() => {
+    added.value = false
+  }, 1800)
+  return true
+}
+
+function hasCurrent() {
+  return quote.lines.value.some(item => item.kind === props.kind && item.summary === summary.value)
+}
+
+function quoteNow() {
+  const ready = props.kind !== 'custom' || validateCustomSize()
+  if (ready && (!quote.total.value || !hasCurrent()))
+    quote.add(currentLine())
+  else if (!ready && !quote.total.value)
+    return
   openQuote({
     intent: 'quote',
-    message: `${t('pdp.quoteLead')}\n\n${summary.value}`
+    message: quote.message()
   })
 }
 
 function consult() {
-  openConsult(`${t('pdp.quoteLead')}\n\n${summary.value}`)
+  const ready = props.kind !== 'custom' || validateCustomSize()
+  if (ready && (!quote.total.value || !hasCurrent()))
+    quote.add(currentLine())
+  openConsult(quote.message() || `${t('pdp.quoteLead')}\n\n${summary.value}`)
 }
+
+onUnmounted(() => {
+  if (addedTimer) clearTimeout(addedTimer)
+})
 </script>
 
 <template>
   <div class="hero">
-    <div class="hero__shot">
-      <MediaFrame
-        :src="image"
-        :alt="t(`pdp.${kind}.title`)"
-        ratio="3 / 4"
-        fit="contain"
-        sizes="(min-width: 980px) 42vw, 100vw"
-      />
+    <div class="hero__stage">
+      <div
+        class="hero__shot"
+        :class="{ 'is-drop': showDropSeal && !dropSealPhoto }"
+      >
+        <MediaFrame
+          :src="image"
+          :alt="showDropSeal ? t('pdp.extras.dropSeal') : t(`pdp.${kind}.title`)"
+          ratio="3 / 4"
+          fit="cover"
+          :position="showDropSeal && !dropSealPhoto ? 'center bottom' : 'center'"
+          sizes="(min-width: 980px) 42vw, 100vw"
+        />
+        <aside v-if="showDropSeal" class="hero__drop" aria-live="polite">
+          <svg viewBox="0 0 160 72" fill="none" aria-hidden="true">
+            <path d="M8 18 H152" stroke="currentColor" stroke-opacity=".28" />
+            <rect x="28" y="8" width="104" height="22" stroke="currentColor" stroke-width="1.4" />
+            <path d="M46 30 V46" stroke="currentColor" />
+            <path d="M114 30 V46" stroke="currentColor" />
+            <rect x="44" y="46" width="72" height="6" fill="currentColor" />
+            <path d="M8 62 H152" stroke="currentColor" />
+          </svg>
+          <p>
+            <strong>{{ t('specs.threshold') }}</strong>
+            {{ t('pdp.dropSealNote') }}
+          </p>
+        </aside>
+      </div>
+      <div v-if="shots.length > 1" class="hero__gallery" :aria-label="t('pdp.galleryAria')">
+        <p class="hero__gallery-title">{{ t('pdp.gallery') }}</p>
+        <div class="hero__thumbs">
+          <button
+            v-for="(src, index) in shots"
+            :key="src"
+            type="button"
+            class="hero__thumb"
+            :aria-current="index === selected ? 'true' : undefined"
+            :aria-label="`${index + 1}`"
+            @click="selected = index"
+          >
+            <img :src="src" alt="" width="72" height="96">
+          </button>
+        </div>
+      </div>
     </div>
     <div class="hero__copy">
       <p class="hero__sku">{{ t('pdp.sku') }} {{ sku }}</p>
       <h1>{{ t(`pdp.${kind}.title`) }}</h1>
 
-      <form class="cfg" @submit.prevent="quote">
+      <form class="cfg" @submit.prevent="quoteNow">
         <fieldset v-if="kind === 'finish'">
           <legend>{{ t('pdp.selector.finish') }}</legend>
           <label class="opt">
@@ -174,13 +289,33 @@ function consult() {
           </label>
         </fieldset>
 
+        <fieldset>
+          <legend>{{ t('pdp.qty') }}</legend>
+          <label class="qty">
+            <input
+              v-model.number="qty"
+              type="number"
+              name="qty"
+              min="1"
+              :max="quote.maxQty"
+              step="1"
+              required
+              @blur="qty = quote.clampQty(qty)"
+            >
+            <span>{{ t('pdp.pcs') }}</span>
+          </label>
+        </fieldset>
+
         <p v-if="kind === 'finish'" class="hero__b2b">{{ t('pdp.b2b') }}</p>
         <p v-if="kind === 'custom'" class="hero__note">{{ t('pdp.priceNote') }}</p>
         <div class="hero__cta">
+          <AppButton type="button" variant="line" @click="addLine">{{ t('pdp.addLine') }}</AppButton>
           <AppButton type="submit">{{ t('pdp.quote') }}</AppButton>
           <AppButton type="button" variant="line" @click="consult">{{ t('cta.consult') }}</AppButton>
         </div>
+        <p v-if="added" class="hero__added" role="status">{{ t('pdp.added') }}</p>
       </form>
+      <QuoteList compact />
     </div>
   </div>
 </template>
@@ -192,9 +327,110 @@ function consult() {
   align-items: start;
 }
 
+.hero__stage {
+  display: grid;
+  gap: 0.7rem;
+}
+
 .hero__shot {
   background: #eceae6;
   border: var(--hair) solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__shot.is-drop :deep(.media__img) {
+  transform: scale(1.22);
+  transform-origin: 50% 82%;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero__shot:not(.is-drop) :deep(.media__img) {
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero__drop {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  display: grid;
+  grid-template-columns: 5.4rem 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  border: var(--hair) solid var(--line-strong);
+  color: var(--ink);
+}
+
+.hero__drop svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero__drop p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.hero__drop strong {
+  display: block;
+  font-family: var(--font-spec);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.hero__gallery-title {
+  margin: 0;
+  font-family: var(--font-spec);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero__thumbs {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+  scrollbar-width: thin;
+}
+
+.hero__thumb {
+  flex: 0 0 auto;
+  width: 4.4rem;
+  height: 5.6rem;
+  padding: 0;
+  border: var(--hair) solid var(--line-strong);
+  background: #eceae6;
+  cursor: pointer;
+}
+
+.hero__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__thumb[aria-current='true'] {
+  border-color: var(--ink);
+  outline: 1px solid var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__shot.is-drop :deep(.media__img),
+  .hero__shot:not(.is-drop) :deep(.media__img) {
+    transition: none;
+  }
 }
 
 .hero__sku {
@@ -350,13 +586,95 @@ legend {
   margin-top: 0.3rem;
 }
 
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: 12rem;
+}
+
+.qty input {
+  width: 4.8rem;
+  min-height: 44px;
+  padding: 0.45rem 0.1rem;
+  border: 0;
+  border-bottom: var(--hair) solid var(--line-strong);
+  background: transparent;
+  font-size: 1rem;
+}
+
+.qty input:focus {
+  outline: none;
+  border-bottom-color: var(--ink);
+}
+
+.hero__added {
+  margin: 0;
+  font-family: var(--font-spec);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ok);
+}
+
+.hero__copy :deep(.list) {
+  margin-top: 1.4rem;
+}
+
+@media (max-width: 979px) {
+  .hero {
+    display: block;
+  }
+
+  .hero__stage {
+    display: contents;
+  }
+
+  .hero__shot {
+    position: sticky;
+    top: var(--header);
+    z-index: 4;
+  }
+
+  .hero__gallery {
+    margin: 0.7rem 0 1.6rem;
+  }
+
+  .hero__shot :deep(.media) {
+    aspect-ratio: 16 / 10;
+    max-height: 32svh;
+  }
+
+  .hero__shot.is-drop :deep(.media__img) {
+    transform: none;
+  }
+
+  .hero__drop {
+    grid-template-columns: 1fr;
+    padding: 0.45rem 0.55rem;
+    gap: 0;
+  }
+
+  .hero__drop svg {
+    display: none;
+  }
+
+  .hero__drop p {
+    font-size: 0.75rem;
+  }
+
+  .hero__gallery-title {
+    display: none;
+  }
+}
+
 @media (min-width: 980px) {
   .hero {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 2.4rem;
   }
 
-  .hero__shot {
+  .hero__stage {
     position: sticky;
     top: calc(var(--header) + 0.8rem);
   }

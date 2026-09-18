@@ -4,6 +4,7 @@ import type { InquiryPayload } from '~/types/content'
 
 const { t } = useLocale()
 const { draft } = useInquiryModal()
+const quote = useQuoteList()
 
 const form = reactive<InquiryPayload>({
   name: '',
@@ -15,6 +16,11 @@ const form = reactive<InquiryPayload>({
 watch(() => draft.value.message, (msg) => {
   if (msg) form.message = msg
 }, { immediate: true })
+
+watch(() => quote.lines.value, () => {
+  if (draft.value.intent === 'quote' && quote.lines.value.length)
+    draft.value.message = quote.message()
+}, { deep: true })
 
 const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const message = ref('')
@@ -50,6 +56,7 @@ async function onSubmit() {
     const result = await submitInquiry({ ...form })
     status.value = result.ok ? 'success' : 'error'
     message.value = result.ok ? t('form.success') : t('form.error')
+    if (result.ok) quote.clear()
   } catch {
     status.value = 'error'
     message.value = t('form.error')

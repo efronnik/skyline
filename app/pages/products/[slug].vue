@@ -38,7 +38,7 @@ useJsonLd(() => ({
 <template>
   <article v-if="product" class="page">
     <ProductBreadcrumb :kind="product.kind" />
-    <ProductConfigurator :kind="product.kind" :sku="product.sku" />
+    <ProductConfigurator :kind="product.kind" :sku="product.sku" :gallery="product.gallery" />
     <ProductDetails :kind="product.kind" />
   </article>
 </template>

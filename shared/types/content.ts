@@ -105,3 +105,11 @@ export interface InquiryDraft {
   message: string
   intent: 'quote' | 'consult' | ''
 }
+
+export interface QuoteLine {
+  id: string
+  kind: ProductKind
+  sku: string
+  summary: string
+  qty: number
+}

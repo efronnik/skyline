@@ -1,84 +1,38 @@
 <script setup lang="ts">
 import { animate, stagger } from 'animejs'
+import { homeSlides } from '~/data/products'
 
 const { t } = useLocale()
 const reduced = useReducedMotion()
 const copy = ref<HTMLElement | null>(null)
-const hero = ref<HTMLElement | null>(null)
 const { play } = useAnimeJob()
-
-function silence(event: Event) {
-  const video = event.currentTarget as HTMLVideoElement
-  video.muted = true
-  video.defaultMuted = true
-  video.volume = 0
-}
-
-function videoNode() {
-  const node = hero.value?.querySelector('video')
-  return node instanceof HTMLVideoElement ? node : null
-}
 
 onMounted(async () => {
   await nextTick()
-  if (!reduced.value && copy.value) {
-    play(
-      'hero',
-      animate(copy.value.children, {
-        opacity: [0, 1],
-        y: [18, 0],
-        delay: stagger(90),
-        duration: 780,
-        ease: 'outCubic'
-      })
-    )
-  }
-
-  if (reduced.value || !hero.value) return
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      const video = videoNode()
-      if (!video) return
-      if (entry?.isIntersecting) void video.play()
-      else video.pause()
-    },
-    { threshold: 0.2 }
+  if (reduced.value || !copy.value) return
+  play(
+    'hero',
+    animate(copy.value.children, {
+      opacity: [0, 1],
+      y: [18, 0],
+      delay: stagger(90),
+      duration: 780,
+      ease: 'outCubic'
+    })
   )
-  observer.observe(hero.value)
-  onUnmounted(() => observer.disconnect())
 })
 </script>
 
 <template>
-  <section ref="hero" class="hero" aria-labelledby="hero-title">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="hero__visual">
-      <img
-        src="/images/hero-poster.jpg"
+      <PhotoShow
+        :slides="[...homeSlides.hero]"
         :alt="t('hero.alt')"
-        width="1600"
-        height="900"
-        class="hero__img"
-      >
-      <ClientOnly>
-        <video
-          v-if="!reduced"
-          class="hero__video"
-          autoplay
-          muted
-          loop
-          playsinline
-          disablepictureinpicture
-          disableremoteplayback
-          preload="auto"
-          poster="/images/hero-poster.jpg"
-          aria-hidden="true"
-          @loadedmetadata="silence"
-          @play="silence"
-          @volumechange="silence"
-        >
-          <source src="/videos/hero.mp4" type="video/mp4">
-        </video>
-      </ClientOnly>
+        fill
+        :controls="false"
+        fit="cover"
+      />
       <span class="hero__ticks" aria-hidden="true" />
     </div>
     <div ref="copy" class="hero__copy">
@@ -86,7 +40,7 @@ onMounted(async () => {
       <h1 id="hero-title">{{ t('hero.title') }}</h1>
       <p class="hero__lead">{{ t('hero.lead') }}</p>
       <div class="hero__cta">
-        <AppButton to="#collection" invert>{{ t('hero.cta1') }}</AppButton>
+        <AppButton to="#primed" invert>{{ t('hero.cta1') }}</AppButton>
         <AppButton to="#contact" variant="ghost" invert>{{ t('hero.cta2') }}</AppButton>
       </div>
     </div>
@@ -113,26 +67,8 @@ onMounted(async () => {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(20,18,16,0.34) 0%, rgba(20,18,16,0.5) 42%, rgba(20,18,16,0.82) 100%);
-}
-
-.hero__img,
-.hero__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
-}
-
-.hero__img {
-  animation: hero-drift 36s ease-in-out infinite alternate;
-}
-
-.hero__video {
   pointer-events: none;
+  background: linear-gradient(180deg, rgba(20,18,16,0.34) 0%, rgba(20,18,16,0.5) 42%, rgba(20,18,16,0.82) 100%);
 }
 
 .hero__ticks {
@@ -185,20 +121,5 @@ h1 {
   .hero__copy {
     padding-bottom: var(--space-7);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__video {
-    display: none;
-  }
-
-  .hero__img {
-    animation: none;
-  }
-}
-
-@keyframes hero-drift {
-  from { transform: scale(1); }
-  to { transform: scale(1.06); }
 }
 </style>

@@ -18,5 +18,6 @@ export type {
   TechnicalStep,
   InquiryPayload,
   InquiryResult,
-  InquiryDraft
+  InquiryDraft,
+  QuoteLine
 } from '#shared/types/content'

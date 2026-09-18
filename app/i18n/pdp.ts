@@ -59,18 +59,41 @@ export const pdp = {
   ),
   telegram: L('Telegram', 'Telegram', 'Telegram', 'Telegram'),
   whatsapp: L('WhatsApp', 'WhatsApp', 'WhatsApp', 'WhatsApp'),
-  quoteLead: L('Прошу просчёт по конфигурации:', 'Прошу прорахунок за конфігурацією:', 'Solicito cálculo de esta configuración:', 'Please quote this configuration:'),
+  quoteLead: L('Прошу просчёт по комплекту:', 'Прошу прорахунок за комплектом:', 'Solicito cálculo de este conjunto:', 'Please quote this set:'),
+  qty: L('Количество одинаковых полотен', 'Кількість однакових полотен', 'Cantidad de hojas iguales', 'Quantity of identical leaves'),
+  addLine: L('Добавить в просчёт', 'Додати до прорахунку', 'Añadir al cálculo', 'Add to quote'),
+  added: L('Добавлено в просчёт', 'Додано до прорахунку', 'Añadido al cálculo', 'Added to quote'),
+  quoteList: L('Позиции просчёта', 'Позиції прорахунку', 'Posiciones del cálculo', 'Quote positions'),
+  quoteTotal: L('Всего полотен', 'Усього полотен', 'Hojas en total', 'Leaves in total'),
+  removeLine: L('Убрать позицию', 'Прибрати позицію', 'Quitar posición', 'Remove position'),
+  pcs: L('шт.', 'шт.', 'ud.', 'pcs'),
+  quoteAria: L('Просчёт', 'Прорахунок', 'Cálculo', 'Quote'),
   consultLeadMsg: L('Прошу консультацию', 'Прошу консультацію', 'Solicito consulta', 'Please consult'),
   viaTelegram: L('через Telegram', 'через Telegram', 'por Telegram', 'via Telegram'),
   viaWhatsApp: L('через WhatsApp', 'через WhatsApp', 'por WhatsApp', 'via WhatsApp'),
   quoteFormTitle: L('Получить просчёт', 'Отримати прорахунок', 'Pedir cálculo', 'Request a quote'),
   quoteFormLead: L(
-    'Оставьте контакт — к заявке прикрепится выбранная конфигурация.',
-    'Залиште контакт — до заявки додасться обрана конфігурація.',
-    'Deje un contacto: la configuración elegida irá con la consulta.',
-    'Leave a contact — the selected configuration will be attached to the inquiry.'
+    'Оставьте контакт. В заявке будут все позиции: разные полотна и количество.',
+    'Залиште контакт. У заявці будуть усі позиції: різні полотна і кількість.',
+    'Deje un contacto. La consulta llevará todas las posiciones: hojas distintas y cantidades.',
+    'Leave a contact. The inquiry will include every position: different leaves and quantities.'
   ),
   none: L('без опций', 'без опцій', 'sin opciones', 'no extras'),
+  prevShot: L('Предыдущее фото', 'Попереднє фото', 'Foto anterior', 'Previous photo'),
+  nextShot: L('Следующее фото', 'Наступне фото', 'Foto siguiente', 'Next photo'),
+  gallery: L(
+    'Покраска, обои, штукатурка, микроцемент',
+    'Фарбування, шпалери, штукатурка, мікроцемент',
+    'Pintura, papel, yeso, microcemento',
+    'Paint, wallpaper, plaster, microcement'
+  ),
+  galleryAria: L('Галерея отделки двери', 'Галерея оздоблення дверей', 'Galería de acabado de la puerta', 'Door finish gallery'),
+  dropSealNote: L(
+    'Врезной уплотнитель внизу полотна. Опускается к полу и закрывает технологический зазор.',
+    'Врізний ущільнювач унизу полотна. Опускається до підлоги і закриває технологічний зазор.',
+    'Junta empotrada en la base de la hoja. Baja al suelo y cierra la holgura técnica.',
+    'Concealed gasket at the bottom of the leaf. It drops to the floor and closes the clearance.'
+  ),
   dash: L('—', '—', '—', '—'),
   priceNote: L(
     'Точная цена формируется после просчёта параметров конфигурации и габаритов проёма.',
@@ -145,7 +168,8 @@ export const pdp = {
     custom: L('индивидуальный размер, высота до 2400 мм', 'індивідуальний розмір, висота до 2400 мм', 'medida individual, altura hasta 2400 mm', 'custom size, height up to 2400 mm'),
     edge: L('Кромка и короб', 'Крайка і короб', 'Canto y marco', 'Edge and frame'),
     finish: L('Отделка', 'Оздоблення', 'Acabado', 'Finish'),
-    extras: L('Опции', 'Опції', 'Opciones', 'Options')
+    extras: L('Опции', 'Опції', 'Opciones', 'Options'),
+    qty: L('Количество', 'Кількість', 'Cantidad', 'Quantity')
   },
 
   base: {

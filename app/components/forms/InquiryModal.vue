@@ -3,6 +3,7 @@ import { contact } from '~/data/site'
 
 const { t } = useLocale()
 const { isOpen, close, draft } = useInquiryModal()
+const quote = useQuoteList()
 
 const title = computed(() => {
   if (draft.value.intent === 'quote') return t('pdp.quoteFormTitle')
@@ -60,6 +61,8 @@ function onBackdrop(event: MouseEvent) {
         <p>{{ lead }}</p>
       </header>
 
+      <QuoteList v-if="draft.intent === 'quote'" compact />
+
       <ConsultationForm />
 
       <aside class="modal__aside">
@@ -79,7 +82,7 @@ function onBackdrop(event: MouseEvent) {
 <style scoped>
 .modal {
   width: min(40rem, calc(100vw - 1.4rem));
-  max-height: min(92vh, 40rem);
+  max-height: min(92vh, 46rem);
   margin: auto;
   padding: 0;
   border: var(--hair) solid var(--line);
@@ -119,6 +122,10 @@ h2 {
 .modal__head p {
   color: var(--muted);
   max-width: 34rem;
+}
+
+.modal__panel :deep(.list) {
+  margin-bottom: 1.2rem;
 }
 
 .modal__close {

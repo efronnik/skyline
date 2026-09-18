@@ -63,10 +63,10 @@ export const messages = {
     cta1: L('Смотреть iDOORS Prime', 'Дивитися iDOORS Prime', 'Ver iDOORS Prime', 'See iDOORS Prime'),
     cta2: L('Рассчитать проект', 'Розрахувати проєкт', 'Calcular el proyecto', 'Request a quote'),
     alt: L(
-      'Производство скрытых дверей: полотно и алюминиевый профиль',
-      'Виробництво прихованих дверей: полотно й алюмінієвий профіль',
-      'Fabricación de puertas ocultas: hoja y perfil de aluminio',
-      'Flush-door production: leaf and aluminium profile'
+      'Скрытая дверь iDOORS в интерьере',
+      'Приховані двері iDOORS в інтер’єрі',
+      'Puerta oculta iDOORS en un interior',
+      'iDOORS flush door in an interior'
     )
   },
 

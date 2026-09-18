@@ -3,12 +3,22 @@ import { primaryNav } from '~/data/site'
 
 const { t } = useLocale()
 const route = useRoute()
+const { open } = useInquiryModal()
+const quote = useQuoteList()
 const menuOpen = ref(false)
 const inverted = computed(() => Boolean(route.meta.darkHeader) && route.path === '/')
 const scrolled = ref(false)
 
 function onScroll() {
   scrolled.value = window.scrollY > 16
+}
+
+function openQuote() {
+  menuOpen.value = false
+  open({
+    intent: 'quote',
+    message: quote.message()
+  })
 }
 
 onMounted(() => {
@@ -36,6 +46,16 @@ onMounted(() => {
     </nav>
     <div class="bar__actions">
       <LangSwitch class="bar__lang" />
+      <button
+        v-if="quote.total.value"
+        type="button"
+        class="bar__quote"
+        :aria-label="`${t('pdp.quoteAria')}: ${quote.total.value}`"
+        @click="openQuote"
+      >
+        {{ t('pdp.quoteAria') }}
+        <span>{{ quote.total.value }}</span>
+      </button>
       <HashLink to="#contact" class="bar__link bar__cta-link">{{ t('nav.contact') }}</HashLink>
       <button
         class="bar__burger"
@@ -135,6 +155,32 @@ onMounted(() => {
 .bar__cta-link {
   display: none;
   opacity: 1;
+}
+
+.bar__quote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font-spec);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bar__quote span {
+  min-width: 1.4rem;
+  min-height: 1.4rem;
+  padding: 0 0.28rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--hair) solid currentColor;
 }
 
 .bar__lang {
