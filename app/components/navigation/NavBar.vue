@@ -103,12 +103,9 @@ onMounted(() => {
   height: 2rem;
   width: auto;
   display: block;
-  /* logo has white text — darken on light header */
-  filter: brightness(0);
   transition: filter 0.25s ease;
 }
 
-/* on dark/hero header: show original (gold circle + white text) */
 .bar.is-invert .bar__logo {
   filter: none;
 }
