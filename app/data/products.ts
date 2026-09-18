@@ -1,12 +1,13 @@
 import type { CatalogProduct, ExtraId, ProductLook } from '~/types/content'
 
+// PDP gallery — portrait 3:4 container, use portrait-friendly shots
 const flushInteriors = [
-  '/images/work-corner.jpg',
-  '/images/work-pair.jpg',
+  '/images/prime-al-c.jpg',
+  '/images/prime-al-c-inside.jpg',
+  '/images/prime-al-ch.jpg',
+  '/images/prime-al-ch-inside.jpg',
   '/images/work-room.jpg',
-  '/images/work-corridor.jpg',
   '/images/interior-flush.jpg',
-  '/images/after-flush.jpg',
   '/images/idoors-interior-light.jpg',
   '/images/idoors-interior-dark.jpg',
 ]
@@ -14,8 +15,8 @@ const flushInteriors = [
 const finishInteriors = [
   '/images/idoors-interior-light.jpg',
   '/images/idoors-interior-dark.jpg',
-  '/images/work-corner.jpg',
   '/images/work-room.jpg',
+  '/images/interior-flush.jpg',
   '/images/project-living-oak.jpg',
   '/images/material-paint.jpg',
   '/images/product-glass.jpg',
