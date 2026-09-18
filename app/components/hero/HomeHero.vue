@@ -49,6 +49,7 @@ onMounted(async () => {
     </div>
     <div ref="copy" class="hero__copy">
       <h1 id="hero-title">{{ t('hero.title') }}</h1>
+      <p class="hero__slogan">{{ t('hero.slogan') }}</p>
       <div class="hero__cta">
         <AppButton variant="ghost" invert @click="openAsk()">{{ t('hero.cta1') }}</AppButton>
         <AppButton invert @click="quoteOrder">{{ t('hero.cta2') }}</AppButton>
@@ -111,7 +112,15 @@ h1 {
   font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.04em;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero__slogan {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  opacity: 0.82;
+  margin: 0 0 1.2rem;
 }
 
 .hero__cta {

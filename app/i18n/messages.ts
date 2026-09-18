@@ -57,6 +57,7 @@ export const messages = {
   hero: {
     spec: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
     title: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas de instalación oculta', 'Flush doors'),
+    slogan: L('Двери, которые чувствуют интерьер.', 'Двері, що відчувають інтер'єр.', 'Puertas que sienten el interior.', 'Doors that feel the interior.'),
     lead: L(
       'Под ваши желания.',
       'Під ваші бажання.',

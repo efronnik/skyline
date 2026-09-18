@@ -18,7 +18,7 @@ function footerLabel(item: { label: string, to: string }) {
     <div class="foot__grid">
       <div>
         <p class="foot__brand">{{ site.name }}</p>
-        <p class="foot__tag">{{ t('hero.title') }}</p>
+        <p class="foot__tag">{{ t('hero.slogan') }}</p>
         <AppButton to="#contact">{{ t('nav.quote') }}</AppButton>
       </div>
       <nav :aria-label="t('footer.studio')">
