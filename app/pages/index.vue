@@ -63,16 +63,44 @@ onMounted(() => {
   <div>
     <HomeHero />
     <RevealOnView>
-      <IdoorsOffer />
+      <CopyOffer
+        id="primed"
+        copy-key="offers.primed"
+        src="/images/after-flush.jpg"
+        image="right"
+        cta-to="#collection"
+      />
     </RevealOnView>
     <RevealOnView stagger=".sku">
       <CollectionSection />
     </RevealOnView>
-    <RevealOnView stagger=".swatch">
-      <MaterialsSection detail-to="/materials" />
+    <RevealOnView>
+      <CopyOffer
+        id="finished"
+        copy-key="offers.finished"
+        src="/images/project-living-oak.jpg"
+        invert
+        cta-to="#contact"
+      />
     </RevealOnView>
     <RevealOnView>
-      <SizeOffer />
+      <CopyOffer
+        id="size"
+        copy-key="offers.size"
+        src="/images/idoors-install-standard.jpg"
+        image="right"
+        cta-to="#contact"
+      />
+    </RevealOnView>
+    <RevealOnView>
+      <CopyOffer
+        id="hardware"
+        copy-key="offers.hardware"
+        src="/images/detail-handle.jpg"
+        invert
+        cta-to="#contact"
+        ratio="1 / 1"
+      />
     </RevealOnView>
     <CtaBand />
   </div>

@@ -62,7 +62,7 @@ h2 {
   font-size: var(--fs-xl);
   line-height: var(--lh-display);
   letter-spacing: -0.04em;
-  max-width: 16ch;
+  max-width: 18em;
   margin: 0.7rem 0 0.8rem;
 }
 

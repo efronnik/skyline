@@ -22,8 +22,9 @@ export const messages = {
 
   nav: {
     collection: L('Система', 'Система', 'Sistema', 'System'),
-    materials: L('Материалы', 'Матеріали', 'Materiales', 'Materials'),
+    finished: L('Отделка', 'Оздоблення', 'Acabado', 'Finish'),
     size: L('Размер', 'Розмір', 'Medida', 'Size'),
+    hardware: L('Фурнитура', 'Фурнітура', 'Herrajes', 'Hardware'),
     technology: L('Технология', 'Технологія', 'Tecnología', 'Technology'),
     projects: L('Проекты', 'Проєкти', 'Proyectos', 'Projects'),
     contact: L('Заявка', 'Заявка', 'Consulta', 'Inquiry'),
@@ -39,12 +40,12 @@ export const messages = {
   },
 
   seo: {
-    homeTitle: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas de instalación oculta', 'Flush doors'),
+    homeTitle: L('Двери скрытого монтажа iDOORS', 'Двері прихованого монтажу iDOORS', 'Puertas de instalación oculta iDOORS', 'iDOORS flush doors'),
     homeDesc: L(
-      'Архитектурные двери скрытого монтажа: полотно в плоскости стены, скрытая коробка, минимальный зазор.',
-      'Архітектурні двері прихованого монтажу: полотно в площині стіни, прихована коробка, мінімальний зазор.',
-      'Puertas arquitectónicas de instalación oculta: hoja al ras del muro, marco oculto, junta mínima.',
-      'Architectural flush doors: leaf in the plane of the wall, hidden frame, minimal gap.'
+      'Двери скрытого монтажа iDOORS под финишную отделку: короб из анодированного алюминия, скрытые петли, полотно вровень со стеной.',
+      'Двері прихованого монтажу iDOORS під фінішне оздоблення: короб з анодованого алюмінію, приховані петлі, полотно врівень зі стіною.',
+      'Puertas de instalación oculta iDOORS para el acabado: marco de aluminio anodizado, bisagras ocultas, hoja al ras del muro.',
+      'iDOORS flush doors for finishing: anodized aluminium frame, concealed hinges, leaf flush with the wall.'
     )
   },
 
@@ -90,7 +91,7 @@ export const messages = {
 
   collection: {
     kicker: L('IDOORS', 'IDOORS', 'IDOORS', 'IDOORS'),
-    spec: L('01 — IDOORS', '01 — IDOORS', '01 — IDOORS', '01 — IDOORS'),
+    spec: L('02 — Prime-AL', '02 — Prime-AL', '02 — Prime-AL', '02 — Prime-AL'),
     title: L('Prime-AL.', 'Prime-AL.', 'Prime-AL.', 'Prime-AL.'),
     hint: L(
       'Праймированная плёнка (Германия) под краску, обои и штукатурку. Кромка серая или чёрная. Standard или INSIDE.',
@@ -124,6 +125,97 @@ export const messages = {
       frame: L('Анодированный короб и торец', 'Анодований короб і торець', 'Marco y canto anodizados', 'Anodized frame and edge'),
       swing: L('Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE', 'Standard / INSIDE'),
       wall: L('Гипсокартон или кирпич', 'Гіпсокартон або цегла', 'Pladur o ladrillo', 'Drywall or brick')
+    }
+  },
+
+  offers: {
+    primed: {
+      kicker: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+      spec: L('01 — Finish', '01 — Finish', '01 — Finish', '01 — Finish'),
+      title: L(
+        'Двери скрытого монтажа iDOORS под финишную отделку',
+        'Двері прихованого монтажу iDOORS під фінішне оздоблення',
+        'Puertas de instalación oculta iDOORS para el acabado',
+        'iDOORS flush doors for finishing'
+      ),
+      text: L(
+        'Идеальное решение для стильных современных интерьеров, где важна каждая деталь. Прочный короб из анодированного алюминия и скрытые петли позволяют установить дверь абсолютно вровень со стеной. Воплощайте любые дизайнерские задумки — полотно полностью готово под покраску, декоративную штукатурку или обои. Создайте эффект безупречной монолитной стены и визуально расширьте пространство вашего дома!',
+        'Ідеальне рішення для стильних сучасних інтер’єрів, де важлива кожна деталь. Міцний короб з анодованого алюмінію і приховані петлі дають встановити двері абсолютно врівень зі стіною. Втілюйте будь-які дизайнерські задуми — полотно повністю готове під фарбування, декоративну штукатурку або шпалери. Створіть ефект бездоганної монолітної стіни і візуально розширіть простір вашого дому!',
+        'La solución para interiores contemporáneos donde cuenta cada detalle. Un marco robusto de aluminio anodizado y bisagras ocultas permiten instalar la puerta totalmente al ras del muro. Cualquier idea de diseño: la hoja llega lista para pintura, enlucido decorativo o papel. El efecto de un muro monolítico impecable, y el espacio de la casa se agranda a la vista.',
+        'The solution for precise contemporary interiors. A robust anodized aluminium frame and concealed hinges let the door sit fully flush with the wall. Carry any design through — the leaf is ready for paint, decorative plaster or wallpaper. A seamless monolithic wall, and the house reads larger.'
+      ),
+      alt: L(
+        'Скрытая дверь iDOORS в плоскости стены после отделки',
+        'Приховані двері iDOORS у площині стіни після оздоблення',
+        'Puerta oculta iDOORS al ras del muro tras el acabado',
+        'iDOORS flush door in the wall plane after finishing'
+      )
+    },
+    finished: {
+      kicker: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+      spec: L('02 — Surface', '02 — Surface', '02 — Surface', '02 — Surface'),
+      title: L(
+        'Скрытые двери iDOORS с готовой отделкой',
+        'Приховані двері iDOORS із готовою обробкою',
+        'Puertas ocultas iDOORS con acabado de fábrica',
+        'iDOORS flush doors with factory finish'
+      ),
+      text: L(
+        'Превратите двери в ключевой акцент вашего интерьера или сделайте их элегантным продолжением стен. Мы предлагаем готовые премиальные решения: благородный натуральный шпон, стильные зеркальные полотна, визуально расширяющие пространство, или безупречное окрашивание в любой цвет по каталогу RAL. Безупречное заводское качество покрытия, алюминиевая кромка и надёжные скрытые механизмы для тех, кто не компрометирует стиль.',
+        'Перетворіть двері на ключовий акцент інтер’єру або зробіть їх елегантним продовженням стін. Пропонуємо готові преміальні рішення: шляхетний натуральний шпон, стильні дзеркальні полотна, що візуально розширюють простір, або бездоганне фарбування в будь-який колір за каталогом RAL. Заводська якість покриття, алюмінієва крайка і надійні приховані механізми для тих, хто не поступається стилем.',
+        'Convierta la puerta en el acento del interior o en la continuación elegante del muro. Soluciones premium listas: chapa natural, hojas de espejo que agrandan el espacio, o lacado en cualquier color RAL. Calidad de fábrica, canto de aluminio y herrajes ocultos para quien no cede en el estilo.',
+        'Make the door the accent of the room, or an elegant continuation of the wall. Ready premium options: natural veneer, mirror leaves that widen the space, or a factory paint in any RAL colour. Factory coating, aluminium edge and concealed hardware for interiors that do not compromise on style.'
+      ),
+      alt: L(
+        'Скрытая дверь iDOORS с готовой отделкой в интерьере',
+        'Приховані двері iDOORS із готовою обробкою в інтер’єрі',
+        'Puerta oculta iDOORS con acabado de fábrica en un interior',
+        'Factory-finished iDOORS flush door in an interior'
+      )
+    },
+    size: {
+      kicker: L('iDOORS', 'iDOORS', 'iDOORS', 'iDOORS'),
+      spec: L('03 — Size', '03 — Size', '03 — Size', '03 — Size'),
+      title: L(
+        'Двери скрытого монтажа iDOORS — Под ваш размер',
+        'Двері прихованого монтажу iDOORS — Під ваш розмір',
+        'Puertas de instalación oculta iDOORS — A su medida',
+        'iDOORS flush doors — Made to your size'
+      ),
+      text: L(
+        'Создавайте архитектурные решения без стандартных ограничений! Мы изготавливаем двери скрытого монтажа по индивидуальным габаритам высотой до 2400 мм. Высокие дверные полотна визуально приподнимают потолки, вытягивают пространство и придают интерьеру премиальный статус. Идеальное решение для нестандартных проёмов и масштабных дизайнерских проектов.',
+        'Створюйте архітектурні рішення без стандартних обмежень. Виготовляємо двері прихованого монтажу за індивідуальними габаритами висотою до 2400 мм. Високі полотна візуально піднімають стелі, витягують простір і надають інтер’єру преміальний статус. Ідеальне рішення для нестандартних прорізів і масштабних дизайнерських проєктів.',
+        'Arquitectura sin el límite del estándar. Fabricamos puertas de instalación oculta a medida, de hasta 2400 mm de altura. Las hojas altas elevan el techo a la vista, alargan el espacio y dan al interior un carácter premium. La solución para huecos fuera de norma y encargos de escala.',
+        'Architecture without the standard limit. We build flush doors to individual sizes, up to 2400 mm high. Tall leaves lift the ceiling, stretch the room and give the interior a premium register. The solution for non-standard openings and large design projects.'
+      ),
+      alt: L(
+        'Высокая скрытая дверь iDOORS в проёме',
+        'Високі приховані двері iDOORS у прорізі',
+        'Puerta oculta iDOORS de gran altura en el hueco',
+        'Tall iDOORS flush door in an opening'
+      )
+    },
+    hardware: {
+      kicker: L('Spinoff', 'Spinoff', 'Spinoff', 'Spinoff'),
+      spec: L('04 — Hardware', '04 — Hardware', '04 — Hardware', '04 — Hardware'),
+      title: L(
+        'Дверные ручки и замки Spinoff',
+        'Дверні ручки і замки Spinoff',
+        'Manillas y cerraduras Spinoff',
+        'Spinoff handles and locks'
+      ),
+      text: L(
+        'Идеальное дополнение к дверям скрытого монтажа — премиальная фурнитура Spinoff. Итальянский минимализм, чёткая геометрия и безупречная эргономика. Замки Spinoff с магнитным язычком обеспечивают абсолютно бесшумное закрывание, а ручки с износостойким galvanic-покрытием сохраняют первозданный вид даже при активном ежедневном использовании. Подчеркните стиль вашего интерьера надёжными деталями.',
+        'Ідеальне доповнення до дверей прихованого монтажу — преміальна фурнітура Spinoff. Італійський мінімалізм, чітка геометрія і бездоганна ергономіка. Замки Spinoff з магнітним язичком забезпечують абсолютно безшумне зачинення, а ручки зі зносостійким galvanic-покриттям зберігають первісний вигляд навіть за щоденного користування. Підкресліть стиль інтер’єру надійними деталями.',
+        'El complemento de la puerta oculta: herrajes premium Spinoff. Minimalismo italiano, geometría clara y ergonomía precisa. Las cerraduras Spinoff con pestillo magnético cierran en silencio, y las manillas con recubrimiento galvanic resisten el uso diario. El estilo del interior, en los detalles que duran.',
+        'The counterpart to a flush door: Spinoff premium hardware. Italian minimalism, clear geometry, exact ergonomics. Spinoff locks with a magnetic latch close in silence, and handles with a wear-resistant galvanic finish keep their look in daily use. The interior, carried by the details.'
+      ),
+      alt: L(
+        'Дверная ручка Spinoff на полотне скрытой двери',
+        'Дверна ручка Spinoff на полотні прихованих дверей',
+        'Manilla Spinoff en una hoja de puerta oculta',
+        'Spinoff handle on a flush-door leaf'
+      )
     }
   },
 
