@@ -1,24 +1,24 @@
 import type { CatalogProduct, ExtraId, ProductLook } from '~/types/content'
 
 const flushInteriors = [
-  '/images/prime-al-c.jpg',
-  '/images/prime-al-c-inside.jpg',
-  '/images/prime-al-ch.jpg',
-  '/images/prime-al-ch-inside.jpg',
-  '/images/idoors-interior-light.jpg',
+  '/images/work-corner.jpg',
+  '/images/work-pair.jpg',
+  '/images/work-room.jpg',
   '/images/work-corridor.jpg',
-  '/images/after-flush.jpg',
   '/images/interior-flush.jpg',
+  '/images/after-flush.jpg',
+  '/images/idoors-interior-light.jpg',
+  '/images/idoors-interior-dark.jpg',
 ]
 
 const finishInteriors = [
-  '/images/prime-al-c.jpg',
-  '/images/prime-al-ch.jpg',
+  '/images/idoors-interior-light.jpg',
+  '/images/idoors-interior-dark.jpg',
+  '/images/work-corner.jpg',
+  '/images/work-room.jpg',
   '/images/project-living-oak.jpg',
   '/images/material-paint.jpg',
-  '/images/idoors-interior-dark.jpg',
   '/images/product-glass.jpg',
-  '/images/work-corridor.jpg',
 ]
 
 export const homeHeroShot = '/images/idoors-interior-light.jpg'
@@ -26,22 +26,22 @@ export const homeHeroShot = '/images/idoors-interior-light.jpg'
 export const homeSlides = {
   hero: flushInteriors,
   primed: [
-    '/images/prime-al-c.jpg',
-    '/images/prime-al-ch.jpg',
-    '/images/after-flush.jpg',
+    '/images/work-corner.jpg',
+    '/images/work-pair.jpg',
+    '/images/work-room.jpg',
     '/images/work-corridor.jpg',
   ],
   finished: [
-    '/images/prime-al-c.jpg',
-    '/images/project-living-oak.jpg',
+    '/images/idoors-interior-light.jpg',
     '/images/idoors-interior-dark.jpg',
-    '/images/material-paint.jpg',
+    '/images/work-corner.jpg',
+    '/images/work-corridor.jpg',
   ],
   size: [
-    '/images/prime-al-ch-inside.jpg',
-    '/images/work-corridor.jpg',
+    '/images/work-pair.jpg',
+    '/images/work-room.jpg',
+    '/images/interior-flush.jpg',
     '/images/after-flush.jpg',
-    '/images/idoors-install-standard.jpg',
   ]
 } as const
 
