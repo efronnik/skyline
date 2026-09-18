@@ -23,7 +23,7 @@ export const messages = {
   langAria: L('Язык', 'Мова', 'Idioma', 'Language'),
 
   nav: {
-    collection: L('Система', 'Система', 'Sistema', 'System'),
+    collection: L('Наша продукция', 'Наша продукція', 'Nuestra producción', 'Our products'),
     finished: L('Отделка', 'Оздоблення', 'Acabado', 'Finish'),
     size: L('Размер', 'Розмір', 'Medida', 'Size'),
     hardware: L('Фурнитура', 'Фурнітура', 'Herrajes', 'Hardware'),
@@ -38,7 +38,7 @@ export const messages = {
 
   footer: {
     studio: L('Студия', 'Студія', 'Estudio', 'Studio'),
-    collection: L('Система', 'Система', 'Sistema', 'System'),
+    collection: L('Наша продукция', 'Наша продукція', 'Nuestra producción', 'Our products'),
     contact: L('Контакт', 'Контакт', 'Contacto', 'Contact'),
     directions: L('Как добраться', 'Як дістатися', 'Cómo llegar', 'Directions'),
     addressNote: L('Адрес появится после заполнения карточки студии.', 'Адреса з’явиться після заповнення картки студії.', 'La dirección aparecerá cuando se complete la ficha del estudio.', 'The address will appear once the studio card is filled in.')
