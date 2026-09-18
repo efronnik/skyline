@@ -86,7 +86,7 @@ onMounted(async () => {
       <h1 id="hero-title">{{ t('hero.title') }}</h1>
       <p class="hero__lead">{{ t('hero.lead') }}</p>
       <div class="hero__cta">
-        <AppButton to="#configurator" invert>{{ t('hero.cta1') }}</AppButton>
+        <AppButton to="#collection" invert>{{ t('hero.cta1') }}</AppButton>
         <AppButton to="#contact" variant="ghost" invert>{{ t('hero.cta2') }}</AppButton>
       </div>
     </div>
@@ -95,7 +95,7 @@ onMounted(async () => {
 
 <style scoped>
 .hero {
-  min-height: min(88svh, 760px);
+  min-height: min(58svh, 520px);
   display: grid;
   background: var(--night);
   color: var(--paper);

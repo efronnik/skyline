@@ -4,7 +4,6 @@ import { getProduct } from '~/data/products'
 definePageMeta({ darkHeader: true })
 
 const { t, ta } = useLocale()
-const { openProduct } = useConfigurator()
 const slug = String(useRoute().params.slug)
 
 if (slug === 'prime-al') {
@@ -54,7 +53,7 @@ useJsonLd(() => ({
         <p>{{ t(`products.${product.slug}.latin`) }}</p>
         <h1>{{ t(`products.${product.slug}.name`) }}</h1>
         <p>{{ t(`products.${product.slug}.summary`) }}</p>
-        <AppButton invert @click="openProduct(product.slug)">{{ t('collection.configure') }}</AppButton>
+        <AppButton to="#contact" invert>{{ t('cta.consult') }}</AppButton>
       </div>
     </header>
     <div class="body">

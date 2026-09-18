@@ -44,7 +44,7 @@ onMounted(() => {
       </button>
     </div>
     <nav class="menu__nav" :aria-label="t('navAria')">
-      <HashLink
+      <NavLink
         v-for="item in primaryNav"
         :key="item.to"
         :to="item.to"
@@ -52,7 +52,7 @@ onMounted(() => {
         @click="close"
       >
         {{ t(`nav.${item.label}`) }}
-      </HashLink>
+      </NavLink>
       <HashLink to="#contact" class="menu__link" @click="close">{{ t('nav.contact') }}</HashLink>
     </nav>
     <div class="menu__cta">

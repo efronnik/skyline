@@ -4,7 +4,7 @@ import { idoorsBuild, idoorsSizes, sizeLine } from '~/data/idoorsSpec'
 import { technicalSteps } from '~/data/technical'
 
 const { t } = useLocale()
-const { swing } = useConfigurator()
+const swing = ref<'in' | 'out'>('out')
 const reduced = useReducedMotion()
 const { play } = useAnimeJob()
 const active = ref(0)

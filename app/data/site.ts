@@ -42,9 +42,9 @@ export const contact: SiteContact = {
 
 export const primaryNav: NavItem[] = [
   { label: 'collection', to: '#collection' },
-  { label: 'configurator', to: '#configurator' },
   { label: 'materials', to: '#materials' },
-  { label: 'projects', to: '#projects' }
+  { label: 'size', to: '#size' },
+  { label: 'projects', to: '/projects' }
 ]
 
 export const footerNav: NavItem[] = [

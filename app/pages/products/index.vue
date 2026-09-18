@@ -2,7 +2,6 @@
 import { products } from '~/data/products'
 
 const { t } = useLocale()
-const { openProduct } = useConfigurator()
 
 usePageSeo(() => ({
   title: t('collection.kicker'),
@@ -21,11 +20,10 @@ usePageSeo(() => ({
       <p>{{ t('collection.hint') }}</p>
     </header>
     <div class="list">
-      <button
+      <NuxtLink
         v-for="item in products"
         :key="item.slug"
-        type="button"
-        @click="openProduct(item.slug)"
+        :to="`/products/${item.slug}`"
       >
         <MediaFrame
           :src="item.image"
@@ -37,7 +35,7 @@ usePageSeo(() => ({
         <p>{{ t(`products.${item.slug}.latin`) }}</p>
         <h2>{{ t(`products.${item.slug}.name`) }}</h2>
         <p>{{ t(`products.${item.slug}.summary`) }}</p>
-      </button>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -71,16 +69,14 @@ h1 {
   gap: 1.3rem;
 }
 
-button {
+a {
   padding: 0;
-  border: 0;
-  background: none;
   color: inherit;
+  text-decoration: none;
   text-align: left;
-  cursor: pointer;
 }
 
-button p:first-of-type {
+a p:first-of-type {
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;

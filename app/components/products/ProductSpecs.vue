@@ -15,15 +15,15 @@ const mdf = computed(() => (props.product.swing === 'in' ? idoorsBuild.mdfIn : i
   <dl class="specs">
     <div>
       <dt>{{ t('specs.finish') }}</dt>
-      <dd>{{ t('config.leafFinish') }}</dd>
+      <dd>{{ t('specs.leafFinish') }}</dd>
     </div>
     <div>
       <dt>{{ t('specs.edge') }}</dt>
-      <dd>{{ t(`config.edges.${product.edge}`) }}</dd>
+      <dd>{{ t(`specs.edges.${product.edge}`) }}</dd>
     </div>
     <div>
       <dt>{{ t('specs.opening') }}</dt>
-      <dd>{{ t(`config.openings.${product.swing}`) }} · {{ t('config.openings.left') }} · {{ t('config.openings.right') }}</dd>
+      <dd>{{ t(`specs.openings.${product.swing}`) }} · {{ t('specs.openings.left') }} · {{ t('specs.openings.right') }}</dd>
     </div>
     <div>
       <dt>{{ t('specs.leafSize') }}</dt>

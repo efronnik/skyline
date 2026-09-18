@@ -3,7 +3,6 @@ import { animate } from 'animejs'
 import { products } from '~/data/products'
 
 const { t } = useLocale()
-const { openProduct, selectedSlug } = useConfigurator()
 const reduced = useReducedMotion()
 const { play } = useAnimeJob()
 
@@ -11,21 +10,6 @@ const edgeTones = {
   silver: '#E8E6E1',
   black: '#1C1916'
 } as const
-
-function pulseShot(event: MouseEvent, slug: string) {
-  openProduct(slug)
-  if (reduced.value) return
-  const shot = (event.currentTarget as HTMLElement).querySelector('.sku__shot')
-  if (!(shot instanceof HTMLElement)) return
-  play(
-    `sku-${slug}`,
-    animate(shot, {
-      scale: [1, 0.975, 1],
-      duration: 460,
-      ease: 'outQuad'
-    })
-  )
-}
 
 function liftShot(event: PointerEvent, on: boolean) {
   if (reduced.value) return
@@ -59,15 +43,12 @@ function liftShot(event: PointerEvent, on: boolean) {
       :aria-label="t('collection.shelfAria')"
       tabindex="0"
     >
-      <button
+      <NuxtLink
         v-for="item in products"
         :key="item.slug"
-        type="button"
         class="sku"
-        :class="{ 'is-on': selectedSlug === item.slug }"
+        :to="`/products/${item.slug}`"
         :data-slug="item.slug"
-        :aria-pressed="selectedSlug === item.slug"
-        @click="pulseShot($event, item.slug)"
         @pointerenter="liftShot($event, true)"
         @pointerleave="liftShot($event, false)"
       >
@@ -83,9 +64,9 @@ function liftShot(event: PointerEvent, on: boolean) {
         <h3>{{ t(`products.${item.slug}.name`) }}</h3>
         <p class="sku__edge">
           <span class="sku__dot" :style="{ background: edgeTones[item.edge] }" />
-          {{ t(`config.edges.${item.edge}`) }}
+          {{ t(`specs.edges.${item.edge}`) }}
         </p>
-      </button>
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -142,11 +123,9 @@ h2 {
   display: grid;
   gap: 0.65rem;
   padding: 0;
-  border: 0;
-  background: none;
   color: inherit;
+  text-decoration: none;
   text-align: left;
-  cursor: pointer;
 }
 
 .sku__shot {
@@ -161,8 +140,7 @@ h2 {
   background: #eceae6;
 }
 
-.sku:hover .sku__shot,
-.sku.is-on .sku__shot {
+.sku:hover .sku__shot {
   border-color: var(--ink);
 }
 

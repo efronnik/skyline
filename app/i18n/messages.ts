@@ -22,8 +22,9 @@ export const messages = {
 
   nav: {
     collection: L('Система', 'Система', 'Sistema', 'System'),
-    configurator: L('Конфигуратор', 'Конфігуратор', 'Configurador', 'Configurator'),
     materials: L('Материалы', 'Матеріали', 'Materiales', 'Materials'),
+    size: L('Размер', 'Розмір', 'Medida', 'Size'),
+    technology: L('Технология', 'Технологія', 'Tecnología', 'Technology'),
     projects: L('Проекты', 'Проєкти', 'Proyectos', 'Projects'),
     contact: L('Заявка', 'Заявка', 'Consulta', 'Inquiry'),
     about: L('О студии', 'Про студію', 'Estudio', 'Studio')
@@ -56,7 +57,7 @@ export const messages = {
       'La hoja al ras del muro: arquitectura.',
       'The leaf in the wall plane — architecture.'
     ),
-    cta1: L('Собрать дверь', 'Зібрати двері', 'Configurar la puerta', 'Build the door'),
+    cta1: L('Смотреть Prime-AL', 'Дивитися Prime-AL', 'Ver Prime-AL', 'See Prime-AL'),
     cta2: L('Рассчитать проект', 'Розрахувати проєкт', 'Calcular el proyecto', 'Request a quote'),
     alt: L(
       'Производство скрытых дверей: полотно и алюминиевый профиль',
@@ -89,9 +90,8 @@ export const messages = {
 
   collection: {
     kicker: L('IDOORS', 'IDOORS', 'IDOORS', 'IDOORS'),
-    spec: L('02 — Collection', '02 — Collection', '02 — Collection', '02 — Collection'),
+    spec: L('01 — IDOORS', '01 — IDOORS', '01 — IDOORS', '01 — IDOORS'),
     title: L('Prime-AL.', 'Prime-AL.', 'Prime-AL.', 'Prime-AL.'),
-    configure: L('Настроить', 'Налаштувати', 'Configurar', 'Configure'),
     hint: L(
       'Праймированная плёнка (Германия) под краску, обои и штукатурку. Кромка серая или чёрная. Standard или INSIDE.',
       'Праймована плівка (Німеччина) під фарбу, шпалери й штукатурку. Кромка сіра або чорна. Standard або INSIDE.',
@@ -127,96 +127,9 @@ export const messages = {
     }
   },
 
-  config: {
-    kicker: L('Конфигуратор', 'Конфігуратор', 'Configurador', 'Configurator'),
-    spec: L('03 — Spec', '03 — Spec', '03 — Spec', '03 — Spec'),
-    title: L('Собрать систему.', 'Зібрати систему.', 'Configurar el sistema.', 'Specify the system.'),
-    lead: L(
-      'Праймированная плёнка. Кромка анодированная. Нажмите на дверь, чтобы открыть.',
-      'Праймована плівка. Кромка анодована. Натисніть на двері, щоб відкрити.',
-      'Lámina imprimada. Canto anodizado. Pulse la puerta para abrir.',
-      'Primed film. Anodized edge. Click the door to open.'
-    ),
-    liveAria: L('Кромка, сторона и направление', 'Кромка, сторона і напрямок', 'Canto, lado y sentido', 'Edge, side and swing'),
-    clickDoor: L('Нажмите на полотно, чтобы открыть или закрыть', 'Натисніть на полотно, щоб відкрити або закрити', 'Pulse la hoja para abrir o cerrar', 'Click the leaf to open or close'),
-    openDoor: L('Открыть', 'Відкрити', 'Abrir', 'Open'),
-    closeDoor: L('Закрыть', 'Закрити', 'Cerrar', 'Close'),
-    clickHandle: L('Положение ручки', 'Положення ручки', 'Posición de la manilla', 'Handle position'),
-    clickSill: L('Выпадающий порог', 'Випадний поріг', 'Umbral automático', 'Drop seal'),
-    picking: L('Цвет кромки', 'Колір кромки', 'Color del canto', 'Edge colour'),
-    loading: L('Загрузка модели…', 'Завантаження моделі…', 'Cargando el modelo…', 'Loading the model…'),
-    type: L('Тип', 'Тип', 'Tipo', 'Type'),
-    opening: L('Открывание', 'Відкривання', 'Apertura', 'Handing'),
-    side: L('Сторона', 'Сторона', 'Lado', 'Side'),
-    swing: L('Направление', 'Напрямок', 'Sentido', 'Swing'),
-    height: L('Высота', 'Висота', 'Altura', 'Height'),
-    handle: L('Ручка', 'Ручка', 'Manilla', 'Handle'),
-    handlePos: L('Положение ручки', 'Положення ручки', 'Posición de la manilla', 'Handle position'),
-    edge: L('Окантовка', 'Окантовка', 'Canto', 'Edging'),
-    wall: L('Стена', 'Стіна', 'Muro', 'Wall'),
-    floor: L('Пол', 'Підлога', 'Suelo', 'Floor'),
-    leafFinish: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)'),
-    threshold: L('Выпадающий порог', 'Випадний поріг', 'Umbral automático', 'Drop seal'),
-    finish: L('Отделка', 'Оздоблення', 'Acabado', 'Finish'),
-    color: L('Цвет', 'Колір', 'Color', 'Colour'),
-    discuss: L('Обсудить это решение', 'Обговорити це рішення', 'Consultar esta solución', 'Discuss this spec'),
-    summary: L('Спецификация', 'Специфікація', 'Especificación', 'Specification'),
-    types: {
-      single: L('Одностворчатая', 'Одностулкова', 'De una hoja', 'Single'),
-      double: L('Двустворчатая', 'Двостулкова', 'De dos hojas', 'Double'),
-      sliding: L('Раздвижная', 'Розсувна', 'Corredera', 'Sliding')
-    },
-    openings: {
-      left: L('Левое', 'Ліве', 'Izquierda', 'Left'),
-      right: L('Правое', 'Праве', 'Derecha', 'Right'),
-      in: L('INSIDE · внутрь', 'INSIDE · всередину', 'INSIDE · dentro', 'INSIDE · inward'),
-      out: L('Standard · наружу', 'Standard · назовні', 'Standard · fuera', 'Standard · outward'),
-      inLive: L('INSIDE', 'INSIDE', 'INSIDE', 'INSIDE'),
-      outLive: L('STD', 'STD', 'STD', 'STD')
-    },
-    heights: {
-      standard: L('Стандарт', 'Стандарт', 'Estándar', 'Standard'),
-      ceiling: L('До потолка', 'До стелі', 'Hasta el techo', 'To ceiling'),
-      custom: L('По проекту', 'За проєктом', 'A medida', 'Bespoke')
-    },
-    handles: {
-      linear: L('Линейная', 'Лінійна', 'Lineal', 'Linear'),
-      hidden: L('Скрытая', 'Прихована', 'Oculta', 'Concealed'),
-      none: L('Без ручки', 'Без ручки', 'Sin manilla', 'No handle')
-    },
-    handlePositions: {
-      standard: L('Стандарт', 'Стандарт', 'Estándar', 'Standard'),
-      high: L('Высокая', 'Висока', 'Alta', 'High'),
-      custom: L('По проекту', 'За проєктом', 'A medida', 'Bespoke')
-    },
-    edges: {
-      silver: L('Анодированный алюминий', 'Анодований алюміній', 'Aluminio anodizado', 'Anodized aluminum'),
-      black: L('Анодированный чёрный', 'Анодований чорний', 'Anodizado negro', 'Anodized black')
-    },
-    thresholds: {
-      yes: L('Есть', 'Є', 'Sí', 'Yes'),
-      no: L('Нет', 'Немає', 'No', 'No')
-    },
-    colors: {
-      chalk: L('Мел', 'Крейда', 'Tiza', 'Chalk'),
-      linen: L('Лён', 'Льон', 'Lino', 'Linen'),
-      sand: L('Песок', 'Пісок', 'Arena', 'Sand'),
-      mineral: L('Минерал', 'Мінерал', 'Mineral', 'Mineral'),
-      clay: L('Глина', 'Глина', 'Arcilla', 'Clay'),
-      sage: L('Шалфей', 'Шавлія', 'Salvia', 'Sage'),
-      plaster: L('Штукатурка', 'Штукатурка', 'Yeso', 'Plaster'),
-      graphite: L('Графит', 'Графіт', 'Grafito', 'Graphite'),
-      oak: L('Дуб', 'Дуб', 'Roble', 'Oak'),
-      honey: L('Медовый', 'Медовий', 'Miel', 'Honey'),
-      walnut: L('Орех', 'Горіх', 'Nogal', 'Walnut'),
-      smoke: L('Дымчатый', 'Димчастий', 'Ahumado', 'Smoke'),
-      charcoal: L('Уголь', 'Вугілля', 'Carbón', 'Charcoal')
-    }
-  },
-
   materials: {
     kicker: L('Материалы', 'Матеріали', 'Materiales', 'Materials'),
-    spec: L('04 — Surface', '04 — Surface', '04 — Surface', '04 — Surface'),
+    spec: L('02 — Surface', '02 — Surface', '02 — Surface', '02 — Surface'),
     title: L('Сначала поверхность, потом проём.', 'Спочатку поверхня, потім проріз.', 'Primero la superficie, luego el hueco.', 'Surface first, opening second.'),
     items: {
       paint: {
@@ -257,7 +170,7 @@ export const messages = {
 
   technology: {
     kicker: L('Технология', 'Технологія', 'Tecnología', 'Technology'),
-    spec: L('05 — Construction', '05 — Construction', '05 — Construction', '05 — Construction'),
+    spec: L('04 — Construction', '04 — Construction', '04 — Construction', '04 — Construction'),
     title: L('Алюминиевый короб iDoors.', 'Алюмінієвий короб iDoors.', 'Marco de aluminio iDoors.', 'iDoors aluminium frame.'),
     lead: L(
       'Standard открывается в сторону плоскости. INSIDE — заподлицо с одной стороны, открывается в другую. Рядом, закрытые, выглядят одинаково.',
@@ -349,7 +262,7 @@ export const messages = {
 
   beforeAfter: {
     kicker: L('Сравнение', 'Порівняння', 'Comparación', 'Compare'),
-    spec: L('06 — Before / After', '06 — Before / After', '06 — Before / After', '06 — Before / After'),
+    spec: L('05 — Before / After', '05 — Before / After', '05 — Before / After', '05 — Before / After'),
     title: L('Обычная дверь. Затем — стена.', 'Звичайні двері. Потім — стіна.', 'Una puerta convencional. Luego, el muro.', 'A conventional door. Then — the wall.'),
     before: L('Дверь', 'Двері', 'Puerta', 'Door'),
     after: L('Стена', 'Стіна', 'Muro', 'Wall'),
@@ -360,7 +273,7 @@ export const messages = {
 
   projects: {
     kicker: L('Сценарии', 'Сценарії', 'Escenarios', 'Scenarios'),
-    spec: L('07 — Spaces', '07 — Spaces', '07 — Spaces', '07 — Spaces'),
+    spec: L('06 — Spaces', '06 — Spaces', '06 — Spaces', '06 — Spaces'),
     title: L('Дверь в пространстве, не в каталоге.', 'Двері в просторі, не в каталозі.', 'La puerta en el espacio, no en el catálogo.', 'The door in the room, not in a catalogue.'),
     lead: L(
       'Белое полотно, алюминиевая кромка.',
@@ -494,7 +407,7 @@ export const messages = {
 
   process: {
     kicker: L('Процесс', 'Процес', 'Proceso', 'Process'),
-    spec: L('08 — Sequence', '08 — Sequence', '08 — Sequence', '08 — Sequence'),
+    spec: L('07 — Sequence', '07 — Sequence', '07 — Sequence', '07 — Sequence'),
     title: L('От разговора до плоскости.', 'Від розмови до площини.', 'De la conversación al plano.', 'From conversation to plane.'),
     steps: L(
       [
@@ -534,7 +447,7 @@ export const messages = {
 
   quality: {
     kicker: L('Детали', 'Деталі', 'Detalles', 'Details'),
-    spec: L('09 — Precision', '09 — Precision', '09 — Precision', '09 — Precision'),
+    spec: L('08 — Precision', '08 — Precision', '08 — Precision', '08 — Precision'),
     title: L('Точность в деталях.', 'Точність у деталях.', 'La precisión está en el detalle.', 'Precision is in the details.'),
     metrics: L(
       '25 дБА · 50 000 циклов · плоскость ≤ 2 мм/м',
@@ -558,9 +471,15 @@ export const messages = {
     }
   },
 
+  size: {
+    kicker: L('Размер', 'Розмір', 'Medida', 'Size'),
+    spec: L('03 — Opening', '03 — Opening', '03 — Opening', '03 — Opening'),
+    title: L('Ваш размер.', 'Ваш розмір.', 'A su medida.', 'Your size.')
+  },
+
   architects: {
     kicker: L('Для бюро', 'Для бюро', 'Para estudios', 'For practices'),
-    spec: L('10 — Practice', '10 — Practice', '10 — Practice', '10 — Practice'),
+    spec: L('09 — Practice', '09 — Practice', '09 — Practice', '09 — Practice'),
     title: L('Для архитекторов и дизайнеров.', 'Для архітекторів і дизайнерів.', 'Para arquitectos y diseñadores.', 'For architects and designers.'),
     text: L(
       'Стандартные размеры, узел стыка и сетка — по запросу. Наличника нет: проём должен быть ровным.',
@@ -603,7 +522,7 @@ export const messages = {
 
   contact: {
     kicker: L('Контакт', 'Контакт', 'Contacto', 'Contact'),
-    spec: L('11 — Request', '11 — Request', '11 — Request', '11 — Request'),
+    spec: L('10 — Request', '10 — Request', '10 — Request', '10 — Request'),
     title: L('Форма обратной связи', 'Форма зворотного зв’язку', 'Formulario de contacto', 'Feedback form'),
     lead: L(
       'Имя, телефон, почта и сообщение.',
@@ -763,7 +682,18 @@ export const messages = {
     sound: L('Звук / ресурс', 'Звук / ресурс', 'Sonido / ciclos', 'Sound / cycles'),
     cycles: L('циклов', 'циклів', 'ciclos', 'cycles'),
     mm: L('мм', 'мм', 'mm', 'mm'),
-    dba: L('дБА', 'дБА', 'dBA', 'dBA')
+    dba: L('дБА', 'дБА', 'dBA', 'dBA'),
+    leafFinish: L('Праймированная плёнка (Германия)', 'Праймована плівка (Німеччина)', 'Lámina imprimada (Alemania)', 'Primed film (Germany)'),
+    edges: {
+      silver: L('Анодированный алюминий', 'Анодований алюміній', 'Aluminio anodizado', 'Anodized aluminum'),
+      black: L('Анодированный чёрный', 'Анодований чорний', 'Anodizado negro', 'Anodized black')
+    },
+    openings: {
+      left: L('Левое', 'Ліве', 'Izquierda', 'Left'),
+      right: L('Правое', 'Праве', 'Derecha', 'Right'),
+      in: L('INSIDE · внутрь', 'INSIDE · всередину', 'INSIDE · dentro', 'INSIDE · inward'),
+      out: L('Standard · наружу', 'Standard · назовні', 'Standard · fuera', 'Standard · outward')
+    }
   },
 
   legal: {
@@ -933,7 +863,8 @@ export const messages = {
     title: L('Обсудить проём.', 'Обговорити проріз.', 'Hablar del hueco.', 'Discuss the opening.'),
     text: L('Чертеж, фото стены или задача. Считаем систему под архитектуру.', 'Креслення, фото стіни або задача. Рахуємо систему під архітектуру.', 'Plano, foto del muro o encargo. Calculamos el sistema para la arquitectura.', 'A drawing, a wall photo, or the brief. We size the system to the architecture.'),
     consult: L('Получить консультацию', 'Отримати консультацію', 'Pedir consulta', 'Get a consultation'),
-    price: L('Запросить стоимость', 'Запросити вартість', 'Pedir presupuesto', 'Request pricing')
+    price: L('Запросить стоимость', 'Запросити вартість', 'Pedir presupuesto', 'Request pricing'),
+    more: L('Узнать больше', 'Дізнатися більше', 'Saber más', 'Learn more')
   },
 
   pages: {

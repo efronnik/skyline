@@ -63,32 +63,17 @@ onMounted(() => {
   <div>
     <HomeHero />
     <RevealOnView>
-      <PhilosophySection />
+      <IdoorsOffer />
     </RevealOnView>
     <RevealOnView stagger=".sku">
       <CollectionSection />
     </RevealOnView>
-    <DoorConfigurator />
     <RevealOnView stagger=".swatch">
-      <MaterialsSection />
-    </RevealOnView>
-    <RevealOnView stagger=".tech__frame">
-      <TechnologySection />
+      <MaterialsSection detail-to="/materials" />
     </RevealOnView>
     <RevealOnView>
-      <BeforeAfterSection />
+      <SizeOffer />
     </RevealOnView>
-    <RevealOnView stagger=".card">
-      <ProjectsSection />
-    </RevealOnView>
-    <RevealOnView stagger="li">
-      <ProcessSection />
-    </RevealOnView>
-    <RevealOnView stagger="article">
-      <QualitySection />
-    </RevealOnView>
-    <RevealOnView stagger="li">
-      <ArchitectsTeaser />
-    </RevealOnView>
+    <CtaBand />
   </div>
 </template>

@@ -25,14 +25,14 @@ onMounted(() => {
       <span>LIMEN</span>
     </NuxtLink>
     <nav class="bar__nav" :aria-label="t('navAria')">
-      <HashLink
+      <NavLink
         v-for="item in primaryNav"
         :key="item.to"
         :to="item.to"
         class="bar__link"
       >
         {{ t(`nav.${item.label}`) }}
-      </HashLink>
+      </NavLink>
     </nav>
     <div class="bar__actions">
       <LangSwitch class="bar__lang" />

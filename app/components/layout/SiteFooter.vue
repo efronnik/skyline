@@ -23,7 +23,7 @@ function footerLabel(item: { label: string, to: string }) {
       </div>
       <nav :aria-label="t('footer.studio')">
         <p class="foot__h">{{ t('footer.studio') }}</p>
-        <HashLink v-for="item in primaryNav" :key="item.to" :to="item.to">{{ t(`nav.${item.label}`) }}</HashLink>
+        <NavLink v-for="item in primaryNav" :key="item.to" :to="item.to">{{ t(`nav.${item.label}`) }}</NavLink>
         <HashLink to="#contact">{{ t('nav.contact') }}</HashLink>
       </nav>
       <nav :aria-label="t('footer.collection')">

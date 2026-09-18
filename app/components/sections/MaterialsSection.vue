@@ -2,6 +2,10 @@
 import { animate } from 'animejs'
 import { materials } from '~/data/materials'
 
+const props = defineProps<{
+  detailTo?: string
+}>()
+
 const { t } = useLocale()
 const reduced = useReducedMotion()
 const { play } = useAnimeJob()
@@ -13,120 +17,80 @@ watch(active, async () => {
   await nextTick()
   if (reduced.value || !stage.value) return
   const img = stage.value.querySelector('.media__img')
-  const copy = stage.value.querySelector('.mat__copy')
-  if (img)
-    play(
-      'mat-img',
-      animate(img, {
-        opacity: [0, 1],
-        scale: [1.045, 1],
-        duration: 720,
-        ease: 'outCubic'
-      })
-    )
-  if (copy)
-    play(
-      'mat-copy',
-      animate(copy, {
-        opacity: [0, 1],
-        y: [12, 0],
-        duration: 560,
-        ease: 'outCubic'
-      })
-    )
+  if (!img) return
+  play(
+    'mat-img',
+    animate(img, {
+      opacity: [0, 1],
+      scale: [1.045, 1],
+      duration: 720,
+      ease: 'outCubic'
+    })
+  )
 })
 </script>
 
 <template>
-  <section id="materials" class="mat" aria-labelledby="mat-title">
-    <div class="mat__intro">
-      <SectionLabel :kicker="t('materials.kicker')" :spec="t('materials.spec')" />
-      <h2 id="mat-title">{{ t('materials.title') }}</h2>
-    </div>
-    <div ref="stage" class="mat__stage">
+  <OfferBlock
+    id="materials"
+    invert
+    :kicker="t('materials.kicker')"
+    :spec="t('materials.spec')"
+    :title="t('materials.title')"
+  >
+    <div ref="stage">
       <MediaFrame
         v-if="current"
         :key="current.id"
         :src="current.preview"
         :alt="t(`materials.items.${current.id}.name`)"
-        ratio="16 / 10"
-        sizes="(min-width: 980px) 60vw, 100vw"
+        ratio="4 / 5"
+        sizes="(min-width: 960px) 46vw, 100vw"
         position="center"
       />
-      <div v-if="current" class="mat__copy">
-        <p class="mat__cat">{{ t(`materials.items.${current.id}.category`) }}</p>
-        <h3>{{ t(`materials.items.${current.id}.name`) }}</h3>
-        <p>{{ t(`materials.items.${current.id}.summary`) }}</p>
+    </div>
+    <template #body>
+      <p v-if="current" class="cat">{{ t(`materials.items.${current.id}.category`) }}</p>
+      <p v-if="current" class="lead">{{ t(`materials.items.${current.id}.summary`) }}</p>
+      <div class="swatches" role="list">
+        <button
+          v-for="item in materials"
+          :key="item.id"
+          type="button"
+          class="swatch"
+          :class="{ 'is-on': item.id === active }"
+          :aria-pressed="item.id === active"
+          @click="active = item.id"
+        >
+          <img :src="item.image" alt="" width="72" height="72">
+          <span>{{ t(`materials.items.${item.id}.name`) }}</span>
+        </button>
       </div>
-    </div>
-    <div class="mat__swatches" role="list">
-      <button
-        v-for="item in materials"
-        :key="item.id"
-        type="button"
-        class="swatch"
-        :class="{ 'is-on': item.id === active }"
-        :aria-pressed="item.id === active"
-        @click="active = item.id"
-      >
-        <img :src="item.image" alt="" width="72" height="72">
-        <span>{{ t(`materials.items.${item.id}.name`) }}</span>
-      </button>
-    </div>
-  </section>
+      <AppButton v-if="props.detailTo" :to="props.detailTo" invert>{{ t('cta.more') }}</AppButton>
+    </template>
+  </OfferBlock>
 </template>
 
 <style scoped>
-.mat {
-  padding: var(--section) var(--pad);
-  background: var(--night);
-  color: var(--paper);
-}
-
-.mat__intro,
-.mat__stage,
-.mat__swatches {
-  max-width: var(--max);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-h2 {
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  line-height: var(--lh-display);
-  max-width: 16ch;
-  margin-top: 0.8rem;
-}
-
-.mat__stage {
-  display: grid;
-  gap: 1.2rem;
-  margin: 1.4rem 0;
-}
-
-.mat__cat {
+.cat {
   font-family: var(--font-spec);
   font-size: var(--fs-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--joint-bright);
+  margin: 0 0 0.5rem;
 }
 
-h3 {
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  margin: 0.35rem 0 0.6rem;
+.lead {
+  margin: 0 0 1.1rem;
+  font-size: 1.12rem;
+  max-width: 36rem;
 }
 
-.mat__stage :deep(.media__img) {
-  will-change: transform, opacity;
-}
-
-.mat__swatches {
+.swatches {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+  margin: 0 0 1.2rem;
 }
 
 .swatch {
@@ -141,7 +105,6 @@ h3 {
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
 }
 
 .swatch img {
@@ -164,22 +127,7 @@ h3 {
   border-color: var(--paper);
 }
 
-@media (min-width: 800px) {
-  .mat__swatches {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 980px) {
-  .mat__stage {
-    grid-template-columns: 1.35fr 0.65fr;
-    align-items: end;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .swatch {
-    transition: none;
-  }
+.offer__visual :deep(.media) {
+  border: var(--hair) solid var(--line-on-night);
 }
 </style>
