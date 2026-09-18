@@ -29,8 +29,7 @@ onMounted(() => {
 <template>
   <header class="bar" :class="{ 'is-invert': inverted && !scrolled && !menuOpen, 'is-solid': scrolled || menuOpen || route.path !== '/' }">
     <NuxtLink to="/" class="bar__brand" :aria-label="t('brandAria')">
-      <span class="bar__mark" aria-hidden="true" />
-      <span>LIMEN</span>
+      <img src="/images/logo-idoors.png" alt="iDOORS" class="bar__logo" />
     </NuxtLink>
     <div class="bar__actions">
       <div class="bar__lang">
@@ -97,18 +96,21 @@ onMounted(() => {
 .bar__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
   min-height: 48px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  font-size: 0.82rem;
 }
 
-.bar__mark {
-  width: 1px;
-  height: 1.4rem;
-  background: currentColor;
+.bar__logo {
+  height: 2rem;
+  width: auto;
+  display: block;
+  /* logo has white text — darken on light header */
+  filter: brightness(0);
+  transition: filter 0.25s ease;
+}
+
+/* on dark/hero header: show original (gold circle + white text) */
+.bar.is-invert .bar__logo {
+  filter: none;
 }
 
 .bar__actions {

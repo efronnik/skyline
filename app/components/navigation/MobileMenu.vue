@@ -54,7 +54,7 @@ onMounted(() => {
       :aria-label="t('menuAria')"
     >
     <div class="menu__top">
-      <p class="menu__mark">LIMEN</p>
+      <img src="/images/logo-idoors.png" alt="iDOORS" class="menu__logo" />
       <button class="menu__close" type="button" @click="close">
         {{ t('menuClose') }}
       </button>
@@ -118,7 +118,13 @@ onMounted(() => {
   gap: 1rem;
 }
 
-.menu__mark,
+.menu__logo {
+  height: 1.8rem;
+  width: auto;
+  display: block;
+  /* menu is dark — logo shows gold + white, perfect */
+}
+
 .menu__close {
   font-family: var(--font-spec);
   font-size: var(--fs-xs);

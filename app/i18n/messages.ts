@@ -15,7 +15,7 @@ function L<T>(ru: T, uk: T, es: T, en: T) {
 
 export const messages = {
   skip: L('К содержанию', 'До змісту', 'Saltar al contenido', 'Skip to content'),
-  brandAria: L('LIMEN — на главную', 'LIMEN — на головну', 'LIMEN — inicio', 'LIMEN — home'),
+  brandAria: L('iDOORS — на главную', 'iDOORS — на головну', 'iDOORS — inicio', 'iDOORS — home'),
   navAria: L('Основная навигация', 'Основна навігація', 'Navegación principal', 'Main navigation'),
   menuAria: L('Меню', 'Меню', 'Menú', 'Menu'),
   menuOpen: L('Открыть меню', 'Відкрити меню', 'Abrir menú', 'Open menu'),
