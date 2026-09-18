@@ -4,11 +4,25 @@ const { t, ta } = useLocale()
 
 <template>
   <section id="studio" class="studio" aria-labelledby="studio-title">
-    <SectionLabel :kicker="t('studio.kicker')" :spec="t('studio.spec')" />
-    <div class="studio__grid">
-      <h2 id="studio-title">{{ t('studio.title') }}</h2>
-      <div class="studio__copy">
-        <p v-for="item in ta('studio.paragraphs')" :key="item">{{ item }}</p>
+    <div class="studio__inner">
+      <div class="studio__text">
+        <SectionLabel :kicker="t('studio.kicker')" :spec="t('studio.spec')" />
+        <h2 id="studio-title">{{ t('studio.title') }}</h2>
+        <div class="studio__copy">
+          <p v-for="item in ta('studio.paragraphs')" :key="item">{{ item }}</p>
+        </div>
+      </div>
+      <div class="studio__visual" aria-hidden="true">
+        <NuxtImg
+          src="/images/idoors-install-standard.jpg"
+          alt=""
+          width="640"
+          height="800"
+          sizes="(min-width: 980px) 42vw, 100vw"
+          fit="cover"
+          class="studio__img"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -22,25 +36,65 @@ const { t, ta } = useLocale()
   min-width: 0;
 }
 
+.studio__inner {
+  display: grid;
+  gap: 2rem;
+}
+
+.studio__text {
+  display: grid;
+  align-content: start;
+  gap: 0;
+}
+
 h2 {
   font-family: var(--font-display);
-  font-size: var(--fs-xl);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   line-height: var(--lh-display);
   letter-spacing: -0.03em;
-  max-width: 8.2em;
-  margin: 0.8rem 0 0;
+  max-width: 14em;
+  margin: 0.6rem 0 0;
   overflow-wrap: break-word;
 }
 
 .studio__copy {
   display: grid;
-  gap: 0.9rem;
-  margin-top: 1.2rem;
-  max-width: 42rem;
+  gap: 0.8rem;
+  margin-top: 1rem;
 }
 
 .studio__copy p {
   margin: 0;
-  font-size: 1.12rem;
+  font-size: 1rem;
+  max-width: 36rem;
+  line-height: 1.6;
+}
+
+.studio__visual {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.studio__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 980px) {
+  .studio__inner {
+    grid-template-columns: 1fr 0.9fr;
+    gap: 3.2rem;
+    align-items: center;
+  }
+
+  .studio__visual {
+    aspect-ratio: 3 / 4;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+  }
 }
 </style>

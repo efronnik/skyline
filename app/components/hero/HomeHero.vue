@@ -108,7 +108,7 @@ onMounted(async () => {
 
 h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.04em;
