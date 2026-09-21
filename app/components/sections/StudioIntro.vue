@@ -41,10 +41,18 @@ const { t, ta } = useLocale()
   gap: 2rem;
 }
 
+/* mobile: photo first */
+.studio__visual {
+  order: -1;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
 .studio__text {
   display: grid;
   align-content: start;
   gap: 0;
+  padding: 0 var(--pad);
 }
 
 h2 {
@@ -66,13 +74,7 @@ h2 {
 .studio__copy p {
   margin: 0;
   font-size: 1rem;
-  max-width: 36rem;
   line-height: 1.6;
-}
-
-.studio__visual {
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
 }
 
 .studio__img {
@@ -89,8 +91,14 @@ h2 {
     align-items: center;
   }
 
+  /* desktop: text left, photo right — reset mobile order */
   .studio__visual {
+    order: 0;
     aspect-ratio: 4 / 3;
+  }
+
+  .studio__text {
+    padding: 0 0 0 var(--pad);
   }
 
   h2 {

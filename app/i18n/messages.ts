@@ -1,10 +1,10 @@
 ﻿import { pdp } from './pdp'
 
 export const localeList = [
-  { id: 'ru', label: 'RU' },
-  { id: 'uk', label: 'UA' },
   { id: 'es', label: 'ES' },
-  { id: 'en', label: 'EN' }
+  { id: 'en', label: 'EN' },
+  { id: 'uk', label: 'UA' },
+  { id: 'ru', label: 'RU' }
 ] as const
 
 export type Locale = (typeof localeList)[number]['id']

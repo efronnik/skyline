@@ -48,8 +48,8 @@ onMounted(async () => {
       <span class="hero__ticks" aria-hidden="true" />
     </div>
     <div ref="copy" class="hero__copy">
-      <h1 id="hero-title">{{ t('hero.title') }}</h1>
-      <p class="hero__slogan">{{ t('hero.slogan') }}</p>
+      <p class="hero__kicker">{{ t('hero.title') }}</p>
+      <h1 id="hero-title">{{ t('hero.slogan') }}</h1>
       <div class="hero__cta">
         <AppButton variant="ghost" invert @click="openAsk()">{{ t('hero.cta1') }}</AppButton>
         <AppButton invert @click="quoteOrder">{{ t('hero.cta2') }}</AppButton>
@@ -106,21 +106,22 @@ onMounted(async () => {
   max-width: min(40rem, calc(100% - 1.2rem));
 }
 
-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
-  font-weight: 700;
-  line-height: var(--lh-display);
-  letter-spacing: -0.04em;
-  margin-bottom: 0.5rem;
+.hero__kicker {
+  font-family: var(--font-spec);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin: 0 0 0.6rem;
 }
 
-.hero__slogan {
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  opacity: 0.82;
-  margin: 0 0 1.2rem;
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.1rem;
 }
 
 .hero__cta {
