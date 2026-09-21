@@ -1,17 +1,21 @@
 const VALID = ['ru', 'uk', 'es', 'en']
 const KEY = 'limen-locale'
 
-export default defineNuxtPlugin(() => {
-  const { locale, setLocale } = useLocale()
+export default defineNuxtPlugin((nuxtApp) => {
+  const locale = useState<string>('limen-locale-state')
 
-  // Restore from localStorage on first load
-  const saved = localStorage.getItem(KEY)
-  if (saved && VALID.includes(saved) && saved !== locale.value) {
-    setLocale(saved as 'ru' | 'uk' | 'es' | 'en')
-  }
-
-  // Persist every change
+  // Persist every change to localStorage
   watch(locale, (val) => {
     localStorage.setItem(KEY, val)
-  }, { immediate: true })
+  })
+
+  // Restore AFTER hydration is complete (so Vue doesn't suppress the update)
+  nuxtApp.hook('app:mounted', () => {
+    const saved = localStorage.getItem(KEY)
+    if (saved && VALID.includes(saved) && saved !== locale.value) {
+      locale.value = saved as string
+      const cookie = useCookie('limen-locale')
+      cookie.value = saved
+    }
+  })
 })
