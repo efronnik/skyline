@@ -103,7 +103,7 @@ onMounted(async () => {
   z-index: 2;
   align-self: end;
   padding: calc(var(--header) + 1.1rem) var(--pad) 1.6rem;
-  max-width: min(40rem, calc(100% - 1.2rem));
+  max-width: min(56rem, calc(100% - 1.2rem));
 }
 
 .hero__kicker {
@@ -117,7 +117,7 @@ onMounted(async () => {
 
 h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  font-size: clamp(1.7rem, 2.4vw, 2.4rem);
   font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.03em;
