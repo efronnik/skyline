@@ -37,10 +37,10 @@ export const homeSlides = {
     '/images/work-corridor.jpg',
   ],
   size: [
-    '/images/work-pair.jpg',
-    '/images/work-room.jpg',
-    '/images/interior-flush.jpg',
-    '/images/after-flush.jpg',
+    '/images/project-bathroom.jpg',
+    '/images/project-kitchen.jpg',
+    '/images/project-hallway.jpg',
+    '/images/project-compare.jpg',
   ]
 } as const
 
@@ -65,8 +65,15 @@ export const catalogProducts: CatalogProduct[] = [
     slug: 'prime-custom',
     sku: 'iD-PRIME-CUSTOM',
     kind: 'custom',
-    image: '/images/work-corridor.jpg',
-    gallery: finishInteriors,
+    image: '/images/project-kitchen.jpg',
+    gallery: [
+      '/images/project-bathroom.jpg',
+      '/images/project-kitchen.jpg',
+      '/images/project-hallway.jpg',
+      '/images/project-compare.jpg',
+      '/images/work-room.jpg',
+      '/images/interior-flush.jpg',
+    ],
     ratio: '3 / 4'
   }
 ]
