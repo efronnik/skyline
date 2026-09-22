@@ -93,11 +93,13 @@ h2 {
     align-items: stretch;
   }
 
-  /* desktop: text left, photo right — reset mobile order */
+  /* desktop: photo left, text right */
   .studio__visual {
-    order: 0;
+    order: -1;
     aspect-ratio: auto;
     min-height: 420px;
+    margin: 0;
+    border-radius: 0;
   }
 
   .studio__text {
