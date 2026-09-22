@@ -30,6 +30,7 @@ const { t, ta } = useLocale()
 
 <style scoped>
 .studio {
+  padding-top: var(--section);
   max-width: var(--max);
   margin: 0 auto;
   min-width: 0;
@@ -40,19 +41,20 @@ const { t, ta } = useLocale()
   gap: 0;
 }
 
-/* mobile: photo first, full-bleed */
+/* mobile: photo first, with side padding */
 .studio__visual {
   order: -1;
   overflow: hidden;
   aspect-ratio: 16 / 10;
-  width: 100%;
+  margin: 0 var(--pad);
+  border-radius: 4px;
 }
 
 .studio__text {
   display: grid;
   align-content: start;
   gap: 0;
-  padding: var(--section) var(--pad);
+  padding: 1.6rem var(--pad) var(--section);
 }
 
 h2 {
