@@ -30,7 +30,6 @@ const { t, ta } = useLocale()
 
 <style scoped>
 .studio {
-  padding: var(--section) 0;
   max-width: var(--max);
   margin: 0 auto;
   min-width: 0;
@@ -38,21 +37,22 @@ const { t, ta } = useLocale()
 
 .studio__inner {
   display: grid;
-  gap: 2rem;
+  gap: 0;
 }
 
-/* mobile: photo first */
+/* mobile: photo first, full-bleed */
 .studio__visual {
   order: -1;
   overflow: hidden;
   aspect-ratio: 16 / 10;
+  width: 100%;
 }
 
 .studio__text {
   display: grid;
   align-content: start;
   gap: 0;
-  padding: 0 var(--pad);
+  padding: var(--section) var(--pad);
 }
 
 h2 {
@@ -99,7 +99,7 @@ h2 {
   }
 
   .studio__text {
-    padding: var(--section) var(--pad) var(--section) var(--pad);
+    padding: 0 var(--pad) 0 var(--pad);
   }
 
   h2 {
