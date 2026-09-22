@@ -37,7 +37,9 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    inquiryMode: 'mock',
+    inquiryMode: 'live',
+    resendApiKey: '',
+    inquiryTo: '',
     public: {
       siteUrl: 'https://limen.example',
       siteName: 'LIMEN'
