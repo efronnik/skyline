@@ -24,7 +24,7 @@ useJsonLd(() => ({
   headline: t(`projects.items.${project.slug}.title`),
   description: t(`projects.items.${project.slug}.story`),
   image: `${config.public.siteUrl}${project.cover}`,
-  author: { '@type': 'Organization', name: 'LIMEN' }
+  author: { '@type': 'Organization', name: 'iDOORS' }
 }))
 </script>
 

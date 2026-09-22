@@ -1,8 +1,8 @@
 const VALID = ['ru', 'uk', 'es', 'en']
-const KEY = 'limen-locale'
+const KEY = 'idoors-locale'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const locale = useState<string>('limen-locale-state')
+  const locale = useState<string>('idoors-locale-state')
 
   // Restore BEFORE Vue mounts — eliminates the Russian flash on SSG pages.
   // At this point Nuxt has already hydrated useState to 'ru' from the SSR
@@ -13,7 +13,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const saved = localStorage.getItem(KEY)
     if (saved && VALID.includes(saved) && saved !== locale.value) {
       locale.value = saved
-      const cookie = useCookie('limen-locale')
+      const cookie = useCookie('idoors-locale')
       cookie.value = saved
     }
   })

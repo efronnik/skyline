@@ -22,14 +22,14 @@ useJsonLd(() => ({
   '@graph': [
     {
       '@type': 'Organization',
-      name: 'LIMEN',
+      name: 'iDOORS',
       url: config.public.siteUrl,
-      email: 'studio@limen.example',
+      email: 'studio@idoors.example',
       sameAs: ['https://www.instagram.com/idoors.es/']
     },
     {
       '@type': 'WebSite',
-      name: 'LIMEN',
+      name: 'iDOORS',
       url: config.public.siteUrl,
       inLanguage: locale.value,
       description: t('seo.homeDesc')

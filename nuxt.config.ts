@@ -41,8 +41,8 @@ export default defineNuxtConfig({
     resendApiKey: '',
     inquiryTo: '',
     public: {
-      siteUrl: 'https://limen.example',
-      siteName: 'LIMEN'
+      siteUrl: 'https://idoors.example',
+      siteName: 'iDOORS'
     }
   },
   nitro: {

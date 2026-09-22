@@ -16,12 +16,12 @@ function pickLocale<T>(node: unknown, locale: Locale): T | undefined {
 }
 
 export function useLocale() {
-  const cookie = useCookie<Locale>('limen-locale', {
+  const cookie = useCookie<Locale>('idoors-locale', {
     default: () => 'ru',
     sameSite: 'lax',
     path: '/'
   })
-  const locale = useState<Locale>('limen-locale-state', () => {
+  const locale = useState<Locale>('idoors-locale-state', () => {
     const saved = cookie.value
     return localeList.some(item => item.id === saved) ? saved : 'ru'
   })

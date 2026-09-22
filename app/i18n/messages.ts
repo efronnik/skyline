@@ -1021,17 +1021,17 @@ export const messages = {
   legal: {
     privacyTitle: L('Конфиденциальность', 'Конфіденційність', 'Privacidad', 'Privacy'),
     privacyLead: L(
-      'Как LIMEN обрабатывает данные на этом сайте. Базовый текст — его заменят после правовой вычитки и заполнения реквизитов студии.',
-      'Як LIMEN обробляє дані на цьому сайті. Базовий текст — його замінять після правового вичитування і заповнення реквізитів студії.',
-      'Cómo LIMEN trata los datos en este sitio. Texto básico: se sustituirá tras revisión jurídica y cuando esté la ficha del estudio.',
-      'How LIMEN handles data on this site. A basic notice — it will be replaced after legal review and once the studio details are filled in.'
+      'Как iDOORS обрабатывает данные на этом сайте. Базовый текст — его заменят после правовой вычитки и заполнения реквизитов студии.',
+      'Як iDOORS обробляє дані на цьому сайті. Базовий текст — його замінять після правового вичитування і заповнення реквізитів студії.',
+      'Cómo iDOORS trata los datos en este sitio. Texto básico: se sustituirá tras revisión jurídica y cuando esté la ficha del estudio.',
+      'How iDOORS handles data on this site. A basic notice — it will be replaced after legal review and once the studio details are filled in.'
     ),
     privacyUpdated: L('Обновлено: сентябрь 2026', 'Оновлено: вересень 2026', 'Actualizado: septiembre 2026', 'Updated: September 2026'),
     privacySections: L(
       [
         {
           title: 'Кто обрабатывает',
-          text: 'Сайт ведёт LIMEN. Почта: studio@limen.example. Instagram: @idoors.es. Адрес и полные реквизиты появятся, когда будет заполнена карточка студии.'
+          text: 'Сайт ведёт iDOORS. Почта: studio@idoors.example. Instagram: @idoors.es. Адрес и полные реквизиты появятся, когда будет заполнена карточка студии.'
         },
         {
           title: 'Какие данные',
@@ -1051,11 +1051,11 @@ export const messages = {
         },
         {
           title: 'Cookies',
-          text: 'Сохраняем только язык интерфейса (cookie limen-locale). Счётчиков и рекламных cookies нет. Подробности — на странице Cookies.'
+          text: 'Сохраняем только язык интерфейса (cookie idoors-locale). Счётчиков и рекламных cookies нет. Подробности — на странице Cookies.'
         },
         {
           title: 'Ваши права',
-          text: 'Можно запросить доступ, исправление или удаление данных из заявки: напишите на studio@limen.example. Если вы в ЕС, можете также обратиться в надзорный орган своей страны.'
+          text: 'Можно запросить доступ, исправление или удаление данных из заявки: напишите на studio@idoors.example. Если вы в ЕС, можете также обратиться в надзорный орган своей страны.'
         },
         {
           title: 'Изменения',
@@ -1065,7 +1065,7 @@ export const messages = {
       [
         {
           title: 'Хто обробляє',
-          text: 'Сайт веде LIMEN. Пошта: studio@limen.example. Instagram: @idoors.es. Адреса й повні реквізити з’являться, коли буде заповнена картка студії.'
+          text: 'Сайт веде iDOORS. Пошта: studio@idoors.example. Instagram: @idoors.es. Адреса й повні реквізити з’являться, коли буде заповнена картка студії.'
         },
         {
           title: 'Які дані',
@@ -1085,11 +1085,11 @@ export const messages = {
         },
         {
           title: 'Cookies',
-          text: 'Зберігаємо лише мову інтерфейсу (cookie limen-locale). Лічильників і рекламних cookies немає. Подробиці — на сторінці Cookies.'
+          text: 'Зберігаємо лише мову інтерфейсу (cookie idoors-locale). Лічильників і рекламних cookies немає. Подробиці — на сторінці Cookies.'
         },
         {
           title: 'Ваші права',
-          text: 'Можна запросити доступ, виправлення або видалення даних із заявки: напишіть на studio@limen.example. Якщо ви в ЄС, можете також звернутися до наглядового органу своєї країни.'
+          text: 'Можна запросити доступ, виправлення або видалення даних із заявки: напишіть на studio@idoors.example. Якщо ви в ЄС, можете також звернутися до наглядового органу своєї країни.'
         },
         {
           title: 'Зміни',
@@ -1099,7 +1099,7 @@ export const messages = {
       [
         {
           title: 'Quién trata los datos',
-          text: 'El sitio lo opera LIMEN. Correo: studio@limen.example. Instagram: @idoors.es. La dirección y los datos fiscales aparecerán cuando esté completa la ficha del estudio.'
+          text: 'El sitio lo opera iDOORS. Correo: studio@idoors.example. Instagram: @idoors.es. La dirección y los datos fiscales aparecerán cuando esté completa la ficha del estudio.'
         },
         {
           title: 'Qué datos',
@@ -1119,11 +1119,11 @@ export const messages = {
         },
         {
           title: 'Cookies',
-          text: 'Solo guardamos el idioma de la interfaz (cookie limen-locale). No hay contadores ni cookies publicitarias. Más detalle en la página Cookies.'
+          text: 'Solo guardamos el idioma de la interfaz (cookie idoors-locale). No hay contadores ni cookies publicitarias. Más detalle en la página Cookies.'
         },
         {
           title: 'Sus derechos',
-          text: 'Puede pedir acceso, corrección o supresión de los datos de una consulta en studio@limen.example. Si está en la UE, también puede acudir a la autoridad de su país.'
+          text: 'Puede pedir acceso, corrección o supresión de los datos de una consulta en studio@idoors.example. Si está en la UE, también puede acudir a la autoridad de su país.'
         },
         {
           title: 'Cambios',
@@ -1133,7 +1133,7 @@ export const messages = {
       [
         {
           title: 'Who processes data',
-          text: 'This site is run by LIMEN. Email: studio@limen.example. Instagram: @idoors.es. Address and legal details will appear once the studio card is filled in.'
+          text: 'This site is run by iDOORS. Email: studio@idoors.example. Instagram: @idoors.es. Address and legal details will appear once the studio card is filled in.'
         },
         {
           title: 'What we collect',
@@ -1153,11 +1153,11 @@ export const messages = {
         },
         {
           title: 'Cookies',
-          text: 'We only store the interface language (cookie limen-locale). There are no counters or advertising cookies. See the Cookies page for more.'
+          text: 'We only store the interface language (cookie idoors-locale). There are no counters or advertising cookies. See the Cookies page for more.'
         },
         {
           title: 'Your rights',
-          text: 'You can ask to access, correct or delete inquiry data at studio@limen.example. If you are in the EU, you may also contact your national authority.'
+          text: 'You can ask to access, correct or delete inquiry data at studio@idoors.example. If you are in the EU, you may also contact your national authority.'
         },
         {
           title: 'Changes',

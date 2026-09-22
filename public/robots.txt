@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://limen.example/sitemap.xml
+Sitemap: https://idoors.example/sitemap.xml

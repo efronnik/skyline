@@ -1,11 +1,11 @@
 import type { MessengerLink, NavItem, SiteContact } from '~/types/content'
 
 export const site = {
-  name: 'LIMEN',
-  legalName: 'LIMEN',
+  name: 'iDOORS',
+  legalName: 'iDOORS',
   taglineKey: 'hero.title',
   descriptionKey: 'seo.homeDesc',
-  url: 'https://limen.example',
+  url: 'https://idoors.example',
   locale: 'ru_RU'
 } as const
 
@@ -18,8 +18,8 @@ export const contact: SiteContact = {
   },
   email: {
     label: 'Почта',
-    value: 'studio@limen.example',
-    href: 'mailto:studio@limen.example',
+    value: 'studio@idoors.example',
+    href: 'mailto:studio@idoors.example',
     placeholder: true
   },
   address: {

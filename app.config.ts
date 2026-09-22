@@ -1,7 +1,7 @@
 export default defineAppConfig({
   brand: {
-    name: 'LIMEN',
-    mark: 'LM',
+    name: 'iDOORS',
+    mark: 'iD',
     tagline: 'Порог, которого нет'
   }
 })

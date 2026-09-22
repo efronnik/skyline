@@ -1,6 +1,6 @@
 import type { ProductKind, QuoteLine } from '~/types/content'
 
-const STORAGE = 'limen-quote'
+const STORAGE = 'idoors-quote'
 const maxQty = 99
 
 function clampQty(value: number) {

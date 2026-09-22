@@ -29,10 +29,10 @@ export function usePageSeo(input: SeoInput | (() => SeoInput)) {
   }
 
   useSeoMeta({
-    title: () => `${resolved.value.title} — LIMEN`,
+    title: () => `${resolved.value.title} — iDOORS`,
     description: () => resolved.value.description,
     robots: () => resolved.value.noindex ? 'noindex, follow' : 'index, follow',
-    ogTitle: () => `${resolved.value.title} — LIMEN`,
+    ogTitle: () => `${resolved.value.title} — iDOORS`,
     ogDescription: () => resolved.value.description,
     ogType: () => resolved.value.type ?? 'website',
     ogUrl: () => absolute(resolved.value.path),
@@ -42,7 +42,7 @@ export function usePageSeo(input: SeoInput | (() => SeoInput)) {
     ogLocale: () => ogLocales[locale.value],
     ogLocaleAlternate: () => Object.values(ogLocales).filter(item => item !== ogLocales[locale.value]),
     twitterCard: 'summary_large_image',
-    twitterTitle: () => `${resolved.value.title} — LIMEN`,
+    twitterTitle: () => `${resolved.value.title} — iDOORS`,
     twitterDescription: () => resolved.value.description,
     twitterImage: () => imageUrl(),
     twitterImageAlt: () => resolved.value.title
