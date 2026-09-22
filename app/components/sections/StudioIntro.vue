@@ -16,9 +16,9 @@ const { t, ta } = useLocale()
         <NuxtImg
           src="/images/factory-craft.jpg"
           alt=""
-          width="640"
-          height="420"
-          sizes="(min-width: 980px) 42vw, 100vw"
+          width="960"
+          height="640"
+          sizes="(min-width: 980px) 50vw, 100vw"
           fit="cover"
           class="studio__img"
           loading="lazy"
@@ -86,19 +86,20 @@ h2 {
 
 @media (min-width: 980px) {
   .studio__inner {
-    grid-template-columns: 1fr 0.9fr;
-    gap: 3.2rem;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
   }
 
   /* desktop: text left, photo right — reset mobile order */
   .studio__visual {
     order: 0;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: auto;
+    min-height: 420px;
   }
 
   .studio__text {
-    padding: 0 0 0 var(--pad);
+    padding: var(--section) var(--pad) var(--section) var(--pad);
   }
 
   h2 {
