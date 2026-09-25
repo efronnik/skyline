@@ -1019,156 +1019,182 @@ export const messages = {
   },
 
   legal: {
-    privacyTitle: L('Конфиденциальность', 'Конфіденційність', 'Privacidad', 'Privacy'),
+    privacyTitle: L('Политика конфиденциальности', 'Політика конфіденційності', 'Política de privacidad', 'Privacy Policy'),
     privacyLead: L(
-      'Как iDOORS обрабатывает данные на этом сайте. Базовый текст — его заменят после правовой вычитки и заполнения реквизитов студии.',
-      'Як iDOORS обробляє дані на цьому сайті. Базовий текст — його замінять після правового вичитування і заповнення реквізитів студії.',
-      'Cómo iDOORS trata los datos en este sitio. Texto básico: se sustituirá tras revisión jurídica y cuando esté la ficha del estudio.',
-      'How iDOORS handles data on this site. A basic notice — it will be replaced after legal review and once the studio details are filled in.'
+      'iDOORS уважает вашу конфиденциальность. Здесь описано, какие данные мы собираем, зачем и как вы можете ими управлять.',
+      'iDOORS поважає вашу конфіденційність. Тут описано, які дані ми збираємо, навіщо і як ви можете ними керувати.',
+      'iDOORS respeta su privacidad. Aquí explicamos qué datos recopilamos, con qué finalidad y cómo puede gestionarlos.',
+      'iDOORS respects your privacy. This page explains what data we collect, why, and how you can manage it.'
     ),
     privacyUpdated: L('Обновлено: сентябрь 2026', 'Оновлено: вересень 2026', 'Actualizado: septiembre 2026', 'Updated: September 2026'),
     privacySections: L(
       [
         {
-          title: 'Кто обрабатывает',
-          text: 'Сайт ведёт iDOORS. Почта: studio@idoors.example. Instagram: @idoors.es. Адрес и полные реквизиты появятся, когда будет заполнена карточка студии.'
+          title: 'Кто обрабатывает данные',
+          text: 'Ответственный за обработку: iDOORS — официальный представитель украинского дверного производства на территории Испании и Португалии. Электронная почта: ventas@idoors.es. Instagram: @idoors.es.'
         },
         {
-          title: 'Какие данные',
-          text: 'В форме обратной связи: имя, телефон, почта и сообщение.'
+          title: 'Какие данные мы собираем',
+          text: 'Через форму обратной связи: имя, номер телефона, адрес электронной почты и сообщение. Через Google Analytics: анонимизированные данные об использовании сайта (страницы, время на сайте, источник перехода, тип устройства и браузера, приблизительное местоположение на уровне города).'
         },
         {
-          title: 'Зачем',
-          text: 'Чтобы ответить на запрос, уточнить проём и посчитать систему. Данные не продаём и не используем для рекламных рассылок, пока вы сами об этом не попросите.'
+          title: 'Для каких целей',
+          text: 'Данные формы — чтобы ответить на ваш запрос, уточнить параметры проёма и рассчитать систему. Аналитические данные — чтобы улучшать сайт, понимать, какие страницы полезны, и оптимизировать пользовательский опыт. Мы не используем ваши данные для рекламных рассылок без вашего явного согласия.'
         },
         {
-          title: 'Как храним',
-          text: 'Сейчас форма в тестовом режиме: заявка принимается на сайте и в CRM не уходит. Когда канал отправки подключат, данные будут храниться столько, сколько нужно для ответа и учёта проекта, затем удаляться или архивироваться.'
+          title: 'Правовая основа',
+          text: 'Обработка данных формы — на основании законного интереса (GDPR, ст. 6(1)(f)): ответить на ваш запрос. Аналитические данные — на основании вашего согласия (ст. 6(1)(a)), выраженного через настройки cookie.'
         },
         {
-          title: 'Кому передаём',
-          text: 'Хостинг может видеть технические логи запроса (IP, браузер, время) — это обычная работа сервера. Рекламных пикселей нет. Переход в Instagram регулируется политикой Meta.'
+          title: 'Хранение данных',
+          text: 'Данные из форм хранятся в почтовом ящике ventas@idoors.es до разрешения вашего запроса. Данные Google Analytics — согласно настройкам удержания Google (по умолчанию 14 месяцев).'
+        },
+        {
+          title: 'Кому мы передаём данные',
+          text: 'Vercel (хостинг) — технические логи в рамках обычной работы сервера. Resend — сервис доставки email. Google LLC — аналитика через Google Analytics; данные могут передаваться на серверы в США по стандартным договорным условиям ЕС. Мы не продаём и не передаём ваши данные третьим лицам в маркетинговых целях.'
         },
         {
           title: 'Cookies',
-          text: 'Сохраняем только язык интерфейса (cookie idoors-locale). Счётчиков и рекламных cookies нет. Подробности — на странице Cookies.'
+          text: 'Мы используем технические cookies (язык интерфейса) и аналитические cookies Google Analytics. Подробнее — на странице Cookies.'
         },
         {
           title: 'Ваши права',
-          text: 'Можно запросить доступ, исправление или удаление данных из заявки: напишите на studio@idoors.example. Если вы в ЕС, можете также обратиться в надзорный орган своей страны.'
+          text: 'По GDPR вы вправе запросить доступ, исправление, удаление, ограничение обработки, перенос данных или возражать против обработки. Направьте запрос на ventas@idoors.es. В Испании надзорный орган — AEPD (aepd.es).'
         },
         {
           title: 'Изменения',
-          text: 'Текст обновим, когда появятся реквизиты, живая отправка заявок или аналитика.'
+          text: 'При существенных изменениях мы обновим дату в заголовке. Рекомендуем периодически проверять эту страницу.'
         }
       ],
       [
         {
-          title: 'Хто обробляє',
-          text: 'Сайт веде iDOORS. Пошта: studio@idoors.example. Instagram: @idoors.es. Адреса й повні реквізити з’являться, коли буде заповнена картка студії.'
+          title: 'Хто обробляє дані',
+          text: "iDOORS — офіційний представник українського дверного виробництва в Іспанії та Португалії. Пошта: ventas@idoors.es. Instagram: @idoors.es."
         },
         {
-          title: 'Які дані',
-          text: 'У формі зворотного зв’язку: ім’я, телефон, пошта і повідомлення.'
+          title: 'Які дані ми збираємо',
+          text: "Через форму: ім'я, телефон, email, повідомлення. Через Google Analytics: анонімізовані дані про використання сайту (сторінки, час, джерело, пристрій, місто)."
         },
         {
-          title: 'Навіщо',
-          text: 'Щоб відповісти на запит, уточнити проріз і порахувати систему. Дані не продаємо і не використовуємо для рекламних розсилок, поки ви самі про це не попросите.'
+          title: 'З якою метою',
+          text: "Дані форми — відповісти на запит та розрахувати систему. Аналітика — покращувати сайт. Ми не використовуємо дані для розсилок без вашої згоди."
         },
         {
-          title: 'Як зберігаємо',
-          text: 'Зараз форма в тестовому режимі: заявка приймається на сайті і в CRM не йде. Коли канал надсилання підключать, дані зберігатимуться стільки, скільки потрібно для відповіді й обліку проєкту, потім видалятимуться або архівуватимуться.'
+          title: 'Правова підстава',
+          text: "Дані форми — законний інтерес (GDPR ст. 6(1)(f)). Аналітика — ваша згода (ст. 6(1)(a)) через налаштування cookie."
+        },
+        {
+          title: 'Зберігання даних',
+          text: "Дані форм — у скриньці ventas@idoors.es до вирішення запиту. Дані Google Analytics — відповідно до налаштувань Google (за замовчуванням 14 місяців)."
         },
         {
           title: 'Кому передаємо',
-          text: 'Хостинг може бачити технічні логи запиту (IP, браузер, час) — це звичайна робота сервера. Рекламних пікселів немає. Перехід в Instagram регулює політика Meta.'
+          text: "Vercel (хостинг) — технічні логи. Resend — доставка email. Google LLC — аналітика; дані можуть передаватися до США за стандартними договірними умовами ЄС. Ми не продаємо дані третім особам."
         },
         {
           title: 'Cookies',
-          text: 'Зберігаємо лише мову інтерфейсу (cookie idoors-locale). Лічильників і рекламних cookies немає. Подробиці — на сторінці Cookies.'
+          text: "Технічні cookies (мова інтерфейсу) та аналітичні cookies Google Analytics. Детальніше — на сторінці Cookies."
         },
         {
           title: 'Ваші права',
-          text: 'Можна запросити доступ, виправлення або видалення даних із заявки: напишіть на studio@idoors.example. Якщо ви в ЄС, можете також звернутися до наглядового органу своєї країни.'
+          text: "За GDPR ви маєте право на доступ, виправлення, видалення, обмеження, перенесення та заперечення. Запит — на ventas@idoors.es. Наглядовий орган в Іспанії: AEPD (aepd.es)."
         },
         {
           title: 'Зміни',
-          text: 'Текст оновимо, коли з’являться реквізити, живе надсилання заявок або аналітика.'
+          text: "При суттєвих змінах ми оновимо дату. Рекомендуємо перевіряти цю сторінку."
         }
       ],
       [
         {
-          title: 'Quién trata los datos',
-          text: 'El sitio lo opera iDOORS. Correo: studio@idoors.example. Instagram: @idoors.es. La dirección y los datos fiscales aparecerán cuando esté completa la ficha del estudio.'
+          title: 'Responsable del tratamiento',
+          text: 'iDOORS, representación oficial de un fabricante ucraniano de puertas en España y Portugal. Correo: ventas@idoors.es. Instagram: @idoors.es.'
         },
         {
-          title: 'Qué datos',
-          text: 'En el formulario: nombre, teléfono, correo y mensaje.'
+          title: 'Datos que recopilamos',
+          text: 'Formulario de contacto: nombre, teléfono, correo y mensaje. Google Analytics: datos anonimizados sobre el uso del sitio (páginas, tiempo, origen, dispositivo, ciudad aproximada).'
         },
         {
-          title: 'Para qué',
-          text: 'Para responder, precisar el hueco y calcular el sistema. No vendemos los datos ni los usamos para publicidad, salvo que usted lo pida.'
+          title: 'Finalidad',
+          text: 'Los datos del formulario sirven para responder su consulta y calcular el sistema. La analítica nos ayuda a mejorar el sitio. No utilizamos sus datos para envíos comerciales sin consentimiento expreso.'
         },
         {
-          title: 'Cómo se guardan',
-          text: 'El formulario está ahora en modo de prueba: la consulta se recibe en el sitio y no va a un CRM. Cuando haya un canal de envío, los datos se conservarán el tiempo necesario para responder y llevar el proyecto, y luego se eliminarán o archivarán.'
+          title: 'Base legal',
+          text: 'Formulario: interés legítimo (RGPD art. 6.1.f). Analítica: consentimiento (art. 6.1.a) expresado a través de la configuración de cookies.'
         },
         {
-          title: 'A quién se ceden',
-          text: 'El hosting puede ver registros técnicos (IP, navegador, hora): es el funcionamiento habitual del servidor. No hay píxeles publicitarios. Si entra en Instagram, rige la política de Meta.'
+          title: 'Conservación',
+          text: 'Los datos del formulario se conservan en ventas@idoors.es hasta resolver la consulta. Los de Google Analytics, según la retención configurada en Google (14 meses por defecto).'
+        },
+        {
+          title: 'Destinatarios',
+          text: 'Vercel (hosting): logs técnicos del servidor. Resend: entrega de correo. Google LLC: analítica; datos pueden transferirse a EE. UU. bajo cláusulas contractuales tipo de la UE. No cedemos datos a terceros con fines comerciales.'
         },
         {
           title: 'Cookies',
-          text: 'Solo guardamos el idioma de la interfaz (cookie idoors-locale). No hay contadores ni cookies publicitarias. Más detalle en la página Cookies.'
+          text: 'Cookies técnicas (idioma de interfaz) y cookies analíticas de Google Analytics. Más información en la página de Cookies.'
         },
         {
           title: 'Sus derechos',
-          text: 'Puede pedir acceso, corrección o supresión de los datos de una consulta en studio@idoors.example. Si está en la UE, también puede acudir a la autoridad de su país.'
+          text: 'Conforme al RGPD puede solicitar acceso, rectificación, supresión, limitación, portabilidad u oposición. Escríbanos a ventas@idoors.es. En España puede reclamar ante la AEPD (aepd.es).'
         },
         {
           title: 'Cambios',
-          text: 'Actualizaremos el texto cuando haya ficha fiscal, envío real de consultas o analítica.'
+          text: 'Si actualizamos esta política, cambiaremos la fecha del encabezado. Le recomendamos revisar esta página periódicamente.'
         }
       ],
       [
         {
-          title: 'Who processes data',
-          text: 'This site is run by iDOORS. Email: studio@idoors.example. Instagram: @idoors.es. Address and legal details will appear once the studio card is filled in.'
+          title: 'Data controller',
+          text: 'iDOORS, official representative of a Ukrainian door manufacturer in Spain and Portugal. Email: ventas@idoors.es. Instagram: @idoors.es.'
         },
         {
           title: 'What we collect',
-          text: 'The feedback form collects name, phone, email and a message.'
+          text: 'Contact form: name, phone, email and message. Google Analytics: anonymised usage data (pages, time on site, traffic source, device type, approximate city).'
         },
         {
-          title: 'Why',
-          text: 'To reply, confirm the opening and price the system. We do not sell the data or use it for marketing unless you ask us to.'
+          title: 'Why we collect it',
+          text: 'Form data is used to respond to your enquiry and quote the system. Analytics helps us improve the site. We do not use your data for marketing without explicit consent.'
         },
         {
-          title: 'How we store it',
-          text: 'The form is in test mode: inquiries stay on the site and are not sent to a CRM. Once a live channel is connected, data will be kept for as long as needed to reply and run the project, then deleted or archived.'
+          title: 'Legal basis',
+          text: 'Form data: legitimate interest (GDPR Art. 6(1)(f)). Analytics: your consent (Art. 6(1)(a)) given through cookie settings.'
         },
         {
-          title: 'Who we share with',
-          text: 'Hosting may see technical logs (IP, browser, time) as part of normal server operation. There are no advertising pixels. If you open Instagram, Meta’s policy applies.'
+          title: 'Retention',
+          text: 'Form data is kept at ventas@idoors.es until your request is resolved. Google Analytics data is retained per Google settings (14 months by default).'
+        },
+        {
+          title: 'Recipients',
+          text: 'Vercel (hosting): technical server logs. Resend: email delivery. Google LLC: analytics; data may be transferred to the US under EU standard contractual clauses. We do not sell data to third parties.'
         },
         {
           title: 'Cookies',
-          text: 'We only store the interface language (cookie idoors-locale). There are no counters or advertising cookies. See the Cookies page for more.'
+          text: 'Technical cookies (interface language) and Google Analytics cookies. Full details on the Cookies page.'
         },
         {
           title: 'Your rights',
-          text: 'You can ask to access, correct or delete inquiry data at studio@idoors.example. If you are in the EU, you may also contact your national authority.'
+          text: 'Under GDPR you may request access, rectification, erasure, restriction, portability or object to processing. Write to ventas@idoors.es. In Spain the supervisory authority is AEPD (aepd.es).'
         },
         {
           title: 'Changes',
-          text: 'We will update this notice when studio details, live inquiry delivery or analytics are in place.'
+          text: 'For significant changes we will update the date in the header. We recommend checking this page periodically.'
         }
       ]
     ),
     cookiesLink: L('Cookies', 'Cookies', 'Cookies', 'Cookies'),
-    cookiesTitle: L('Cookies', 'Cookies', 'Cookies', 'Cookies'),
-    cookies1: L('Сайт не подключает рекламные трекеры. Технические cookies появятся здесь после выбора аналитики.', 'Сайт не підключає рекламні трекери. Технічні cookies з’являться тут після вибору аналітики.', 'El sitio no conecta rastreadores publicitarios. Las cookies técnicas aparecerán aquí tras elegir analítica.', 'The site does not connect advertising trackers. Technical cookies will appear here after analytics is chosen.'),
-    cookies2: L('Пока сторонние счётчики не установлены, отдельное согласие не запрашивается.', 'Поки сторонні лічильники не встановлені, окрема згода не запитується.', 'Mientras no haya contadores de terceros, no se pide un consentimiento aparte.', 'While third-party counters are not installed, separate consent is not requested.'),
+    cookiesTitle: L('Политика cookies', 'Політика cookies', 'Política de cookies', 'Cookie Policy'),
+    cookies1: L(
+      'Сайт использует два вида cookies: технические (обязательные) и аналитические.',
+      'Сайт використовує два види cookies: технічні (обов\'язкові) та аналітичні.',
+      'Este sitio usa dos tipos de cookies: técnicas (necesarias) y analíticas.',
+      'This site uses two types of cookies: technical (required) and analytics.'
+    ),
+    cookies2: L(
+      'Технические cookies\n\nidoors-locale — сохраняет выбранный язык интерфейса. Без фиксированного срока истечения. Не собирает персональные данные.\n\nАналитические cookies (Google Analytics)\n\n_ga — различает уникальных пользователей, срок действия 2 года. _gid — различает пользователей, срок действия 24 часа. _ga_* — поддерживает состояние сессии, срок действия 2 года. Google Analytics настроен с анонимизацией IP. Данные обрабатываются на серверах Google LLC и могут передаваться в США в соответствии со стандартными договорными условиями ЕС.\n\nВы можете отключить аналитические cookies в настройках браузера или через дополнение Google Analytics Opt-out: tools.google.com/dlpage/gaoptout',
+      "Технічні cookies\n\nidoors-locale — зберігає обрану мову інтерфейсу. Без фіксованого терміну дії. Не збирає персональних даних.\n\nАналітичні cookies (Google Analytics)\n\n_ga — розрізняє унікальних користувачів, термін дії 2 роки. _gid — розрізняє користувачів, термін дії 24 години. _ga_* — підтримує стан сесії, термін дії 2 роки. Google Analytics налаштований з анонімізацією IP. Дані можуть передаватися до США за стандартними договірними умовами ЄС.\n\nВідключити аналітичні cookies можна в налаштуваннях браузера або через доповнення Google Analytics Opt-out: tools.google.com/dlpage/gaoptout",
+      'Cookies técnicas\n\nidoors-locale — guarda el idioma de la interfaz. Sin caducidad fija. No recoge datos personales.\n\nCookies analíticas (Google Analytics)\n\n_ga — distingue usuarios únicos, caduca en 2 años. _gid — distingue usuarios, caduca en 24 horas. _ga_* — mantiene el estado de sesión, caduca en 2 años. Google Analytics está configurado con anonimización de IP. Los datos pueden transferirse a EE. UU. bajo las cláusulas contractuales tipo de la UE.\n\nPuede desactivar las cookies analíticas desde su navegador o usando el complemento de inhabilitación de Google Analytics: tools.google.com/dlpage/gaoptout',
+      'Technical cookies\n\nidoors-locale — stores the selected interface language. No fixed expiry. Collects no personal data.\n\nAnalytics cookies (Google Analytics)\n\n_ga — distinguishes unique users, expires in 2 years. _gid — distinguishes users, expires in 24 hours. _ga_* — maintains session state, expires in 2 years. Google Analytics is configured with IP anonymisation. Data may be transferred to the US under EU standard contractual clauses.\n\nYou can disable analytics cookies via your browser settings or the Google Analytics opt-out add-on: tools.google.com/dlpage/gaoptout'
+    ),
     privacyNav: L('Конфиденциальность', 'Конфіденційність', 'Privacidad', 'Privacy')
   },
 
