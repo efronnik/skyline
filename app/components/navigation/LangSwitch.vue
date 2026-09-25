@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const { locale, locales, setLocale, t } = useLocale()
+
+// Apply active highlight only after client mount so Vue hydration
+// doesn't inherit the SSR-default (ru) is-on class incorrectly.
+const ready = ref(false)
+onMounted(() => { ready.value = true })
 </script>
 
 <template>
@@ -9,8 +14,8 @@ const { locale, locales, setLocale, t } = useLocale()
       :key="item.id"
       type="button"
       class="lang__btn"
-      :class="{ 'is-on': locale === item.id }"
-      :aria-pressed="locale === item.id"
+      :class="{ 'is-on': ready && locale === item.id }"
+      :aria-pressed="ready ? locale === item.id : false"
       @click="setLocale(item.id)"
     >
       {{ item.label }}
