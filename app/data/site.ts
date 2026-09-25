@@ -5,7 +5,7 @@ export const site = {
   legalName: 'iDOORS',
   taglineKey: 'hero.title',
   descriptionKey: 'seo.homeDesc',
-  url: 'https://idoors.example',
+  url: 'https://idoors.es',
   locale: 'ru_RU'
 } as const
 
@@ -18,8 +18,8 @@ export const contact: SiteContact = {
   },
   email: {
     label: 'Почта',
-    value: 'studio@idoors.example',
-    href: 'mailto:studio@idoors.example',
+    value: 'ventas@idoors.es',
+    href: 'mailto:ventas@idoors.es',
     placeholder: true
   },
   address: {
