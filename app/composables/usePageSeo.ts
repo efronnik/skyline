@@ -48,8 +48,20 @@ export function usePageSeo(input: SeoInput | (() => SeoInput)) {
     twitterImageAlt: () => resolved.value.title
   })
 
+  // Canonical + hreflang for all 4 locales
   useHead({
-    link: computed(() => [{ rel: 'canonical', href: absolute(resolved.value.path) }])
+    link: computed(() => {
+      const path = resolved.value.path
+      const base = config.public.siteUrl as string
+      return [
+        { rel: 'canonical', href: `${base}${path}` },
+        { rel: 'alternate', hreflang: 'es', href: `${base}${path}` },
+        { rel: 'alternate', hreflang: 'en', href: `${base}${path}` },
+        { rel: 'alternate', hreflang: 'uk', href: `${base}${path}` },
+        { rel: 'alternate', hreflang: 'ru', href: `${base}${path}` },
+        { rel: 'alternate', hreflang: 'x-default', href: `${base}${path}` },
+      ]
+    })
   })
 }
 

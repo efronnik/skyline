@@ -17,13 +17,13 @@ function pickLocale<T>(node: unknown, locale: Locale): T | undefined {
 
 export function useLocale() {
   const cookie = useCookie<Locale>('idoors-locale', {
-    default: () => 'ru',
+    default: () => 'es',
     sameSite: 'lax',
     path: '/'
   })
   const locale = useState<Locale>('idoors-locale-state', () => {
     const saved = cookie.value
-    return localeList.some(item => item.id === saved) ? saved : 'ru'
+    return localeList.some(item => item.id === saved) ? saved : 'es'
   })
 
   const htmlLang = computed(() => locale.value)

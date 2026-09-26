@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     resendApiKey: '',
     inquiryTo: '',
     public: {
-      siteUrl: 'https://idoors.example',
+      siteUrl: 'https://idoors.es',
       siteName: 'iDOORS'
     }
   },

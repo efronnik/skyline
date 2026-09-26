@@ -45,19 +45,19 @@ export const messages = {
   },
 
   seo: {
-    homeTitle: L('Двери скрытого монтажа iDOORS', 'Двері прихованого монтажу iDOORS', 'Puertas de instalación oculta iDOORS', 'iDOORS flush doors'),
+    homeTitle: L('Двери скрытого монтажа iDOORS', 'Двері прихованого монтажу iDOORS', 'Puertas Invisibles a Ras de Pared en España | iDOORS', 'Flush-to-Wall Doors in Spain & Portugal | iDOORS'),
     homeDesc: L(
       'Двери скрытого монтажа iDOORS под финишную отделку: короб из анодированного алюминия, скрытые петли, полотно вровень со стеной.',
       'Двері прихованого монтажу iDOORS під фінішне оздоблення: короб з анодованого алюмінію, приховані петлі, полотно врівень зі стіною.',
-      'Puertas de instalación oculta iDOORS para el acabado: marco de aluminio anodizado, bisagras ocultas, hoja al ras del muro.',
-      'iDOORS flush doors for finishing: anodized aluminium frame, concealed hinges, leaf flush with the wall.'
+      'Sistemas de puertas invisibles de aluminio a medida en España y Portugal. Acabados para pintar, chapa natural y espejo. Marco de aluminio anodizado, bisagras ocultas. Solicita tu presupuesto.',
+      'Flush-to-wall door systems in Spain and Portugal. Ready to paint, veneer and mirror finishes. Anodized aluminium frame, concealed hinges. Custom sizes up to 2400 mm.'
     )
   },
 
   hero: {
     spec: L('iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime', 'iDOORS Prime'),
-    title: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas de instalación oculta', 'Flush doors'),
-    slogan: L('Двери, которые чувствуют интерьер.', "Двері, що відчувають інтер'єр.", 'Puertas que sienten el interior.', 'Doors that feel the interior.'),
+    title: L('Двери скрытого монтажа', 'Двері прихованого монтажу', 'Puertas invisibles a ras de pared', 'Flush doors'),
+    slogan: L('Двери, которые чувствуют интерьер.', "Двері, що відчувають інтер'єр.", 'Puertas que se integran en el espacio.', 'Doors that feel the interior.'),
     lead: L(
       'Под ваши желания.',
       'Під ваші бажання.',

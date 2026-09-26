@@ -11,10 +11,12 @@ export default defineNuxtPlugin((nuxtApp) => {
   // is patched immediately with the right language.
   nuxtApp.hook('app:beforeMount', () => {
     const saved = localStorage.getItem(KEY)
-    if (saved && VALID.includes(saved) && saved !== locale.value) {
-      locale.value = saved
+    // If user never visited — default is 'es' (idoors.es domain)
+    const target = (saved && VALID.includes(saved)) ? saved : 'es'
+    if (target !== locale.value) {
+      locale.value = target
       const cookie = useCookie('idoors-locale')
-      cookie.value = saved
+      cookie.value = target
     }
   })
 
