@@ -15,7 +15,7 @@ const { t, ta } = useLocale()
       <div class="studio__visual" aria-hidden="true">
         <NuxtImg
           src="/images/factory-craft.jpg"
-          alt="Производство дверей скрытого монтажа iDOORS — завод в Восточной Европе"
+          alt="Fabricación de puertas invisibles iDOORS — planta en Europa del Este"
           width="960"
           height="640"
           sizes="(min-width: 980px) 50vw, 100vw"
